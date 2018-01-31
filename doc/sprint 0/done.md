@@ -9,4 +9,4 @@ Standard Definition of Done:
   * The software should run properly without bugs, errors, or crashes on the intended target platform: Personal computer systems such as Desktops, or Laptops.
   
 Additional Definition of Done:
-  * Any additional definitions of Done for the user stories will fall under the groups's Criteria of Satisfaction when needed.
+  * Any additional definitions of Done for the user stories will fall under the groups's Criteria of Satisfaction that should be finished.
