@@ -1,4 +1,4 @@
-prject-team-subpar Report
+project-team-subpar Report
 ============================
 
 1. How did you organize the team?
@@ -14,7 +14,8 @@ prject-team-subpar Report
 3. How did you define priority and/or points of user stories? How many rounds of voting (on average)
 did you need to come to a consensus for the point estimate?
 
-  * We
+  * We got into a smaller group, while the rest of the group worked on other aspects of sprint 0, and then each took our own estimates of the priority and points for the user stories.
+  * Typically it took around 2-3 rounds of voting, since after each round we gave our own interpretations of the problem and why we felt that a certain value was appropriate. After this we were able to see more eye-to-eye and estimates were more in line.
   
 ------------------------------------------------------------------------
 
