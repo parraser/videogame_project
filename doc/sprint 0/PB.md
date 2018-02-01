@@ -12,9 +12,11 @@ As a general player, I want to see my character so that I can know where he is a
 Conditions of Satisfaction:
   * There must be some variety between different user's player avatar per match.
 
-Priority:
+Priority: 1
 
-Point Estimate:
+Point Estimate: 5
+
+Dependencies: N/A
 
 -------------------
 
@@ -26,9 +28,11 @@ Conditions of Satisfaction:
   * A user must be able to at minimum, move 8 different directions.
   * A user must be able to move their player avatar smoothly with no input lag or choppiness.
 
-Priority:
+Priority: 1
 
-Point Estimate:
+Point Estimate: 3
+
+Dependencies: 1
 
 ------------------------
 
@@ -39,9 +43,11 @@ As a general player, I want walls so that I have a more varied experience so tha
 Conditions of Satisfaction: 
   * The walls must be solid objects so that the player's shots do not phase through the wall.
 
-Priority:
+Priority: 3
 
-Point Estimate:
+Point Estimate: 3
+
+Dependencies: 2
 
 -----------------------
 
@@ -53,9 +59,11 @@ Conditions of Satisfaction:
   * The obstacles must be solid objects, so that the player avatar does not phase through the obstacle.
 
 
-Priority:
+Priority: 3
 
-Point Estimate:
+Point Estimate: 8
+
+Dependencies: 3
 
 ----------------------
 
@@ -67,22 +75,26 @@ Conditions of Satisfaction:
   * A user must be able to at minimum, shoot 8 different directions.
   * A user must have their bullets move smoothly with no input lag or choppiness.
 
-Priority:
+Priority: 1
 
-Point Estimate:
+Point Estimate: 5
+
+Dependencies: 1
 
 ------------------------
 
 #### User Story 6
 
-As a general player, I want bullets to bounce off walls realisticly, so that I can have interesting varied gameplay allowing room for epic strategies.
+As a general player, I want bullets to bounce off walls realistically, so that I can have interesting varied gameplay allowing room for epic strategies.
 
 Conditions of Satifaction:
   * The bullets must follow some form of physics so that the bouncing shots are more realistic.
 
-Priority:
+Priority: 4
 
-Point Estimate:
+Point Estimate: 13
+
+Dependencies: 5
 
 -------------------------
 
@@ -93,9 +105,11 @@ As a general player, I want to be able to choose between different gamemodes, so
 Conditions of Satisfaction:
   * There could be more gamemodes, but the two game modes above must work with no bugs or issues.
 
-Priority:
+Priority: 5
 
-Point estimate:
+Point estimate: 
+
+Dependencies: 12
 
 ---------------------------
 
@@ -107,9 +121,11 @@ Conditions of Satisfaction:
   * The collectible power-ups must work properly for each power introduced.
   * (Optional) The collectable power-up is defferent each stage.
 
-Priority:
+Priority: 3
 
 Point Estimate:
+
+Dependencies: 5
 
 -------------------------
 
@@ -120,7 +136,7 @@ As a general player, I want miscellaneous hazards so that I can have more varied
 Conditions of Satisfaction:
   * If the hazard is triggered, the result must show both to the player's avatar and on the player's score.
   
-Priority:
+Priority: 3
 
 Point Estimate:
 
@@ -134,7 +150,7 @@ Conditions of Satisfaction:
   * The ranking system must properly follow how many points each individual player has scored.
   * The ranking system could show up after each round and/or after each match. 
   
-Priority:
+Priority: 5
 
 Point Estimate:
 
@@ -147,7 +163,7 @@ As a general player, I want multiple maps, so that I can have a variety in multi
 Conditions of Satisfaction:
   * Each map must be different and should introduce something new that the other maps do not have.
 
-Priority:
+Priority: 4
 
 Point Estimate:
 
@@ -162,7 +178,7 @@ Conditions of Satisfaction:
   * The set up on the main menu must properly work.
   * The default settings given must not be necessessarily difficult or too simple.
 
-Priority:
+Priority: 2
 
 Point Estimate:
 
@@ -177,7 +193,7 @@ Conditions of Satisfaction:
   * The sudden death mode must be properly set up in all modes and stages.
   * The hazard introduced must be properly randomized.
 
-Priority:
+Priority: 4
 
 Point Estimate:
 
@@ -192,7 +208,7 @@ Conditions of Satisfaction:
   * The sudden death mode must be properly set up in all modes and stages.
   * The hazards must be properly working for each stage.
 
-Priority:
+Priority: 4
 
 Point Estimate:
 
@@ -206,8 +222,37 @@ Conditions of Satisfaction:
   * The default setting in this quick set up must not be too difficult or too easy.
   * The player must be able to have a quick drop out option, without interrupting the other possible player or points.
   
-Priority:
+Priority: 2
 
 Point Estimate:
 
 ---------------------------------
+#### User Story 16
+
+As a general player,	I want the main menu and settings to be more complex so that there is more customizable options.
+
+Conditions of Satisfaction:
+  * Each customization must properly affect either the players or that of the map.
+  * The set up on the main menu must properly work.
+  * The default settings given must not be necessessarily difficult or too simple.
+
+Priority: 5
+
+Point Estimate:
+
+----------------------------
+
+#### User Story 17
+
+As a general player, I want to see a win screen when I win so that I can see that I won.
+
+Conditions of Satisfactions:
+  * The win screen must appear depending on the win conditions.
+  
+Priority:
+
+Point Estimate:
+
+Dependencies:
+
+-------------------------------
