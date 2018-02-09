@@ -92,7 +92,7 @@ Conditions of Satisfaction:
 
 Priority: 4
 
-Point Estimate: 21
+Point Estimate: 8
 
 Dependencies: 5
 
@@ -123,7 +123,7 @@ Conditions of Satisfaction:
 
 Priority: 3
 
-Point Estimate: 13
+Point Estimate: 8
 
 Dependencies: 5
 
@@ -154,7 +154,7 @@ Conditions of Satisfaction:
   
 Priority: 5
 
-Point Estimate: 21
+Point Estimate: 8
 
 Dependencies: 17
 
@@ -220,7 +220,7 @@ Conditions of Satisfaction:
 
 Priority: 4
 
-Point Estimate: 13
+Point Estimate: 8
 
 Dependencies: 13
 
