@@ -18,10 +18,10 @@ public class Game extends Canvas implements Runnable{
 	
 	/*
 	 * Game initialization, what to do when the game first starts
-	 * */
+	 */
 	public Game(){
-				
-		//this.addKeyListener(keyListener);
+		KeyHandler keyHand = new KeyHandler();
+		this.addKeyListener(keyHand);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -60,7 +60,6 @@ public class Game extends Canvas implements Runnable{
 		long delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
-		System.out.println(running);
 		while (running){
 			long now = System.nanoTime();
 			
