@@ -6,8 +6,6 @@ public class KeyHandler extends KeyAdapter{
 	
 	public KeyHandler(){
 		obs = new KeyObservable();
-		
-		System.out.println("hi\n");
 	}
 	
 	public void keyPressed(KeyEvent e){}
