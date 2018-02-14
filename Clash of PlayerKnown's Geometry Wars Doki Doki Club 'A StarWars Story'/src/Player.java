@@ -11,6 +11,12 @@ public class Player extends MovableObject implements Observer{
 	final static int WALK = 10;
 	//final static int RUN = 15;
 	
+	String name;
+	
+	public Player(String name){
+		this.name = name;
+	}
+	
 	
 	public void collision() {
 		
@@ -23,20 +29,19 @@ public class Player extends MovableObject implements Observer{
 		int key = ((KeyEvent) e).getKeyCode();
 		
 		if(key == KeyEvent.VK_W) {
-			//if(this.getVelX())
-			//System.out.println("WWWWWWWWW");
+			
 			this.setVelY(-WALK);
 			
 		}else if(key == KeyEvent.VK_S) {
-			//System.out.println("SSSSSSSSSS");
+			
 			this.setVelY(WALK);
 			
 		}else if(key == KeyEvent.VK_A) {
-			//System.out.println("AAAAAAAA");
+			
 			this.setVelX(-WALK);
 			
 		}else if(key == KeyEvent.VK_D) {
-			//System.out.println("DDDDDDDD");
+			
 			this.setVelX(WALK);
 			
 		}
@@ -45,6 +50,8 @@ public class Player extends MovableObject implements Observer{
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
+		this.x = this.x + this.getVelX();
+		this.y = this.y + this.getVelY();
 		
 	}
 
