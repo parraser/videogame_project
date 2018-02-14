@@ -2,8 +2,8 @@
 /* A movable version of a GameObject */
 public abstract class MovableObject extends GameObject {
 	
-	private int velX = 0;
-	private int velY = 0;
+	protected int velX = 0;
+	protected int velY = 0;
 
 	
 	public int getVelX() {

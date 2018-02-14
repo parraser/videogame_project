@@ -11,6 +11,12 @@ public class Player extends MovableObject implements Observer{
 	
 	final static int WALK = 10;
 	
+	String name;
+	
+	public Player(String name){
+		this.name = name;
+	}
+	
 	
 	public void collision() {
 		
@@ -50,6 +56,7 @@ public class Player extends MovableObject implements Observer{
 			}else if (keyAction == KeyEvent.KEY_RELEASED) {
 				this.setVelY(WALK);
 			}
+			
 		}else if(key == KeyEvent.VK_D) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
 				this.setVelY(WALK);
