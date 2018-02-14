@@ -2,7 +2,7 @@
 /* A movable version of a GameObject */
 public abstract class MovableObject extends GameObject {
 	
-	private int velocity;
+	private int velocity = 0;
 	
 	public int getVelocity() {
 		return this.velocity;
