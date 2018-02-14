@@ -8,7 +8,13 @@ public class KeyHandler extends KeyAdapter{
 		obs = new KeyObservable();
 	}
 	
-	public void keyPressed(KeyEvent e){}
-	public void keyReleased(KeyEvent e){}
+	public void keyPressed(KeyEvent e){
+		System.out.println(e.paramString());
+		this.obs.notifyObservers(e);
+	}
+	public void keyReleased(KeyEvent e){
+		System.out.println(e.paramString());
+		this.obs.notifyObservers(e);
+	}
 	
 }

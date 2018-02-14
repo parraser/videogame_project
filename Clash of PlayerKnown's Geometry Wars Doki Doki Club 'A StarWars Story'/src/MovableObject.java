@@ -2,13 +2,24 @@
 /* A movable version of a GameObject */
 public abstract class MovableObject extends GameObject {
 	
-	private int velocity = 0;
+	private int velX = 0;
+	private int velY = 0;
+
 	
-	public int getVelocity() {
-		return this.velocity;
+	public int getVelX() {
+		return velX;
 	}
-	
-	public void setVelocity(int velocity) {
-		this.velocity = velocity;
+
+	public void setVelX(int velX) {
+		this.velX = velX;
 	}
+
+	public int getVelY() {
+		return velY;
+	}
+
+	public void setVelY(int velY) {
+		this.velY = velY;
+	}
+
 }
