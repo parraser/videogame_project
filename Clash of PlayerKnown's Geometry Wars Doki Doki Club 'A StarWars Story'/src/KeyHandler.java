@@ -9,11 +9,11 @@ public class KeyHandler extends KeyAdapter{
 	}
 	
 	public void keyPressed(KeyEvent e){
-		System.out.println(e.paramString());
+		//System.out.println(e.paramString());
 		this.obs.notifyObservers(e);
 	}
 	public void keyReleased(KeyEvent e){
-		System.out.println(e.paramString());
+		//System.out.println(e.paramString());
 		this.obs.notifyObservers(e);
 	}
 	

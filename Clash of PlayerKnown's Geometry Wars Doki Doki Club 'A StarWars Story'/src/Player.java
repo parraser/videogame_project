@@ -1,3 +1,4 @@
+import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -9,7 +10,6 @@ import java.util.Observer;
 public class Player extends MovableObject implements Observer{
 	
 	final static int WALK = 10;
-	//final static int RUN = 15;
 	
 	
 	public void collision() {
@@ -21,30 +21,49 @@ public class Player extends MovableObject implements Observer{
 		// TODO Auto-generated method stub
 		
 		int key = ((KeyEvent) e).getKeyCode();
+		int keyAction = ((KeyEvent) e).getID();
+
+		//since actions are recorded once, releasing the key
+		//shall input an equal negative velocity
+		
+		// could open a bug where one key is not recorded 
+		// it will have twice the speed
 		
 		if(key == KeyEvent.VK_W) {
-			//if(this.getVelX())
-			//System.out.println("WWWWWWWWW");
-			this.setVelY(-WALK);
+			if(keyAction == KeyEvent.KEY_PRESSED) {
+				this.setVelY(-WALK);
+			}else if (keyAction == KeyEvent.KEY_RELEASED) {
+				this.setVelY(WALK);
+			}
 			
 		}else if(key == KeyEvent.VK_S) {
-			//System.out.println("SSSSSSSSSS");
-			this.setVelY(WALK);
-			
-		}else if(key == KeyEvent.VK_A) {
-			//System.out.println("AAAAAAAA");
-			this.setVelX(-WALK);
-			
+			if(keyAction == KeyEvent.KEY_PRESSED) {
+				this.setVelY(WALK);
+			}else if (keyAction == KeyEvent.KEY_RELEASED) {
+				this.setVelY(-WALK);
+			}
+		}
+		
+		if(key == KeyEvent.VK_A) {
+			if(keyAction == KeyEvent.KEY_PRESSED) {
+				this.setVelY(-WALK);
+			}else if (keyAction == KeyEvent.KEY_RELEASED) {
+				this.setVelY(WALK);
+			}
 		}else if(key == KeyEvent.VK_D) {
-			//System.out.println("DDDDDDDD");
-			this.setVelX(WALK);
-			
+			if(keyAction == KeyEvent.KEY_PRESSED) {
+				this.setVelY(WALK);
+			}else if (keyAction == KeyEvent.KEY_RELEASED) {
+				this.setVelY(-WALK);
+			}
 		}
 	}
 
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
+		this.x = this.x + this.getVelX();
+		this.y = this.y + this.getVelY();
 		
 	}
 
