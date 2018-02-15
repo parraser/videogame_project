@@ -10,10 +10,12 @@ public class KeyHandler extends KeyAdapter{
 	
 	public void keyPressed(KeyEvent e){
 		//System.out.println(e.paramString());
+		this.obs.chang();
 		this.obs.notifyObservers(e);
 	}
 	public void keyReleased(KeyEvent e){
 		//System.out.println(e.paramString());
+		this.obs.chang();
 		this.obs.notifyObservers(e);
 	}
 	

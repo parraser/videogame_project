@@ -79,6 +79,7 @@ public class Game extends Canvas implements Runnable{
 				tick();
 				delta--;
 			}
+			tick();
 			// render game objects
 			if (running)
 				render();
