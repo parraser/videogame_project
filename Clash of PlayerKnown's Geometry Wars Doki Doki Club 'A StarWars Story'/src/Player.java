@@ -35,7 +35,6 @@ public class Player extends MovableObject implements Observer{
 
 		//since actions are recorded once, releasing the key
 		//shall input an equal negative velocity
-		
 		// could open a bug where one key is not recorded 
 		// it will have twice the speed
 		System.out.println("KEY: " + e.toString());

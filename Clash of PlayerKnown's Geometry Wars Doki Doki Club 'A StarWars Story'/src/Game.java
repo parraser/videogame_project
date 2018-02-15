@@ -12,11 +12,12 @@ public class Game extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = 1550691097823471818L;
 
-	public static final int WIDTH = 1080, HEIGHT = 720;
+	public static final int WIDTH = 600, HEIGHT = 600;
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
 	private List<GameObject> gameObjects = new ArrayList<GameObject>();
+	private Player playerOne;
 	
 	
 	/*
@@ -25,9 +26,9 @@ public class Game extends Canvas implements Runnable{
 	public Game(){
 		KeyHandler keyHand = new KeyHandler();
 		this.addKeyListener(keyHand);
-		Player player = new Player("Player1");
-		keyHand.obs.addObserver(player);
-		gameObjects.add(player);
+		playerOne = new Player("Player1");
+		keyHand.addObserver(playerOne);
+		gameObjects.add(playerOne);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -71,13 +72,13 @@ public class Game extends Canvas implements Runnable{
 			long now = System.nanoTime();
 			
 			// determine the amount of seconds has elapsed
-			delta += (now - lastTime)/tickPerSecond;
+			delta += now - lastTime;
 			lastTime = now;
 			
 			// when we are due for a tick
-			while (delta >= 1){
+			while (delta >= tickPerSecond){
 				tick();
-				delta--;
+				delta = 0;
 			}
 			// render game objects
 			if (running)
@@ -87,8 +88,9 @@ public class Game extends Canvas implements Runnable{
 			frames++;
 			if (System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
-				//System.out.println("FPS: " + frames);
+				System.out.println("FPS: " + frames);
 				frames = 0;
+				System.out.println();
 			}
 		}
 		stop();
