@@ -15,6 +15,10 @@ public class Player extends MovableObject implements Observer{
 	
 	public Player(String name){
 		this.name = name;
+		this.x = 0;
+		this.y = 0;
+		this.width = 10;
+		this.height = 10;
 	}
 	
 	
@@ -34,7 +38,7 @@ public class Player extends MovableObject implements Observer{
 		
 		// could open a bug where one key is not recorded 
 		// it will have twice the speed
-		
+		System.out.println("KEY: " + e.toString());
 		if(key == KeyEvent.VK_W) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
 				this.setVelY(-WALK);

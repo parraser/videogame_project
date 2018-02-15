@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
@@ -14,6 +16,7 @@ public class Game extends Canvas implements Runnable{
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
+	private List<GameObject> gameObjects = new ArrayList<GameObject>();
 	
 	
 	/*
@@ -22,6 +25,9 @@ public class Game extends Canvas implements Runnable{
 	public Game(){
 		KeyHandler keyHand = new KeyHandler();
 		this.addKeyListener(keyHand);
+		Player player = new Player("Player1");
+		keyHand.obs.addObserver(player);
+		gameObjects.add(player);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -61,6 +67,7 @@ public class Game extends Canvas implements Runnable{
 		long timer = System.currentTimeMillis();
 		int frames = 0;
 		while (running){
+			//System.out.println("" + this.gameObjects.get(0).getX() + " " + this.gameObjects.get(0).getY());
 			long now = System.nanoTime();
 			
 			// determine the amount of seconds has elapsed
@@ -94,7 +101,9 @@ public class Game extends Canvas implements Runnable{
 	 * - game mechanics update?
 	 */
 	private void tick(){
-		
+		for (GameObject go : this.gameObjects){
+			go.tick();
+		}
 	}
 	
 	/*
@@ -113,6 +122,9 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
 		// Tell all game objects here to render themselves
+		for (GameObject go : this.gameObjects){
+			go.render(g);
+		}
 		
 		g.dispose();
 		bs.show();
