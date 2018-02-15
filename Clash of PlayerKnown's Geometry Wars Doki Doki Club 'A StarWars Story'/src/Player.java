@@ -70,6 +70,17 @@ public class Player extends MovableObject implements Observer{
 
 	@Override
 	public void tick() {
+		// TODO Auto-generated method stub
+		this.x += this.getVelX();
+		this.y += this.getVelY();
+		if (this.x >= (Game.WIDTH-this.width-5))
+			this.x = Game.HEIGHT-this.width-5;
+		else if (this.x < 0)
+			this.x = 0;
+		if (this.y >= Game.HEIGHT-this.height-25)
+			this.y = Game.HEIGHT-this.height-25;
+		else if(this.y < 0)
+			this.y = 0;
 	}
 
 	@Override
