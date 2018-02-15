@@ -1,11 +1,12 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Observer;
 
 public class KeyHandler extends KeyAdapter{
-	KeyObservable obs;
+	protected KeyObservable obs;
 	
 	public KeyHandler(){
-		obs = new KeyObservable();
+		this.obs = new KeyObservable();
 	}
 	
 	public void keyPressed(KeyEvent e){
@@ -17,6 +18,9 @@ public class KeyHandler extends KeyAdapter{
 		//System.out.println(e.paramString());
 		this.obs.chang();
 		this.obs.notifyObservers(e);
+	}
+	public void addObserver(GameObject o){
+		this.obs.addObserver((Observer) o);
 	}
 	
 }
