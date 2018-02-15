@@ -7,12 +7,14 @@ public abstract class MovableObject extends GameObject {
 
 	
 	public int getVelX() {
+		System.out.println(this.velX);
 		return velX;
 	}
 
 	public void setVelX(int velX) {
-		this.velX += velX;
-		System.out.println("strafe");
+		//this.velX += velX;
+		this.velX = velX;
+		//System.out.println("strafe");
 	}
 
 	public int getVelY() {
@@ -20,8 +22,8 @@ public abstract class MovableObject extends GameObject {
 	}
 
 	public void setVelY(int velY) {
-		this.velY += velY;
-		System.out.println("jump");
+		this.velY = velY;
+		//System.out.println("jump");
 	}
 
 }
