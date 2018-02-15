@@ -73,23 +73,14 @@ public class Player extends MovableObject implements Observer{
 		// TODO Auto-generated method stub
 		this.x += this.getVelX();
 		this.y += this.getVelY();
-		if (this.x >= (1060-this.width))
-			this.x = 1060-this.width;
+		if (this.x >= (Game.WIDTH-this.width-5))
+			this.x = Game.HEIGHT-this.width-5;
 		else if (this.x < 0)
 			this.x = 0;
-		if (this.y >= 700-this.height)
-			this.y = 700-this.height;
+		if (this.y >= Game.HEIGHT-this.height-25)
+			this.y = Game.HEIGHT-this.height-25;
 		else if(this.y < 0)
 			this.y = 0;
-		/*int updateX = this.x + this.getVelX();
-		int updateY = this.y + this.getVelY();
-		if(updateX<=1080 && updateX>=0){
-			this.x = updateX;
-		}
-		if(updateY<=720 && updateY>=0){
-			this.y = updateY;
-		}*/
-		
 		
 	}
 
