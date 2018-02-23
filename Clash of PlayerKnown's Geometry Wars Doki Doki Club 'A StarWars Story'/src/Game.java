@@ -12,13 +12,14 @@ public class Game extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = 1550691097823471818L;
 
-	public static final int WIDTH = 600, HEIGHT = 600;
+	public static final int WIDTH = 800, HEIGHT = 600;
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
 	private List<GameObject> gameObjects = new ArrayList<GameObject>();
 	private Player playerOne;
-	
+	private MapMaker mapMaker;
+	private MapReader mapReader;
 	
 	/*
 	 * Game initialization, what to do when the game first starts
@@ -26,6 +27,11 @@ public class Game extends Canvas implements Runnable{
 	public Game(){
 		KeyHandler keyHand = new KeyHandler();
 		this.addKeyListener(keyHand);
+		
+		mapMaker = new MapMaker(this);
+		mapReader = new MapReader(mapMaker);
+		mapReader.readDirectoryRandom("Maps");
+		
 		playerOne = new Player("Player1");
 		keyHand.addObserver(playerOne);
 		gameObjects.add(playerOne);
@@ -75,22 +81,20 @@ public class Game extends Canvas implements Runnable{
 			delta += now - lastTime;
 			lastTime = now;
 			
-			// when we are due for a tick
+			// when we are due for a tick and render
 			while (delta >= tickPerSecond){
 				tick();
-				delta = 0;
-			}
-			// render game objects
-			if (running)
 				render();
-			
-			// if a second has elapsed update the FPS
-			frames++;
-			if (System.currentTimeMillis() - timer > 1000){
-				timer += 1000;
-				System.out.println("FPS: " + frames);
-				frames = 0;
-				System.out.println();
+				
+				// if a second has elapsed update the FPS
+				frames++;
+				if (System.currentTimeMillis() - timer > 1000){
+					timer += 1000;
+					System.out.println("FPS: " + frames);
+					frames = 0;
+				}
+				
+				delta = 0;
 			}
 		}
 		stop();
@@ -132,7 +136,9 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 	}
 
-	
+	public void addObject(GameObject obj){
+		this.gameObjects.add(obj);
+	}
 	
 	public static void main(String args[]){
 		new Game();

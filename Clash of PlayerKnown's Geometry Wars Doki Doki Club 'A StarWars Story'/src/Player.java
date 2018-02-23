@@ -73,6 +73,9 @@ public class Player extends MovableObject implements Observer{
 		// TODO Auto-generated method stub
 		this.x += this.getVelX();
 		this.y += this.getVelY();
+		
+		
+		//REPLACE: KEEPING PLAY WITHIN GAME WALLS
 		if (this.x >= (Game.WIDTH-this.width-5))
 			this.x = Game.HEIGHT-this.width-5;
 		else if (this.x < 0)
@@ -91,8 +94,8 @@ public class Player extends MovableObject implements Observer{
 	}
 
 	@Override
-	public boolean intersects(Rectangle r) {
+	public Rectangle getRect() {
 		// TODO Auto-generated method stub
-		return false;
+		return new Rectangle(this.x, this.y, this.width, this.height);
 	}
 }
