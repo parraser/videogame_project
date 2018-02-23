@@ -16,7 +16,7 @@ public class Game extends Canvas implements Runnable{
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
-	private List<GameObject> gameObjects = new ArrayList<GameObject>();
+	private List<GameObject> gameObjects, noClipObj;
 	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
@@ -25,6 +25,9 @@ public class Game extends Canvas implements Runnable{
 	 * Game initialization, what to do when the game first starts
 	 */
 	public Game(){
+		gameObjects = new ArrayList<GameObject>();
+		noClipObj = new ArrayList<GameObject>();
+		
 		KeyHandler keyHand = new KeyHandler();
 		this.addKeyListener(keyHand);
 		
