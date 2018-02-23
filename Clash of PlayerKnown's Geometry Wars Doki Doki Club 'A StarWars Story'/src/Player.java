@@ -13,6 +13,7 @@ public class Player extends MovableObject implements Observer{
 	public final static int WIDTH = 20;
 	public final static int HEIGHT = 20;
 	private Game game;
+	private Color color;
 	
 	String name;
 	
@@ -23,6 +24,7 @@ public class Player extends MovableObject implements Observer{
 		this.width = WIDTH;
 		this.height = HEIGHT;
 		this.game = game;
+		this.color = Color.GRAY;
 	}
 	
 	
@@ -96,7 +98,7 @@ public class Player extends MovableObject implements Observer{
 	@Override
 	public void render(Graphics g) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.white);
+		g.setColor(this.color);
 		g.fillRect(this.x, this.y, this.width, this.height);
 	}
 
