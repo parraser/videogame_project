@@ -9,16 +9,20 @@ import java.util.Observer;
 /* The player class object */
 public class Player extends MovableObject implements Observer{
 	
-	final static int WALK = 8;
+	final static int WALK = 5;
+	public final static int WIDTH = 20;
+	public final static int HEIGHT = 20;
+	private Game game;
 	
 	String name;
 	
-	public Player(String name){
+	public Player(String name, Game game){
 		this.name = name;
 		this.x = 0;
 		this.y = 0;
-		this.width = 20;
-		this.height = 20;
+		this.width = WIDTH;
+		this.height = HEIGHT;
+		this.game = game;
 	}
 	
 	
@@ -70,6 +74,9 @@ public class Player extends MovableObject implements Observer{
 
 	@Override
 	public void tick() {
+		
+		this.game.addTrail(new Trail(this.x, this.y));
+		
 		// TODO Auto-generated method stub
 		this.x += this.getVelX();
 		this.y += this.getVelY();
