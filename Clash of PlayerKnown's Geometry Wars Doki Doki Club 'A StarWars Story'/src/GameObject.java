@@ -20,7 +20,7 @@ public abstract class GameObject {
 	}
 	public abstract void tick();
 	public abstract void render(Graphics g);
-	public abstract boolean intersects(Rectangle r);
+	public abstract Rectangle getRect();
 	
 	public int getX() {
 		return x;
