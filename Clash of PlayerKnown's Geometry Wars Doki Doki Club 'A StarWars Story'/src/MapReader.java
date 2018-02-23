@@ -44,7 +44,7 @@ public class MapReader {
 			int randomMap = r.nextInt(maps.size());
 			this.readFile(maps.get(randomMap).getAbsolutePath());
 		}catch(Exception ex){
-			System.out.println("Something Happened");
+			System.out.println("Directory may not exist");
 			return;
 		}
 		
@@ -85,7 +85,6 @@ public class MapReader {
 			String line;
 		    while ((line = in.readLine()) != null) {
 		    	for(char c : line.toCharArray()){
-		    		System.out.print(c);
 		    		obj = this.readCharBlock(offsetX, offsetY, c);
 		    		if(obj != null){
 		    			this.mapMaker.addObj(obj);
@@ -93,7 +92,6 @@ public class MapReader {
 		    		offsetX += WALL_DIM;
 		    	}
 		    	offsetX = 0;
-		    	System.out.println();
 		        offsetY += WALL_DIM;
 		    }
 		    in.close();

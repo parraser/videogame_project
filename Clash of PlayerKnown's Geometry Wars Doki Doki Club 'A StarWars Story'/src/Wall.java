@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Wall extends GameObject{
+	// The default color for walls
 	public final static Color COLOR = new Color(50,50,50);
 	
 	public Wall(int x, int y, int width, int height){
@@ -15,7 +16,7 @@ public class Wall extends GameObject{
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
-		
+		/* Actually does nothing on tick; the player is the one that checks for collisions. */
 	}
 
 	@Override
