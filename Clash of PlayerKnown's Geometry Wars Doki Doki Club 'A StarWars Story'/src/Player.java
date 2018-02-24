@@ -12,13 +12,15 @@ public class Player extends MovableObject implements Observer{
 	final static int WALK = 8;
 	
 	String name;
+	Game game;
 	
-	public Player(String name){
+	public Player(String name, Game game){
 		this.name = name;
 		this.x = 0;
 		this.y = 0;
 		this.width = 20;
 		this.height = 20;
+		this.game = game;
 	}
 	
 	
@@ -64,6 +66,12 @@ public class Player extends MovableObject implements Observer{
 				this.setVelX(WALK);
 			}else if (keyAction == KeyEvent.KEY_RELEASED) {
 				this.setVelX(0);
+			}
+		}
+		
+		if (key == KeyEvent.VK_SPACE) {
+			if (keyAction == KeyEvent.KEY_PRESSED) {
+				game.addObject(new ProjectileObject(this.x, this.y, 1, 0)); // direction (1,0) is temporary placeholder until rotation is implemented
 			}
 		}
 	}

@@ -32,7 +32,7 @@ public class Game extends Canvas implements Runnable{
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
 		
-		playerOne = new Player("Player1");
+		playerOne = new Player("Player1", this);
 		keyHand.addObserver(playerOne);
 		gameObjects.add(playerOne);
 		
