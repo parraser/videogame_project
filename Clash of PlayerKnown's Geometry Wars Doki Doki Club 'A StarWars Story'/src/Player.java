@@ -21,6 +21,7 @@ public class Player extends MovableObject implements Observer{
 		this.width = 20;
 		this.height = 20;
 		this.game = game;
+		this.game.addObject(this);
 	}
 	
 	
@@ -71,7 +72,9 @@ public class Player extends MovableObject implements Observer{
 		
 		if (key == KeyEvent.VK_SPACE) {
 			if (keyAction == KeyEvent.KEY_PRESSED) {
-				game.addObject(new ProjectileObject(this.x, this.y, 1, 0)); // direction (1,0) is temporary placeholder until rotation is implemented
+				int sourcex = this.x + this.width/2;
+				int sourcey = this.y + this.height/2;
+				game.addObject(new ProjectileObject(game, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // direction is temporary placeholder until rotation is implemented
 			}
 		}
 	}

@@ -34,7 +34,7 @@ public class Game extends Canvas implements Runnable{
 		
 		playerOne = new Player("Player1", this);
 		keyHand.addObserver(playerOne);
-		gameObjects.add(playerOne);
+		//gameObjects.add(playerOne);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -138,6 +138,10 @@ public class Game extends Canvas implements Runnable{
 
 	public void addObject(GameObject obj){
 		this.gameObjects.add(obj);
+	}
+	
+	public void removeObject(GameObject obj) {
+		this.gameObjects.remove(obj);
 	}
 	
 	public static void main(String args[]){
