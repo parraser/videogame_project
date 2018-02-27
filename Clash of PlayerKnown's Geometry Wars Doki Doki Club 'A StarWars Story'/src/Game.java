@@ -20,6 +20,10 @@ public class Game extends Canvas implements Runnable{
 	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
+	private enum State {
+		GAME, MAIN_MENU
+	}
+	private State state = State.MAIN_MENU;
 	
 	/*
 	 * Game initialization, what to do when the game first starts
@@ -41,7 +45,6 @@ public class Game extends Canvas implements Runnable{
 		
 		this.start();
 		
-
 	}
 	
 	public synchronized void start(){
@@ -107,8 +110,10 @@ public class Game extends Canvas implements Runnable{
 	 * - game mechanics update?
 	 */
 	private void tick(){
-		for (GameObject go : this.gameObjects){
-			go.tick();
+		if (state == State.GAME) {
+			for (GameObject go : this.gameObjects) {
+				go.tick();
+			}
 		}
 	}
 	
@@ -127,9 +132,11 @@ public class Game extends Canvas implements Runnable{
 		g.setColor(Color.PINK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		// Tell all game objects here to render themselves
-		for (GameObject go : this.gameObjects){
-			go.render(g);
+		if (state == State.GAME) {
+			// Tell all game objects here to render themselves
+			for (GameObject go : this.gameObjects){
+				go.render(g);
+			}
 		}
 		
 		g.dispose();
