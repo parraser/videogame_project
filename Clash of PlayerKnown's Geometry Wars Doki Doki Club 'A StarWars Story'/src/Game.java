@@ -129,10 +129,11 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		
-		g.setColor(Color.PINK);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-		
-		if (state == State.GAME) {
+		if (state == State.MAIN_MENU) {
+			// render main menu here
+		} else if (state == State.GAME) {
+			g.setColor(Color.PINK);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
 			// Tell all game objects here to render themselves
 			for (GameObject go : this.gameObjects){
 				go.render(g);
