@@ -4,9 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 public class Game extends Canvas implements Runnable{
 	
@@ -20,6 +25,12 @@ public class Game extends Canvas implements Runnable{
 	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
+	private MainMenu menu = new MainMenu();
+	private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
+
+	private BufferedImage background = null;
+	
+	
 	private enum State {
 		GAME, MAIN_MENU
 	}
@@ -127,10 +138,18 @@ public class Game extends Canvas implements Runnable{
 			return;
 		}
 		
-		Graphics g = bs.getDrawGraphics();
+		try {
+		    background = ImageIO.read(getClass().getResource("space.jpg"));
+		    
+		} catch (IOException e) {
+		}
 		
+		Graphics g = bs.getDrawGraphics();
+		g.drawImage(image,0,0, WIDTH,HEIGHT, this);
+		g.drawImage(background,0,0, this);
 		if (state == State.MAIN_MENU) {
 			// render main menu here
+			menu.render(g);
 		} else if (state == State.GAME) {
 			g.setColor(Color.PINK);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
