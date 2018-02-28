@@ -8,10 +8,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
+import java.util.Set;
 
 public class Game extends Canvas implements Runnable{
 	
@@ -21,7 +23,8 @@ public class Game extends Canvas implements Runnable{
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
-	private List<GameObject> gameObjects = new ArrayList<GameObject>();
+	private List<GameObject> gameObjects;
+	private List<Trail> trails;
 	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
@@ -40,6 +43,9 @@ public class Game extends Canvas implements Runnable{
 	 * Game initialization, what to do when the game first starts
 	 */
 	public Game(){
+		gameObjects = new ArrayList<GameObject>();
+		trails = new LinkedList<Trail>();
+		
 		KeyHandler keyHand = new KeyHandler();
 		this.addKeyListener(keyHand);
 		
@@ -47,7 +53,8 @@ public class Game extends Canvas implements Runnable{
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
 		
-		playerOne = new Player("Player1");
+		/* TEMPORARY */
+		playerOne = new Player("Player1", this);
 		keyHand.addObserver(playerOne);
 		gameObjects.add(playerOne);
 		
@@ -90,7 +97,6 @@ public class Game extends Canvas implements Runnable{
 		while (running){
 			//System.out.println("" + this.gameObjects.get(0).getX() + " " + this.gameObjects.get(0).getY());
 			long now = System.nanoTime();
-			
 			// determine the amount of seconds has elapsed
 			delta += now - lastTime;
 			lastTime = now;
@@ -126,6 +132,15 @@ public class Game extends Canvas implements Runnable{
 				go.tick();
 			}
 		}
+		Trail t;
+		for(int i = 0; i < this.trails.size(); i++){
+			t = this.trails.get(i);
+			if(t.isDead()){
+				this.trails.remove(i);
+			}else{
+				t.tick();
+			}
+		}
 	}
 	
 	/*
@@ -142,6 +157,7 @@ public class Game extends Canvas implements Runnable{
 		    background = ImageIO.read(getClass().getResource("space.jpg"));
 		    
 		} catch (IOException e) {
+			
 		}
 		
 		Graphics g = bs.getDrawGraphics();
@@ -166,7 +182,9 @@ public class Game extends Canvas implements Runnable{
 	public void addObject(GameObject obj){
 		this.gameObjects.add(obj);
 	}
-	
+	public void addTrail(Trail trail){
+		this.trails.add(trail);
+	}
 	public static void main(String args[]){
 		new Game();
 	}
