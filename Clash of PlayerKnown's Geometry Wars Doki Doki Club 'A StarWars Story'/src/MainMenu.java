@@ -4,14 +4,28 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.util.Observable;
+import java.util.Observer;
 
 
 
-public class MainMenu{
+
+public class MainMenu implements Observer {
 	
 	public Rectangle play = new Rectangle(Game.WIDTH/3, 250, 266, 75);
 	public Rectangle option = new Rectangle(Game.WIDTH/3, 350, 266, 75);
 	public Rectangle quit = new Rectangle(Game.WIDTH/3, 450, 266, 75);
+	private Game game;
+	private enum menuState {
+		PLAY, OPTIONS, QUIT
+	}
+	private menuState mState;
+	
+	public MainMenu(Game game) {
+		this.game = game;
+		mState = menuState.PLAY;
+	}
 	
 	public void render(Graphics g){
 		
@@ -30,5 +44,33 @@ public class MainMenu{
 		g2d.draw(play);
 		g2d.draw(option);
 		g2d.draw(quit);
+	}
+
+	@Override
+	public void update(Observable o, Object e) {
+		
+		int key = ((KeyEvent) e).getKeyCode();
+		int keyAction = ((KeyEvent) e).getID();
+		
+		if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAY) {
+			game.setState(Game.State.GAME);
+		} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
+			if (this.mState == menuState.PLAY) {
+				this.mState = menuState.QUIT;
+			} else if (this.mState == menuState.OPTIONS) {
+				this.mState = menuState.PLAY;
+			} else if (this.mState == menuState.QUIT) {
+				this.mState = menuState.OPTIONS;
+			}
+		} else if (key == KeyEvent.VK_S && keyAction == KeyEvent.KEY_PRESSED) {
+			if (this.mState == menuState.PLAY) {
+				this.mState = menuState.OPTIONS;
+			} else if (this.mState == menuState.OPTIONS) {
+				this.mState = menuState.QUIT;
+			} else if (this.mState == menuState.QUIT) {
+				this.mState = menuState.PLAY;
+			}
+		}
+		
 	}
 }

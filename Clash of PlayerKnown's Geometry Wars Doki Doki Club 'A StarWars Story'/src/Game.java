@@ -25,19 +25,20 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread;
 	private List<GameObject> gameObjects;
 	private List<Trail> trails;
+	private MainMenu mainMenu;
 	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
-	private MainMenu menu = new MainMenu();
+	private MainMenu menu;
 	private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 
 	private BufferedImage background = null;
 	
 	
-	private enum State {
+	public enum State {
 		GAME, MAIN_MENU
 	}
-	private State state = State.MAIN_MENU;
+	private State state;
 	
 	/*
 	 * Game initialization, what to do when the game first starts
@@ -52,6 +53,10 @@ public class Game extends Canvas implements Runnable{
 		mapMaker = new MapMaker(this);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
+		
+		this.mainMenu = new MainMenu(this);
+		keyHand.addObserver(mainMenu);
+		this.state = State.MAIN_MENU;
 		
 		/* TEMPORARY */
 		playerOne = new Player("Player1", this);
@@ -185,6 +190,11 @@ public class Game extends Canvas implements Runnable{
 	public void addTrail(Trail trail){
 		this.trails.add(trail);
 	}
+	
+	public void setState(State s) {
+		this.state = s;
+	}
+	
 	public static void main(String args[]){
 		new Game();
 	}
