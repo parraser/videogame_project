@@ -19,30 +19,34 @@ public class Game extends Canvas implements Runnable{
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
-	private List<GameObject> gameObjects;
-	private List<Trail> trails;
+	//private List<GameObject> gameObjects;
+	//private List<Trail> trails;
 	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
+	private GameObjectHandlerView gohv;
 	
 	/*
 	 * Game initialization, what to do when the game first starts
 	 */
 	public Game(){
-		gameObjects = new ArrayList<GameObject>();
-		trails = new LinkedList<Trail>();
+		gohv = new GameObjectHandlerView();
+		//gameObjects = new ArrayList<GameObject>();
+		//trails = new LinkedList<Trail>();
 		
 		KeyHandler keyHand = new KeyHandler();
 		this.addKeyListener(keyHand);
 		
-		mapMaker = new MapMaker(this);
+		//mapMaker = new MapMaker(this);
+		mapMaker = new MapMaker(gohv);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
 		
 		/* TEMPORARY */
-		playerOne = new Player("Player1", this);
+		playerOne = new Player("Player1", gohv);
+		//playerOne = new Player("Player1", this);
 		keyHand.addObserver(playerOne);
-		gameObjects.add(playerOne);
+		gohv.addObject(playerOne);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -90,7 +94,7 @@ public class Game extends Canvas implements Runnable{
 			
 			// when we are due for a tick and render
 			while (delta >= tickPerSecond){
-				tick();
+				this.gohv.tickAll();
 				render();
 				
 				// if a second has elapsed update the FPS
@@ -113,6 +117,7 @@ public class Game extends Canvas implements Runnable{
 	 * - position update?
 	 * - game mechanics update?
 	 */
+	/*
 	private void tick(){
 		for (GameObject go : this.gameObjects){
 			go.tick();
@@ -127,6 +132,7 @@ public class Game extends Canvas implements Runnable{
 			}
 		}
 	}
+	*/
 	
 	/*
 	 * Manages the buffer and draws the next available one
@@ -143,26 +149,32 @@ public class Game extends Canvas implements Runnable{
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
+		gohv.renderAll(g);
+		
 		/*Draw GUI first here */
 		
 		// Tell all game objects here to render themselves
+		/*
 		for (GameObject go : this.gameObjects){
 			go.render(g);
 		}
 		for(GameObject go : this.trails){
 			go.render(g);
 		}
+		*/
 		
 		g.dispose();
 		bs.show();
 	}
 
+	/*
 	public void addObject(GameObject obj){
 		this.gameObjects.add(obj);
 	}
 	public void addTrail(Trail trail){
 		this.trails.add(trail);
 	}
+	*/
 	public static void main(String args[]){
 		new Game();
 	}

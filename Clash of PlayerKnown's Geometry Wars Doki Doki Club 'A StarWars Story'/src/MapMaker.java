@@ -1,8 +1,9 @@
 
 public class MapMaker {
-	private Game game;
-	public MapMaker(Game game){
-		this.game = game;
+	//private Game game;
+	private GameObjectHandlerView gohv;
+	public MapMaker(GameObjectHandlerView game){
+		this.gohv = game;
 	}
 	
 	/**
@@ -10,7 +11,7 @@ public class MapMaker {
 	 * @param obj GameObject to add
 	 */
 	public void addObj(GameObject obj){
-		this.game.addObject(obj);
+		this.gohv.addObject(obj);
 	}
 	public void createPlayer(/* CONTROL SCHEME?????? */){
 		
