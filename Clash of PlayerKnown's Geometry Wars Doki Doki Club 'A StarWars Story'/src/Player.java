@@ -14,6 +14,7 @@ public class Player extends MovableObject implements Observer{
 	public final static int HEIGHT = 20;
 	private GameObjectHandlerView gohv;
 	private Color color;
+	private boolean moveRight, moveLeft, moveDown, moveUp;
 	
 	String name;
 	
@@ -45,31 +46,39 @@ public class Player extends MovableObject implements Observer{
 		// it will have twice the speed
 		if(key == KeyEvent.VK_W) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
-				this.setVelY(-WALK);
+				//this.setVelY(-WALK);
+				this.moveUp = true;
 			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-				this.setVelY(0);
+				//this.setVelY(0);
+				this.moveUp = false;
 			}
 			
 		}else if(key == KeyEvent.VK_S) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
-				this.setVelY(WALK);
+				//this.setVelY(WALK);
+				this.moveDown = true;
 			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-				this.setVelY(0);
+				//this.setVelY(0);
+				this.moveDown = false;
 			}
 		}
 		
 		if(key == KeyEvent.VK_A) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
-				this.setVelX(-WALK);
+				//this.setVelX(-WALK);
+				this.moveLeft = true;
 			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-				this.setVelX(0);
+				//this.setVelX(0);
+				this.moveLeft = false;
 			}
 			
 		}else if(key == KeyEvent.VK_D) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
-				this.setVelX(WALK);
+				//this.setVelX(WALK);
+				this.moveRight = true;
 			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-				this.setVelX(0);
+				//this.setVelX(0);
+				this.moveRight = false;
 			}
 		}
 	}
@@ -79,6 +88,14 @@ public class Player extends MovableObject implements Observer{
 		
 		this.gohv.addTrail(new Trail(this.x, this.y));
 		
+		this.velX = 0;
+		this.velY = 0;
+		
+		if (this.moveDown) this.velY+=this.WALK;
+		if (this.moveUp) this.velY-=this.WALK;
+		if (this.moveRight) this.velX+=this.WALK;
+		if (this.moveLeft) this.velX-=this.WALK;
+		
 		// TODO Auto-generated method stub
 		this.x += this.getVelX();
 		this.y += this.getVelY();
@@ -86,7 +103,7 @@ public class Player extends MovableObject implements Observer{
 		
 		//REPLACE: KEEPING PLAY WITHIN GAME WALLS
 		if (this.x >= (Game.WIDTH-this.width-5))
-			this.x = Game.HEIGHT-this.width-5;
+			this.x = Game.WIDTH-this.width-5;
 		else if (this.x < 0)
 			this.x = 0;
 		if (this.y >= Game.HEIGHT-this.height-25)
