@@ -15,8 +15,24 @@ public class Player extends MovableObject implements Observer{
 	private GameObjectHandlerView gohv;
 	private Color color;
 	private boolean moveRight, moveLeft, moveDown, moveUp;
+	private int up, down, left, right;
 	
 	String name;
+	
+	public Player(int up, int down, int left, int right, int width, int height,
+			Color color, String name, GameObjectHandlerView gohv){
+		if (color == null || name == null || gohv == null || width <= 0 || height <= 0)
+			throw new IllegalArgumentException();
+		this.up = up;
+		this.down = down;
+		this.left = left;
+		this.right = right;
+		this.width = width;
+		this.height = height;
+		this.color = color;
+		this.name = name;
+		this.gohv = gohv;
+	}
 	
 	public Player(String name, GameObjectHandlerView gohv){
 		this.name = name;
@@ -26,6 +42,10 @@ public class Player extends MovableObject implements Observer{
 		this.height = HEIGHT;
 		this.gohv = gohv;
 		this.color = Color.GRAY;
+		this.up = KeyEvent.VK_W;
+		this.down = KeyEvent.VK_S;
+		this.right = KeyEvent.VK_D;
+		this.left = KeyEvent.VK_A;
 	}
 	
 	
@@ -44,7 +64,7 @@ public class Player extends MovableObject implements Observer{
 		//shall input an equal negative velocity
 		// could open a bug where one key is not recorded 
 		// it will have twice the speed
-		if(key == KeyEvent.VK_W) {
+		if(key == this.up) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
 				//this.setVelY(-WALK);
 				this.moveUp = true;
@@ -53,7 +73,7 @@ public class Player extends MovableObject implements Observer{
 				this.moveUp = false;
 			}
 			
-		}else if(key == KeyEvent.VK_S) {
+		}else if(key == this.down) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
 				//this.setVelY(WALK);
 				this.moveDown = true;
@@ -63,7 +83,7 @@ public class Player extends MovableObject implements Observer{
 			}
 		}
 		
-		if(key == KeyEvent.VK_A) {
+		if(key == this.left) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
 				//this.setVelX(-WALK);
 				this.moveLeft = true;
@@ -72,7 +92,7 @@ public class Player extends MovableObject implements Observer{
 				this.moveLeft = false;
 			}
 			
-		}else if(key == KeyEvent.VK_D) {
+		}else if(key == this.right) {
 			if(keyAction == KeyEvent.KEY_PRESSED) {
 				//this.setVelX(WALK);
 				this.moveRight = true;
