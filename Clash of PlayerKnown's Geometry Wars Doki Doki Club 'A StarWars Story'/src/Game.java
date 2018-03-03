@@ -25,11 +25,10 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread;
 	private List<GameObject> gameObjects;
 	private List<Trail> trails;
-	private MainMenu mainMenu;
 	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
-	private MainMenu menu;
+	private MainMenu mainMenu;
 	private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 
 	private BufferedImage background = null;
@@ -170,7 +169,7 @@ public class Game extends Canvas implements Runnable{
 		g.drawImage(background,0,0, this);
 		if (state == State.MAIN_MENU) {
 			// render main menu here
-			menu.render(g);
+			mainMenu.render(g);
 		} else if (state == State.GAME) {
 			g.setColor(Color.PINK);
 			g.fillRect(0, 0, WIDTH, HEIGHT);

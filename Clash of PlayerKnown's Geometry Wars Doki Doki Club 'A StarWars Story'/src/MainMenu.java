@@ -41,9 +41,22 @@ public class MainMenu implements Observer {
 		g2d.drawString("Play", play.x + 75,play.y + 50);
 		g2d.drawString("Options", option.x + 50,option.y + 50);
 		g2d.drawString("Quit", quit.x + 75,quit.y + 50);
+		
 		g2d.draw(play);
 		g2d.draw(option);
 		g2d.draw(quit);
+		
+		g2d.setColor(Color.YELLOW);
+		if (this.mState == menuState.PLAY) {
+			g2d.draw(play);
+			g2d.drawString("Play", play.x + 75,play.y + 50);
+		} else if (this.mState == menuState.OPTIONS) {
+			g2d.draw(option);
+			g2d.drawString("Options", option.x + 50,option.y + 50);
+		} else {
+			g2d.draw(quit);
+			g2d.drawString("Quit", quit.x + 75,quit.y + 50);
+		}
 	}
 
 	@Override
