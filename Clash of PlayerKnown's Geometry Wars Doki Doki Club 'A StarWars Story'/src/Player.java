@@ -106,7 +106,7 @@ public class Player extends MovableObject implements Observer{
 	@Override
 	public void tick() {
 		
-		this.gohv.addTrail(new Trail(this.x, this.y));
+		this.gohv.addTrail(new Trail(this.x, this.y, this.color));
 		
 		this.velX = 0;
 		this.velY = 0;

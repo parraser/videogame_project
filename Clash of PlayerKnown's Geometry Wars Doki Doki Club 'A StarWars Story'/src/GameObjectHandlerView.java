@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -8,10 +9,12 @@ import java.util.List;
 public class GameObjectHandlerView {
 	private List<GameObject> gameObjects;
 	private List<Trail> trails;
+	private KeyHandler keyHand;
 
 	public GameObjectHandlerView() {
 		gameObjects = new ArrayList<GameObject>();
 		trails = new LinkedList<Trail>();
+		keyHand = new KeyHandler();
 	}
 	/*
 	 * What to do after every game tick
@@ -52,11 +55,19 @@ public class GameObjectHandlerView {
 		
 	}
 	
+	public void addPlayer(Player p){
+		keyHand.addObserver(p);
+		this.gameObjects.add(p);
+	}
+	
 	public void addObject(GameObject obj){
 		this.gameObjects.add(obj);
 	}
 	public void addTrail(Trail trail){
 		this.trails.add(trail);
+	}
+	public KeyHandler getKeyHandler() {
+		return this.keyHand;
 	}
 
 }

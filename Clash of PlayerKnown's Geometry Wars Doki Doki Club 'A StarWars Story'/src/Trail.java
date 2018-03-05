@@ -58,14 +58,14 @@ public class Trail extends GameObject{
 	private float timeLeft;
 	private Color color;
 	
-	public Trail(int x, int y) {
+	public Trail(int x, int y, Color c) {
 		// TODO Auto-generated constructor stub
 		this.x = x;
 		this.y = y;
 		this.width = Player.WIDTH;
 		this.height = Player.HEIGHT;
 		this.alpha = MAX_LIFE;
-		this.color = Color.WHITE;
+		this.color = c;
 	}
 	@Override
 	public void tick() {

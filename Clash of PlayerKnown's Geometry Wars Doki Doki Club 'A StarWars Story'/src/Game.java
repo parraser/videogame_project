@@ -36,17 +36,11 @@ public class Game extends Canvas implements Runnable{
 		
 		KeyHandler keyHand = new KeyHandler();
 		this.addKeyListener(keyHand);
-		
+		this.addKeyListener(gohv.getKeyHandler());
 		//mapMaker = new MapMaker(this);
 		mapMaker = new MapMaker(gohv);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
-		
-		/* TEMPORARY */
-		playerOne = new Player("Player1", gohv);
-		//playerOne = new Player("Player1", this);
-		keyHand.addObserver(playerOne);
-		gohv.addObject(playerOne);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -110,30 +104,6 @@ public class Game extends Canvas implements Runnable{
 		}
 		stop();
 	}
-	
-	/*
-	 * What to do after every game tick
-	 * - player movement?
-	 * - position update?
-	 * - game mechanics update?
-	 */
-	/*
-	private void tick(){
-		for (GameObject go : this.gameObjects){
-			go.tick();
-		}
-		Trail t;
-		for(int i = 0; i < this.trails.size(); i++){
-			t = this.trails.get(i);
-			if(t.isDead()){
-				this.trails.remove(i);
-			}else{
-				t.tick();
-			}
-		}
-	}
-	*/
-	
 	/*
 	 * Manages the buffer and draws the next available one
 	 */
@@ -153,28 +123,10 @@ public class Game extends Canvas implements Runnable{
 		
 		/*Draw GUI first here */
 		
-		// Tell all game objects here to render themselves
-		/*
-		for (GameObject go : this.gameObjects){
-			go.render(g);
-		}
-		for(GameObject go : this.trails){
-			go.render(g);
-		}
-		*/
-		
 		g.dispose();
 		bs.show();
 	}
 
-	/*
-	public void addObject(GameObject obj){
-		this.gameObjects.add(obj);
-	}
-	public void addTrail(Trail trail){
-		this.trails.add(trail);
-	}
-	*/
 	public static void main(String args[]){
 		new Game();
 	}
