@@ -9,12 +9,14 @@ import java.util.List;
 public class GameObjectHandlerView {
 	private List<GameObject> gameObjects;
 	private List<Trail> trails;
+	private List<ProjectileObject> projectiles;
 	private KeyHandler keyHand;
 
 	public GameObjectHandlerView() {
 		gameObjects = new ArrayList<GameObject>();
 		trails = new LinkedList<Trail>();
 		keyHand = new KeyHandler();
+		this.projectiles = new LinkedList<ProjectileObject>();
 	}
 	/*
 	 * What to do after every game tick
@@ -23,6 +25,8 @@ public class GameObjectHandlerView {
 	 * - game mechanics update?
 	 */
 	public void tickAll(){
+		gameObjects.addAll(this.projectiles);
+		this.projectiles.clear();
 		for (GameObject go : this.gameObjects){
 			go.tick();
 		}
@@ -35,8 +39,7 @@ public class GameObjectHandlerView {
 				t.tick();
 			}
 		}
-		// Removing Projectiles
-		/*
+		// Removing Projectiles off screen
 		for (int i = gameObjects.size() - 1; i >= 0; i--) {
 			if (gameObjects.get(i) instanceof ProjectileObject) {
 				ProjectileObject p = (ProjectileObject)gameObjects.get(i);
@@ -46,7 +49,6 @@ public class GameObjectHandlerView {
 				}
 			}
 		}
-		*/
 	}
 	
 	/*
@@ -76,9 +78,8 @@ public class GameObjectHandlerView {
 		this.gameObjects.add(obj);
 	}
 	
-	//TEMPORARY
-	public void removeObject(GameObject obj){
-		this.gameObjects.remove(obj);
+	public void addProjectile(ProjectileObject obj){
+		this.projectiles.add(obj);
 	}
 	
 	public void addTrail(Trail trail){

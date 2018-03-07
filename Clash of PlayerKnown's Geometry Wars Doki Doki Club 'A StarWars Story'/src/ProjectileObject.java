@@ -23,10 +23,12 @@ public class ProjectileObject extends MovableObject{
 	public void tick() {
 		this.x += velocity*dirx;
 		this.y += velocity*diry;
+		/*
 		if (this.x < 0 - this.width || this.x > Game.WIDTH + this.width ||
 				this.y < 0 - this.height || this.y > Game.HEIGHT + this.height) {
 			gohv.removeObject(this);
 		}
+		*/
 	}
 
 	@Override
