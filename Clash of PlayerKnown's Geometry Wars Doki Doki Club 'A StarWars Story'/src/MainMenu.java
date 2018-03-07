@@ -5,17 +5,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.imageio.ImageIO;
 
 
 
 
 public class MainMenu implements Observer {
-	
-	public Rectangle play = new Rectangle(Game.WIDTH/3, 250, 266, 75);
-	public Rectangle option = new Rectangle(Game.WIDTH/3, 350, 266, 75);
-	public Rectangle quit = new Rectangle(Game.WIDTH/3, 450, 266, 75);
+	private BufferedImage image;
+	private BufferedImage background;
+	private Rectangle play = new Rectangle(Game.WIDTH/3, 250, 266, 75);
+	private Rectangle option = new Rectangle(Game.WIDTH/3, 350, 266, 75);
+	private Rectangle quit = new Rectangle(Game.WIDTH/3, 450, 266, 75);
 	private Game game;
 	private enum menuState {
 		PLAY, OPTIONS, QUIT
@@ -24,12 +29,20 @@ public class MainMenu implements Observer {
 	
 	public MainMenu(Game game) {
 		this.game = game;
-		mState = menuState.PLAY;
+		this.image = new BufferedImage(Game.WIDTH,Game.HEIGHT,BufferedImage.TYPE_INT_RGB);
+		this.mState = menuState.PLAY;
 	}
 	
 	public void render(Graphics g){
-		
 		Graphics2D g2d = (Graphics2D) g;
+		try {
+		    background = ImageIO.read(getClass().getResource("space.jpg"));
+		} catch (IOException e) {
+			
+		}
+		g.drawImage(image,0,0, Game.WIDTH, Game.HEIGHT, game);
+		g.drawImage(background,0,0, game);
+		
 		Font fnt0 = new Font("Comic Sans MS", Font.BOLD, 50);
 		g.setFont(fnt0);
 		g.setColor(Color.YELLOW);

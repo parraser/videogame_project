@@ -23,44 +23,37 @@ public class Game extends Canvas implements Runnable{
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
-	private List<GameObject> gameObjects;
-	private List<Trail> trails;
+	//private List<GameObject> gameObjects;
+	//private List<Trail> trails;
 	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
 	private MainMenu mainMenu;
-	private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
-
-	private BufferedImage background = null;
-	
-	
 	public enum State {
 		GAME, MAIN_MENU
 	}
 	private State state;
+	private GameObjectHandlerView gohv;
 	
 	/*
 	 * Game initialization, what to do when the game first starts
 	 */
 	public Game(){
-		gameObjects = new ArrayList<GameObject>();
-		trails = new LinkedList<Trail>();
+		gohv = new GameObjectHandlerView();
+		//gameObjects = new ArrayList<GameObject>();
+		//trails = new LinkedList<Trail>();
 		
 		KeyHandler keyHand = new KeyHandler();
 		this.addKeyListener(keyHand);
-		
-		mapMaker = new MapMaker(this);
+		this.addKeyListener(gohv.getKeyHandler());
+		//mapMaker = new MapMaker(this);
+		mapMaker = new MapMaker(gohv);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
 		
 		this.mainMenu = new MainMenu(this);
 		keyHand.addObserver(mainMenu);
 		this.state = State.MAIN_MENU;
-		
-		/* TEMPORARY */
-		playerOne = new Player("Player1", this);
-		keyHand.addObserver(playerOne);
-		gameObjects.add(playerOne);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -107,7 +100,7 @@ public class Game extends Canvas implements Runnable{
 			
 			// when we are due for a tick and render
 			while (delta >= tickPerSecond){
-				tick();
+				this.gohv.tickAll();
 				render();
 				
 				// if a second has elapsed update the FPS
@@ -123,30 +116,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		stop();
 	}
-	
-	/*
-	 * What to do after every game tick
-	 * - player movement?
-	 * - position update?
-	 * - game mechanics update?
-	 */
-	private void tick(){
-		if (state == State.GAME) {
-			for (GameObject go : this.gameObjects) {
-				go.tick();
-			}
-		}
-		Trail t;
-		for(int i = 0; i < this.trails.size(); i++){
-			t = this.trails.get(i);
-			if(t.isDead()){
-				this.trails.remove(i);
-			}else{
-				t.tick();
-			}
-		}
-	}
-	
+
 	/*
 	 * Manages the buffer and draws the next available one
 	 */
@@ -156,38 +126,22 @@ public class Game extends Canvas implements Runnable{
 			this.createBufferStrategy(3);
 			return;
 		}
-		
-		try {
-		    background = ImageIO.read(getClass().getResource("space.jpg"));
-		    
-		} catch (IOException e) {
-			
-		}
-		
+
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image,0,0, WIDTH,HEIGHT, this);
-		g.drawImage(background,0,0, this);
-		if (state == State.MAIN_MENU) {
+		if (state == State.MAIN_MENU) { // should prly encapsulate in mainMenu
 			// render main menu here
 			mainMenu.render(g);
 		} else if (state == State.GAME) {
-			g.setColor(Color.PINK);
+			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
-			// Tell all game objects here to render themselves
-			for (GameObject go : this.gameObjects){
-				go.render(g);
-			}
+			gohv.renderAll(g);
 		}
+
+		
+		/*Draw GUI first here */
 		
 		g.dispose();
 		bs.show();
-	}
-
-	public void addObject(GameObject obj){
-		this.gameObjects.add(obj);
-	}
-	public void addTrail(Trail trail){
-		this.trails.add(trail);
 	}
 	
 	public void setState(State s) {

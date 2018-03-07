@@ -62,6 +62,10 @@ public class MapReader {
 				return new Wall(x, y, WALL_DIM, WALL_DIM);
 			case ' ': // Empty space dont add anything
 				return null;
+			case '1':
+				return mapMaker.createPlayerOne(x, y);
+			case '2':
+				return mapMaker.createPlayerTwo(x, y);
 			default:
 				System.out.println("CANNOT READ: "+c);
 				return null;
@@ -86,8 +90,13 @@ public class MapReader {
 		    while ((line = in.readLine()) != null) {
 		    	for(char c : line.toCharArray()){
 		    		obj = this.readCharBlock(offsetX, offsetY, c);
+		    		
 		    		if(obj != null){
-		    			this.mapMaker.addObj(obj);
+		    			if(obj instanceof Player){
+		    				this.mapMaker.addPlayer((Player) obj);
+		    			}else{
+		    				this.mapMaker.addObj(obj);
+		    			}
 		    		}
 		    		offsetX += WALL_DIM;
 		    	}
