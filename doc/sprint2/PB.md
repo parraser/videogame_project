@@ -56,7 +56,7 @@ Tasks: Implement Keyboard listener, Implement new player move methods
 
 ------------------------
 
-#### User Story 3: Mex Wall
+#### User Story 3: Wall
 
 As a casual/competitive player, I want walls so that I have a more varied experience so that bullets can bounce off.
 
@@ -65,9 +65,11 @@ Criteria of Satisfaction:
 
 Priority: 3
 
-Points: 3
+Points: 2
 
 Dependencies: 2
+
+Tasks: Create the wall object, Create collision with player(s)
 
 -----------------------
 
@@ -81,7 +83,7 @@ Criteria of Satisfaction:
 
 Priority: 3
 
-Points: 8
+Points: 5
 
 Dependencies: 3
 
@@ -101,6 +103,8 @@ Points: 5
 
 Dependencies: 1
 
+Tasks: Create a scoring system
+
 ------------------------
 
 #### User Story 6: Bullet types
@@ -116,6 +120,8 @@ Points: 8
 
 Dependencies: 5
 
+Tasks: Create different bullet types
+
 -------------------------
 
 #### User Story 7: Menu Options
@@ -127,9 +133,11 @@ Criteria of Satisfaction:
 
 Priority: 5
 
-Points: 5
+Points: 1
 
 Dependencies: 12
+
+Tasks: Create a main menu, Implement different game modes
 
 ---------------------------
 
@@ -147,6 +155,8 @@ Points: 8
 
 Dependencies: 5
 
+Tasks: Create power-ups class
+
 -------------------------
 
 #### User Story 9: Create traps
@@ -161,6 +171,8 @@ Priority: 3
 Points: 8
 
 Dependencies: 5
+
+Tasks: Create a traps class
 
 --------------------------
 
@@ -178,6 +190,8 @@ Points: 8
 
 Dependencies: 17
 
+Tasks: Create a ranking system
+
 -------------------------
 
 #### User Story 11: Select Maps
@@ -189,9 +203,11 @@ Criteria of Satisfaction:
 
 Priority: 4
 
-Points: 8
+Points: 3
 
 Dependencies: 2
+
+Tasks: Create ObjectMaker class, Create MapReader class, Random Map select
 
 ------------------------
 
@@ -206,9 +222,11 @@ Criteria of Satisfaction:
 
 Priority: 2
 
-Points: 5
+Points: 3
 
 Dependencies: 17
+
+Tasks: Connect up main menu options with the game
 
 ----------------------------
 
@@ -227,6 +245,8 @@ Points: 8
 
 Dependencies: 11
 
+Tasks: Create a sudden death mode
+
 -----------------------------
 
 #### User Story 14: Random Sudden Death
@@ -244,6 +264,8 @@ Points: 8
 
 Dependencies: 13
 
+Tasks: Create a random sudden death
+
 -----------------------------
 
 #### User Story 15: Create Quick Match Option
@@ -259,6 +281,8 @@ Priority: 2
 Points: 3
 
 Dependencies: 12
+
+Tasks: Create a quick match mode
 
 ---------------------------------
 #### User Story 16: Custom Game
@@ -276,6 +300,8 @@ Points: 5
 
 Dependencies: 12
 
+Tasks: Create a custom game mode
+
 ----------------------------
 
 #### User Story 17: Match Complete Alert
@@ -291,6 +317,8 @@ Points: 1
 
 Dependencies: 5
 
+Tasks: Create a win screen
+
 -------------------------------
 
 #### User Story 18: Game Foundation
@@ -305,7 +333,7 @@ Points: 8
 
 Dependencies: N/A
 
-Tasks: GameObj interface, Observer model for main Game class for each game tick, Main Game Class
+Tasks: GameObj, Main Game class, MovableObject Class, Tell all GameObjects to render and tick accordingly
 
 -------------------------------
 
@@ -321,6 +349,8 @@ Priority: 2
 Points: 5
 
 Dependencies: User Story 18
+
+Tasks: Implement GUI class, Implement connections to other User Stories, Health indicator
 
 -----------------------------------
 
@@ -351,9 +381,9 @@ A user must be able to move their player avatar smoothly with no input lag or ch
 
 Priority: 1
 
-Dependencies: User Story 1
-
 Points: 3
+
+Dependencies: User Story 1
 
 Tasks: Create a player by giving it's keys it will use to move, Have the player move in a more consistent manner
 
@@ -368,9 +398,9 @@ See a trail come out of the player and watch it decay over time.
 
 Priority: 8
 
-Dependencies: User Story 2
-
 Points: 3
+
+Dependencies: User Story 2
 
 Tasks: Create trail object, Integrate with Player object
 
@@ -386,9 +416,11 @@ Bullets should react appropriately.
 
 Priority: 5
 
+Points: 5
+
 Dependencies: User Story 3
 
-Points: 5
+Tasks: Map must be implemented, Wall class must exist, Make a collision function
 
 ------------------------------------
 
@@ -401,9 +433,11 @@ The character model should be able to move freely and rotate.
 
 Priority: 6
 
+Points: 5
+
 Dependencies: User Story 2
 
-Points: 5
+Tasks: Make the player rotate
 
 ---------------------------------
 
@@ -416,9 +450,9 @@ The character model should be able to move freely and rotate.
 
 Priority: 6
 
-Dependencies: User Story 1 ,2, 26, 27
-
 Points: 3
+
+Dependencies: User Story 1 ,2, 26, 27
 
 Tasks: Create a second player using the preexisting player methods, Have the second player have the same rules as the first player
 
@@ -441,7 +475,23 @@ Tasks: Add in a handler class to handle all of the game objects
 
 ------------------------------------
 
-#### User Story 27: release 2
+#### User Story 27: Player Builder
+
+As a casual/competitive player, I want to be able to play with other player.
+
+Criteria of Satisfactions:
+There must produce up to two distinct players
+
+Priority: 1
+
+Points: 1
+
+Dependencies: User Story 2
+
+Tasks: Create a Player Builder class to handle the creation of players
+
+------------------------------------
+#### User Story 28: release 2
 
 **RELEASE 2**
 
