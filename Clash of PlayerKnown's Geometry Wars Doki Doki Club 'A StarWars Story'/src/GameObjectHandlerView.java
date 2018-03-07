@@ -10,11 +10,14 @@ public class GameObjectHandlerView {
 	private List<GameObject> gameObjects;
 	private List<Trail> trails;
 	private KeyHandler keyHand;
+	private List<GameObject> walls;
 
+	
 	public GameObjectHandlerView() {
 		gameObjects = new ArrayList<GameObject>();
 		trails = new LinkedList<Trail>();
 		keyHand = new KeyHandler();
+		walls = new ArrayList<GameObject>();
 	}
 	/*
 	 * What to do after every game tick
@@ -24,6 +27,9 @@ public class GameObjectHandlerView {
 	 */
 	public void tickAll(){
 		for (GameObject go : this.gameObjects){
+			go.tick();
+		}
+		for (GameObject go : this.walls){
 			go.tick();
 		}
 		Trail t;
@@ -52,6 +58,9 @@ public class GameObjectHandlerView {
 		for(GameObject go : this.trails){
 			go.render(g);
 		}
+		for(GameObject go : this.walls){
+			go.render(g);
+		}
 		
 	}
 	
@@ -70,4 +79,11 @@ public class GameObjectHandlerView {
 		return this.keyHand;
 	}
 
+	public void addWall(GameObject obj){
+		this.walls.add(obj);
+	}
+	
+	public List<GameObject> getWalls() {
+		return walls;
+	}
 }

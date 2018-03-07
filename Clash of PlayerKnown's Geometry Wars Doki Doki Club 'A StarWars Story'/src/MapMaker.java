@@ -14,11 +14,15 @@ public class MapMaker {
 	 * @param obj GameObject to add
 	 */
 	public void addObj(GameObject obj){
-		this.gohv.addObject(obj);
+		if(obj instanceof Player) {
+			this.gohv.addPlayer((Player) obj);
+		}else if(obj instanceof Wall) {
+			this.gohv.addWall((Wall) obj);
+		}else{
+			this.gohv.addObject(obj);
+		}
 	}
-	public void addPlayer(Player p){
-		this.gohv.addPlayer(p);
-	}
+	
 	public Player createPlayerOne(int x, int y){
 		PlayerBuilder pBuild = new PlayerBuilder();
 		pBuild.setColor(Color.PINK);
