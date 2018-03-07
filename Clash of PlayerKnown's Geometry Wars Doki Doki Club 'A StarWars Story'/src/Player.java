@@ -17,6 +17,8 @@ public class Player extends MovableObject implements Observer{
 	private boolean moveRight, moveLeft, moveDown, moveUp;
 	private int up, down, left, right;
 	
+	private int angle;
+	
 	String name;
 	
 	public Player(int up, int down, int left, int right, int width, int height,
@@ -32,6 +34,7 @@ public class Player extends MovableObject implements Observer{
 		this.color = color;
 		this.name = name;
 		this.gohv = gohv;
+		this.angle = 0;
 	}
 	
 	public Player(String name, GameObjectHandlerView gohv){
@@ -46,11 +49,44 @@ public class Player extends MovableObject implements Observer{
 		this.down = KeyEvent.VK_S;
 		this.right = KeyEvent.VK_D;
 		this.left = KeyEvent.VK_A;
+		this.angle = 0;
 	}
 	
-	
 	public void collision() {
+		if(!collisionX()) {
+			this.x += this.getVelX();
+		}
+		if(!collisionY()) {
+			this.y += this.getVelY();
+		}
+	}
+	
+	public boolean collisionX() {
 		
+		for(GameObject wallIterator : this.gohv.getWalls()) {
+			Rectangle tempRect = this.getRect();
+			
+			tempRect.setLocation(this.getX()+ this.velX, this.getY());
+			
+			if(wallIterator.getRect().intersects(tempRect)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean collisionY() {
+		
+		for(GameObject wallIterator : this.gohv.getWalls()) {
+			Rectangle tempRect = this.getRect();
+			
+			tempRect.setLocation(this.getX(), this.getY()+ this.velY);
+			
+			if(wallIterator.getRect().intersects(tempRect)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -100,6 +136,16 @@ public class Player extends MovableObject implements Observer{
 				//this.setVelX(0);
 				this.moveRight = false;
 			}
+		}else if(key == KeyEvent.VK_Q) {
+			if(keyAction == KeyEvent.KEY_PRESSED) {
+				//this.setVelX(WALK);
+				this.angle = (this.angle-45)%360;
+			}
+		}else if(key == KeyEvent.VK_E) {
+			if(keyAction == KeyEvent.KEY_PRESSED) {
+				//this.setVelX(WALK);
+				this.angle = (this.angle+45)%360;
+			}
 		}
 	}
 
@@ -117,8 +163,7 @@ public class Player extends MovableObject implements Observer{
 		if (this.moveLeft) this.velX-=this.WALK;
 		
 		// TODO Auto-generated method stub
-		this.x += this.getVelX();
-		this.y += this.getVelY();
+		collision();
 		
 		
 		//REPLACE: KEEPING PLAY WITHIN GAME WALLS

@@ -92,11 +92,7 @@ public class MapReader {
 		    		obj = this.readCharBlock(offsetX, offsetY, c);
 		    		
 		    		if(obj != null){
-		    			if(obj instanceof Player){
-		    				this.mapMaker.addPlayer((Player) obj);
-		    			}else{
-		    				this.mapMaker.addObj(obj);
-		    			}
+		    			this.mapMaker.addObj(obj);
 		    		}
 		    		offsetX += WALL_DIM;
 		    	}
