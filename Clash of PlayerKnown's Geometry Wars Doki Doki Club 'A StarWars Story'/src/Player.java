@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -53,37 +54,72 @@ public class Player extends MovableObject implements Observer{
 	}
 	
 	public void collision() {
-		if(!collisionX()) {
+		if(!wallCollisionX() && !playerCollisionX()) {
 			this.x += this.getVelX();
 		}
-		if(!collisionY()) {
+		if(!wallCollisionY() && !playerCollisionY()) {
 			this.y += this.getVelY();
 		}
 	}
 	
-	public boolean collisionX() {
+	public boolean wallCollisionX() {
 		
 		for(GameObject wallIterator : this.gohv.getWalls()) {
-			Rectangle tempRect = this.getRect();
+			Rectangle tempWall = this.getRect();
 			
-			tempRect.setLocation(this.getX()+ this.velX, this.getY());
+			tempWall.setLocation(this.getX()+ this.velX, this.getY());
 			
-			if(wallIterator.getRect().intersects(tempRect)) {
+			if(wallIterator.getRect().intersects(tempWall)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public boolean collisionY() {
+	public boolean wallCollisionY() {
 		
 		for(GameObject wallIterator : this.gohv.getWalls()) {
-			Rectangle tempRect = this.getRect();
+			Rectangle tempWall = this.getRect();
 			
-			tempRect.setLocation(this.getX(), this.getY()+ this.velY);
+			tempWall.setLocation(this.getX(), this.getY()+ this.velY);
 			
-			if(wallIterator.getRect().intersects(tempRect)) {
+			if(wallIterator.getRect().intersects(tempWall)) {
 				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean playerCollisionX() {
+		for(Player playerIter : this.gohv.getPlayers()) {
+			if (playerIter == this) {
+				//skip, can't collide with self
+			}
+			else {
+				Rectangle tempPlayer1 = this.getRect();
+				tempPlayer1.setLocation(this.getX()+ this.velX, this.getY());
+				Rectangle tempPlayer2 = playerIter.getRect();
+				if(tempPlayer1.intersects(tempPlayer2)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+	public boolean playerCollisionY() {
+		for(Player playerIter : this.gohv.getPlayers()) {
+			if (playerIter == this) {
+				//skip, can't collide with self
+			}
+			else {
+				Rectangle tempPlayer1 = this.getRect();
+				tempPlayer1.setLocation(this.getX(), this.getY()+ this.velY);
+				Rectangle tempPlayer2 = playerIter.getRect();
+				if(tempPlayer1.intersects(tempPlayer2)) {
+					return true;
+				}
 			}
 		}
 		return false;
