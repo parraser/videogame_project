@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 public class Wall extends GameObject{
 	// The default color for walls
-	public final static Color COLOR = new Color(50,50,50);
+	public final static Color COLOR = new Color(100,100,100);
 	
 	public Wall(int x, int y, int width, int height){
 		this.x = x;

@@ -19,7 +19,7 @@ public class KeyHandler extends KeyAdapter{
 		this.obs.chang();
 		this.obs.notifyObservers(e);
 	}
-	public void addObserver(GameObject o){
+	public void addObserver(Object o){
 		this.obs.addObserver((Observer) o);
 	}
 	

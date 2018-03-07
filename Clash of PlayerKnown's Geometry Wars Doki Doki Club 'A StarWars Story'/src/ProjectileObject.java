@@ -6,9 +6,9 @@ public class ProjectileObject extends MovableObject{
 	
 	double dirx, diry; // dirx and diry for setting direction/angle of projectile motion
 	int velocity;
-	Game game;
+	GameObjectHandlerView gohv;
 	
-	public ProjectileObject(Game game, int posx, int posy, double dirx, double diry){
+	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double dirx, double diry){
 		this.x = posx;
 		this.y = posy;
 		this.dirx = dirx;
@@ -16,16 +16,16 @@ public class ProjectileObject extends MovableObject{
 		this.width = 4;
 		this.height = 4;
 		this.velocity = 5;
-		this.game = game;
+		this.gohv = gohv;
 	}
 	
 	@Override
 	public void tick() {
 		this.x += velocity*dirx;
 		this.y += velocity*diry;
-		if (this.x < 0 - this.width || this.x > game.WIDTH + this.width ||
-				this.y < 0 - this.height || this.y > game.HEIGHT + this.height) {
-			game.removeObject(this);
+		if (this.x < 0 - this.width || this.x > Game.WIDTH + this.width ||
+				this.y < 0 - this.height || this.y > Game.HEIGHT + this.height) {
+			gohv.removeObject(this);
 		}
 	}
 
