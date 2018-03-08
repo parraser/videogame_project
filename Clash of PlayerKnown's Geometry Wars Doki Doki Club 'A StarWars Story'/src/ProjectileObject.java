@@ -5,30 +5,62 @@ import java.awt.Rectangle;
 public class ProjectileObject extends MovableObject{
 	
 	double dirx, diry; // dirx and diry for setting direction/angle of projectile motion
-	int velocity;
 	GameObjectHandlerView gohv;
 	
 	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double dirx, double diry){
 		this.x = posx;
 		this.y = posy;
-		this.dirx = dirx;
-		this.diry = diry;
+		this.dirx = dirx; //cos(angle)
+		this.diry = diry; //sin(angle)
 		this.width = 4;
 		this.height = 4;
-		this.velocity = 5;
+		this.velX = 5;
+		this.velY = 5;
 		this.gohv = gohv;
+	}
+	
+	public void collision() {
+		if(!collisionX()) {
+			this.x += this.getVelX()*this.dirx;
+		}
+		if(!collisionY()) {
+			this.y += this.getVelY()*this.diry;
+		}
+	}
+	
+	public boolean collisionX() {
+		
+		for(GameObject wallIterator : this.gohv.getWalls()) {
+			Rectangle tempRect = this.getRect();
+			
+			tempRect.setLocation(this.getX()+ this.velX, this.getY());
+			
+			if(wallIterator.getRect().intersects(tempRect)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean collisionY() {
+		
+		for(GameObject wallIterator : this.gohv.getWalls()) {
+			Rectangle tempRect = this.getRect();
+			
+			tempRect.setLocation(this.getX(), this.getY()+ this.velY);
+			
+			if(wallIterator.getRect().intersects(tempRect)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
 	public void tick() {
-		this.x += velocity*dirx;
-		this.y += velocity*diry;
-		/*
-		if (this.x < 0 - this.width || this.x > Game.WIDTH + this.width ||
-				this.y < 0 - this.height || this.y > Game.HEIGHT + this.height) {
-			gohv.removeObject(this);
-		}
-		*/
+		//this.x += this.velX*dirx;
+		//this.y += this.velY*diry;
+		collision();
 	}
 
 	@Override
