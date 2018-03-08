@@ -2,9 +2,12 @@
 
 <h3>1. Positives</h3>
 <ul>
-<li>All scheduled tasks were completed/li>
-<li>We were able to complete more tasks than innitially accounted for</li>
-<li>hello</li>
+  <li>All scheduled tasks were completed/li>
+  <li>We were able to complete more tasks than innitially accounted for</li>
+  <li>There are no bugs at this point</li>
+  <li>The game looks very nice</li>
+  <li>Implemented a title screen</li>
+
 
 </ul>
 
