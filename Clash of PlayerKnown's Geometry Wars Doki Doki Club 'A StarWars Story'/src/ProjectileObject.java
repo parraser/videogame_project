@@ -2,29 +2,39 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class ProjectileObject extends MovableObject{
+public class ProjectileObject extends MovableObject implements HealthObject{
 	
-	double dirx, diry; // dirx and diry for setting direction/angle of projectile motion
+	double dirX, dirY; // dirX and dirY for setting direction/angle of projectile motion
 	GameObjectHandlerView gohv;
+	int numBounces;
 	
-	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double dirx, double diry){
+	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double dirX, double dirY){
 		this.x = posx;
 		this.y = posy;
-		this.dirx = dirx; //cos(angle)
-		this.diry = diry; //sin(angle)
+		this.dirX = dirX; //cos(angle)
+		this.dirY = dirY; //sin(angle)
 		this.width = 4;
 		this.height = 4;
-		this.velX = 5;
-		this.velY = 5;
+		this.velX = 3;
+		this.velY = 3;
 		this.gohv = gohv;
+		this.numBounces = 5; // number of bounces before it dies
 	}
 	
 	public void collision() {
 		if(!collisionX()) {
-			this.x += this.getVelX()*this.dirx;
+			this.x += this.velX*this.dirX;
+		} else {
+			this.velX = -this.velX;
+			this.numBounces --;
 		}
 		if(!collisionY()) {
-			this.y += this.getVelY()*this.diry;
+			this.y += this.velY*this.dirY;
+		} else {
+			System.out.println(this.velY);
+			this.velY = -this.velY;
+			System.out.println(this.velY);
+			this.numBounces --;
 		}
 	}
 	
@@ -58,8 +68,8 @@ public class ProjectileObject extends MovableObject{
 	
 	@Override
 	public void tick() {
-		//this.x += this.velX*dirx;
-		//this.y += this.velY*diry;
+		//this.x += this.velX*dirX;
+		//this.y += this.velY*dirY;
 		collision();
 	}
 
@@ -72,6 +82,11 @@ public class ProjectileObject extends MovableObject{
 	@Override
 	public Rectangle getRect() {
 		return new Rectangle(this.x, this.y, this.width, this.height);
+	}
+
+	@Override
+	public boolean isDead() {
+		return this.numBounces == 0;
 	}
 
 }

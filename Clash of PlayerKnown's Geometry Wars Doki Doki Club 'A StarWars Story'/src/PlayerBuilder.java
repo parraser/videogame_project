@@ -3,7 +3,7 @@ import java.util.function.Supplier;
 
 public class PlayerBuilder implements Supplier<Player> {
 
-	private int up, down, left, right, width, height;
+	private int up, down, left, right, shoot, width, height;
 	private String name = null;
 	private GameObjectHandlerView gohv = null;
 	private Color color = null;
@@ -24,6 +24,10 @@ public class PlayerBuilder implements Supplier<Player> {
 		this.right = right;
 	}
 
+	public void setShoot(int shoot) {
+		this.shoot = shoot;
+	}
+	
 	public void setWidth(int width) {
 		if (width <= 0)
 			throw new IllegalArgumentException();
@@ -62,7 +66,7 @@ public class PlayerBuilder implements Supplier<Player> {
 	public Player get() {
 		if (name == null || gohv == null || color == null)
 			return null;
-		return new Player(this.up, this.down, this.left, this.right, this.width, this.height, this.color, this.name, this.gohv);
+		return new Player(this.up, this.down, this.left, this.right, this.shoot, this.width, this.height, this.color, this.name, this.gohv);
 	}
 
 }

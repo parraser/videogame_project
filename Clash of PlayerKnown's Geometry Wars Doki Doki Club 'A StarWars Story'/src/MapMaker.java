@@ -30,6 +30,7 @@ public class MapMaker {
 		pBuild.setRight(KeyEvent.VK_D);
 		pBuild.setDown(KeyEvent.VK_S);
 		pBuild.setLeft(KeyEvent.VK_A);
+		pBuild.setShoot(KeyEvent.VK_SPACE);
 		pBuild.setGohv(this.gohv);
 		pBuild.setHeight(P_SIZE);
 		pBuild.setWidth(P_SIZE);
@@ -47,6 +48,7 @@ public class MapMaker {
 		pBuild.setRight(KeyEvent.VK_RIGHT);
 		pBuild.setDown(KeyEvent.VK_DOWN);
 		pBuild.setLeft(KeyEvent.VK_LEFT);
+		pBuild.setShoot(KeyEvent.VK_ENTER);
 		pBuild.setGohv(this.gohv);
 		pBuild.setHeight(P_SIZE);
 		pBuild.setWidth(P_SIZE);

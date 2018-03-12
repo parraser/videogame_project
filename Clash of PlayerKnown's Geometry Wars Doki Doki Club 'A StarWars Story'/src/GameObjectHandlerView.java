@@ -50,12 +50,13 @@ public class GameObjectHandlerView {
 				t.tick();
 			}
 		}
-		// Removing Projectiles off screen
+		// Removing Projectiles off screen (and dead projectiles for now)
 		for (int i = gameObjects.size() - 1; i >= 0; i--) {
 			if (gameObjects.get(i) instanceof ProjectileObject) {
 				ProjectileObject p = (ProjectileObject)gameObjects.get(i);
-				if (p.getX() < 0 - p.getWidth() || p.getX() > Game.WIDTH + p.getWidth() ||
-						p.getY() < 0 - p.getHeight() || p.getY() > Game.HEIGHT + p.getHeight()) {
+				boolean offScreenX = p.getX() < 0 - p.getWidth() || p.getX() > Game.WIDTH + p.getWidth();
+				boolean offScreenY = p.getY() < 0 - p.getHeight() || p.getY() > Game.HEIGHT + p.getHeight();
+				if (offScreenX || offScreenY || p.isDead()) {
 					this.gameObjects.remove(p);
 				}
 			}

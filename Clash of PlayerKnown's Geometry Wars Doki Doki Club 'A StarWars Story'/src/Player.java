@@ -16,11 +16,11 @@ public class Player extends MovableObject implements Observer{
 	private GameObjectHandlerView gohv;
 	private Color color;
 	private boolean moveRight, moveLeft, moveDown, moveUp;
-	private int up, down, left, right;
+	private int up, down, left, right, shoot;
 	private int angle;
 	private String name;
 	
-	public Player(int up, int down, int left, int right, int width, int height,
+	public Player(int up, int down, int left, int right, int shoot, int width, int height,
 			Color color, String name, GameObjectHandlerView gohv){
 		if (color == null || name == null || gohv == null || width <= 0 || height <= 0)
 			throw new IllegalArgumentException();
@@ -28,6 +28,7 @@ public class Player extends MovableObject implements Observer{
 		this.down = down;
 		this.left = left;
 		this.right = right;
+		this.shoot = shoot;
 		this.width = width;
 		this.height = height;
 		this.color = color;
@@ -182,7 +183,7 @@ public class Player extends MovableObject implements Observer{
 			}
 		}
 		
-		if (key == KeyEvent.VK_SPACE) {
+		if (key == this.shoot) {
 			if (keyAction == KeyEvent.KEY_PRESSED) {
 				int sourcex = this.x + this.width/2;
 				int sourcey = this.y + this.height/2;
