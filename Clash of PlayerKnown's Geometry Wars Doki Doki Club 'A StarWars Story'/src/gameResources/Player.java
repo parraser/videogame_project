@@ -1,3 +1,4 @@
+package gameResources;
 import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Graphics;
