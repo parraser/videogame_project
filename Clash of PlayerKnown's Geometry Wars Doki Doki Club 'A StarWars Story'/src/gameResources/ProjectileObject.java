@@ -8,6 +8,9 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	
 	double dirX, dirY; // dirX and dirY for setting direction/angle of projectile motion
 	GameObjectHandlerView gohv;
+	public final static int DEFAULT_MAX_BOUNCE = 5;
+	public final static int DEFAULT_BUL_SPEED = 5;
+	public final static int BUL_SIZE = 10;
 	int numBounces;
 	
 	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double dirX, double dirY){
@@ -15,12 +18,12 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 		this.y = posy;
 		this.dirX = dirX; //cos(angle)
 		this.dirY = dirY; //sin(angle)
-		this.width = 4;
-		this.height = 4;
-		this.velX = 3;
-		this.velY = 3;
+		this.width = BUL_SIZE;
+		this.height = BUL_SIZE;
+		this.velX = DEFAULT_BUL_SPEED;
+		this.velY = DEFAULT_BUL_SPEED;
 		this.gohv = gohv;
-		this.numBounces = 5; // number of bounces before it dies
+		this.numBounces = DEFAULT_MAX_BOUNCE; // number of bounces before it dies
 	}
 	
 	public void collision() {
