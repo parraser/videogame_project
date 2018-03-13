@@ -1,3 +1,4 @@
+package gameResources;
 import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,10 +14,15 @@ public class Player extends MovableObject implements Observer{
 	final static int WALK = 5;
 	public final static int WIDTH = 20;
 	public final static int HEIGHT = 20;
+	public final static int BUL_DEFAULT = 0;
+	public final static int BUL_GHOST = 1;
+	public final static int BUL_SNIPE = 2;
+	
 	private GameObjectHandlerView gohv;
 	private Color color;
 	private boolean moveRight, moveLeft, moveDown, moveUp;
 	private int up, down, left, right;
+	private int curBullet, bulDuration;
 	
 	private int angle;
 	
@@ -36,6 +42,7 @@ public class Player extends MovableObject implements Observer{
 		this.name = name;
 		this.gohv = gohv;
 		this.angle = 0;
+		this.curBullet = BUL_DEFAULT;
 	}
 	
 	public Player(String name, GameObjectHandlerView gohv){
@@ -224,5 +231,11 @@ public class Player extends MovableObject implements Observer{
 	public Rectangle getRect() {
 		// TODO Auto-generated method stub
 		return new Rectangle(this.x, this.y, this.width, this.height);
+	}
+	public int getBulletType(){
+		return this.curBullet;
+	}
+	public void setBulletType(int type){
+		this.curBullet = type;
 	}
 }

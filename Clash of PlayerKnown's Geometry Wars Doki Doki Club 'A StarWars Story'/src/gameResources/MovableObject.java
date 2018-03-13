@@ -1,3 +1,4 @@
+package gameResources;
 
 /* A movable version of a GameObject */
 public abstract class MovableObject extends GameObject {
