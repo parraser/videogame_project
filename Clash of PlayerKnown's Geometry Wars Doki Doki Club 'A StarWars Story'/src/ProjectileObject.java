@@ -7,12 +7,14 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	double dirX, dirY; // dirX and dirY for setting direction/angle of projectile motion
 	GameObjectHandlerView gohv;
 	int numBounces;
+	private double angle;
 	
-	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double dirX, double dirY){
+	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double angle){
 		this.x = posx;
 		this.y = posy;
-		this.dirX = dirX; //cos(angle)
-		this.dirY = dirY; //sin(angle)
+		this.angle = angle;
+		this.dirX = Math.cos(angle); //cos(angle)
+		this.dirY = Math.sin(angle); //sin(angle)
 		this.width = 4;
 		this.height = 4;
 		this.velX = 3;

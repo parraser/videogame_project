@@ -187,7 +187,7 @@ public class Player extends MovableObject implements Observer{
 			if (keyAction == KeyEvent.KEY_PRESSED) {
 				int sourcex = this.x + this.width/2;
 				int sourcey = this.y + this.height/2;
-				this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // angle is temporary placeholder until player rotation implemented
+				this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.PI/6)); // angle is temporary placeholder until player rotation implemented
 			}
 		}
 	}
