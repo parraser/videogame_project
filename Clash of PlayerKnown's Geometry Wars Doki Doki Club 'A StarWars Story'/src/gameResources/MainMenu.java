@@ -1,4 +1,5 @@
 package gameResources;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -10,10 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.imageio.ImageIO;
-
-
 
 
 public class MainMenu implements Observer {
@@ -81,6 +79,7 @@ public class MainMenu implements Observer {
 		
 		if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAY) {
 			game.setState(Game.State.GAME);
+			
 		} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
 			System.exit(0);
 		} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {

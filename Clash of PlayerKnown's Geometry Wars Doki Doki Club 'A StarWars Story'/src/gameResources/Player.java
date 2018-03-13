@@ -1,4 +1,5 @@
 package gameResources;
+
 import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,21 +15,14 @@ public class Player extends MovableObject implements Observer{
 	final static int WALK = 5;
 	public final static int WIDTH = 20;
 	public final static int HEIGHT = 20;
-	public final static int BUL_DEFAULT = 0;
-	public final static int BUL_GHOST = 1;
-	public final static int BUL_SNIPE = 2;
-	
 	private GameObjectHandlerView gohv;
 	private Color color;
 	private boolean moveRight, moveLeft, moveDown, moveUp;
-	private int up, down, left, right;
-	private int curBullet, bulDuration;
-	
+	private int up, down, left, right, shoot;
 	private int angle;
+	private String name;
 	
-	String name;
-	
-	public Player(int up, int down, int left, int right, int width, int height,
+	public Player(int up, int down, int left, int right, int shoot, int width, int height,
 			Color color, String name, GameObjectHandlerView gohv){
 		if (color == null || name == null || gohv == null || width <= 0 || height <= 0)
 			throw new IllegalArgumentException();
@@ -36,13 +30,13 @@ public class Player extends MovableObject implements Observer{
 		this.down = down;
 		this.left = left;
 		this.right = right;
+		this.shoot = shoot;
 		this.width = width;
 		this.height = height;
 		this.color = color;
 		this.name = name;
 		this.gohv = gohv;
 		this.angle = 0;
-		this.curBullet = BUL_DEFAULT;
 	}
 	
 	public Player(String name, GameObjectHandlerView gohv){
@@ -190,11 +184,18 @@ public class Player extends MovableObject implements Observer{
 				this.angle = (this.angle+45)%360;
 			}
 		}
+		
+		if (key == this.shoot) {
+			if (keyAction == KeyEvent.KEY_PRESSED) {
+				int sourcex = this.x + this.width/2;
+				int sourcey = this.y + this.height/2;
+				this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // angle is temporary placeholder until player rotation implemented
+			}
+		}
 	}
 
 	@Override
 	public void tick() {
-		
 		this.gohv.addTrail(new Trail(this.x, this.y, this.color));
 		
 		this.velX = 0;
@@ -231,11 +232,5 @@ public class Player extends MovableObject implements Observer{
 	public Rectangle getRect() {
 		// TODO Auto-generated method stub
 		return new Rectangle(this.x, this.y, this.width, this.height);
-	}
-	public int getBulletType(){
-		return this.curBullet;
-	}
-	public void setBulletType(int type){
-		this.curBullet = type;
 	}
 }
