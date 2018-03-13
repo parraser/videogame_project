@@ -14,7 +14,7 @@ public class SniperBullet extends ProjectileObject{
 	int pLife;
 	public final static int SNIPEBULL_PENETRATE_LIFE = 60;
 	public final static int B_SIZE = 10;
-	public SniperBullet(int x,int y, int velX, int velY, Color color, GameObjectHandlerView gohv){
+	public SniperBullet(int x,int y, double angle, Color color, GameObjectHandlerView gohv){
 		this.x = x;
 		this.y = y;
 		this.velY = velY;

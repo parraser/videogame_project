@@ -12,12 +12,14 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	public final static int DEFAULT_BUL_SPEED = 5;
 	public final static int BUL_SIZE = 10;
 	int numBounces;
+	private double angle;
 	
-	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double dirX, double dirY){
+	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double angle){
 		this.x = posx;
 		this.y = posy;
-		this.dirX = dirX; //cos(angle)
-		this.dirY = dirY; //sin(angle)
+		this.angle = angle;
+		this.dirX = Math.cos(angle); //cos(angle)
+		this.dirY = Math.sin(angle); //sin(angle)
 		this.width = BUL_SIZE;
 		this.height = BUL_SIZE;
 		this.velX = DEFAULT_BUL_SPEED;

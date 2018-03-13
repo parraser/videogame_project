@@ -9,15 +9,9 @@ public class GhostBullet extends ProjectileObject {
  * (higher than default bullet)
  */
 	public final static int B_SIZE = 10;
-	public GhostBullet(int x,int y, int velX, int velY, Color color, GameObjectHandlerView gohv){
-		this.x = x;
-		this.y = y;
-		this.velY = velY;
-		this.velX = velX;
+	public GhostBullet(int x,int y, double angle, Color color, GameObjectHandlerView gohv){
+		super(gohv, x, y, angle);
 		this.color = color;
-		this.width = B_SIZE;
-		this.height = B_SIZE;
-		this.gohv = gohv;
 	}
 	private boolean collisionX(){
 		for(GameObject go : this.gohv.getWalls()) {
