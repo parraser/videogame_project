@@ -37,7 +37,7 @@ public class MainMenu implements Observer {
 	public void render(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
 		try {
-		    background = ImageIO.read(getClass().getResource("space.jpg"));
+		    background = ImageIO.read(getClass().getResource("../space.jpg"));
 		} catch (IOException e) {
 			
 		}
