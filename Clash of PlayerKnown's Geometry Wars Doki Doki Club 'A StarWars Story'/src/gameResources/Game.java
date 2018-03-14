@@ -1,3 +1,4 @@
+package gameResources;
 
 import java.awt.Canvas;
 import java.awt.Color;

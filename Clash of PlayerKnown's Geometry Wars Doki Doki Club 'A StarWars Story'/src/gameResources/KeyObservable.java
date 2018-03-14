@@ -1,3 +1,4 @@
+package gameResources;
 import java.util.Observable;
 
 public class KeyObservable extends Observable {
