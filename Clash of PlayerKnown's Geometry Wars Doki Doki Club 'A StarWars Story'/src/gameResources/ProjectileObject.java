@@ -21,12 +21,10 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 		this.velX = 8;
 		this.velY = 8;
 		this.gohv = gohv;
-		this.numBounces = 5; // number of bounces before it dies
+		this.numBounces = 5; // number of collisions for projectile to die (disappears on nth collision)
 	}
 	
 	public void collision() {
-		this.x += this.velX*this.dirX;
-		this.y += this.velY*this.dirY;
 		if (collisionX()) {
 			this.x += this.velX*this.dirX;
 			this.velX = -this.velX;
@@ -68,8 +66,8 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	
 	@Override
 	public void tick() {
-		//this.x += this.velX*dirX;
-		//this.y += this.velY*dirY;
+		this.x += this.velX*this.dirX;
+		this.y += this.velY*this.dirY;
 		collision();
 	}
 
