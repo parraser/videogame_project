@@ -6,13 +6,17 @@ import java.awt.Rectangle;
 
 public class ProjectileObject extends MovableObject implements HealthObject{
 	
-	double dirX, dirY; // dirX and dirY for setting direction/angle of projectile motion
-	GameObjectHandlerView gohv;
+	protected double dirX; // dirX and dirY for setting direction/angle of projectile motion
+	protected double dirY;
+	protected GameObjectHandlerView gohv;
 	public final static int DEFAULT_MAX_BOUNCE = 5;
 	public final static int DEFAULT_BUL_SPEED = 5;
 	public final static int BUL_SIZE = 10;
-	int numBounces;
+	public final static Color DEFAULT_BUL_COLOR = new Color(0, 204, 0);
+	protected int numBounces;
 	private double angle;
+	protected Color color;
+	
 	
 	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double angle){
 		this.x = posx;
@@ -26,6 +30,7 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 		this.velY = DEFAULT_BUL_SPEED;
 		this.gohv = gohv;
 		this.numBounces = DEFAULT_MAX_BOUNCE; // number of bounces before it dies
+		this.color = DEFAULT_BUL_COLOR;
 	}
 	
 	public void collision() {
@@ -82,7 +87,7 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.red);
+		g.setColor(this.color);
 		g.fillRect(this.x, this.y, this.width, this.height);
 	}
 
@@ -93,7 +98,7 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 
 	@Override
 	public boolean isDead() {
-		return this.numBounces == 0;
+		return this.numBounces <= 0;
 	}
 
 }

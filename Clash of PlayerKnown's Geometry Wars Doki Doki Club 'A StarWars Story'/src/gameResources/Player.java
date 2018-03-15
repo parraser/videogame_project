@@ -42,7 +42,7 @@ public class Player extends MovableObject implements Observer{
 		this.name = name;
 		this.gohv = gohv;
 		this.angle = 0;
-		this.bulType = BUL_DEFAULT;
+		this.bulType = BUL_GHOST;
 	}
 	
 	public Player(String name, GameObjectHandlerView gohv){
