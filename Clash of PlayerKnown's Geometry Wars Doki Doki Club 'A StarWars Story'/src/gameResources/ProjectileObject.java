@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 
 public class ProjectileObject extends MovableObject implements HealthObject{
 	
-	double dirX, dirY; // dirX and dirY for setting direction/angle of projectile motion
 	GameObjectHandlerView gohv;
 	int numBounces;
 	private double angle;
@@ -14,8 +13,6 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 		this.x = posx;
 		this.y = posy;
 		this.angle = angle;
-		this.dirX = Math.cos(angle);
-		this.dirY = Math.sin(angle);
 		this.width = 6;
 		this.height = 6;
 		this.velX = 8;
@@ -26,11 +23,11 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	
 	public void collision() {
 		if (collisionX()) {
-			this.x += this.velX*this.dirX;
+			this.x += this.velX*Math.cos(this.angle);
 			this.velX = -this.velX;
 			this.numBounces --;
 		} else if (collisionY()) {
-			this.y += this.velY*this.dirY;
+			this.y += this.velY*Math.sin(this.angle);
 			this.velY = -this.velY;
 			this.numBounces --;
 		}
@@ -66,8 +63,8 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	
 	@Override
 	public void tick() {
-		this.x += this.velX*this.dirX;
-		this.y += this.velY*this.dirY;
+		this.x += this.velX*Math.cos(this.angle);
+		this.y += this.velY*Math.sin(this.angle);
 		collision();
 	}
 
