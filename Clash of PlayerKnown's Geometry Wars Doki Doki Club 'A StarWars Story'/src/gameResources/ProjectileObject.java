@@ -35,7 +35,6 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 			this.y += this.velY*this.dirY;
 			this.velY = -this.velY;
 			this.numBounces --;
-			System.out.println(this.numBounces);
 		}
 	}
 	
@@ -87,7 +86,7 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 
 	@Override
 	public boolean isDead() {
-		return this.numBounces == 0;
+		return this.numBounces <= 0;
 	}
 
 }
