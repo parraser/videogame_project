@@ -13,6 +13,7 @@ public class GameObjectHandlerView {
 	private KeyHandler keyHand;
 	private List<GameObject> walls;
 	private List<Player> playerList;
+	private Health health;
 
 	
 	public GameObjectHandlerView() {
@@ -21,6 +22,7 @@ public class GameObjectHandlerView {
 		keyHand = new KeyHandler();
 		walls = new ArrayList<GameObject>();
 		playerList = new ArrayList<Player>();
+		health = new Health();
 	}
 	/*
 	 * What to do after every game tick
@@ -47,6 +49,7 @@ public class GameObjectHandlerView {
 				t.tick();
 			}
 		}
+		health.tick();
 	}
 	
 	/*
@@ -70,6 +73,7 @@ public class GameObjectHandlerView {
 		for(GameObject go : this.walls){
 			go.render(g);
 		}
+		health.render(g);
 		
 	}
 	
