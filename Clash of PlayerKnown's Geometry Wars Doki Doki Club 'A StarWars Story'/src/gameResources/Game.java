@@ -51,7 +51,7 @@ public class Game extends Canvas implements Runnable{
 		mapMaker = new MapMaker(gohv);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
-	
+		
 		this.mainMenu = new MainMenu(this);
 		keyHand.addObserver(mainMenu);
 		this.state = State.MAIN_MENU;
@@ -148,7 +148,7 @@ public class Game extends Canvas implements Runnable{
 	public void setState(State s) {
 		this.state = s;
 	}
-
+	
 	public static void main(String args[]){
 		new Game();
 	}

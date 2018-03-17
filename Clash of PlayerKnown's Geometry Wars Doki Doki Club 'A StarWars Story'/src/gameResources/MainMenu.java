@@ -81,7 +81,6 @@ public class MainMenu implements Observer {
 		
 		if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAY) {
 			game.setState(Game.State.GAME);
-			
 		} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
 			System.exit(0);
 		} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
