@@ -10,6 +10,8 @@ import java.util.List;
 public class GameObjectHandlerView {
 	private List<GameObject> gameObjects;
 	private List<Trail> trails;
+	private List<ProjectileObject> projectileBuffer; // Add new projectiles here (to prevent concurrency issues)
+	private List<ProjectileObject> projectiles; // projectiles tick and render here
 	private KeyHandler keyHand;
 	private List<GameObject> walls;
 	private List<Player> playerList;
@@ -19,10 +21,11 @@ public class GameObjectHandlerView {
 	public GameObjectHandlerView() {
 		gameObjects = new ArrayList<GameObject>();
 		trails = new LinkedList<Trail>();
+		this.projectileBuffer = new LinkedList<ProjectileObject>();
+		this.projectiles = new LinkedList<ProjectileObject>();
 		keyHand = new KeyHandler();
 		walls = new ArrayList<GameObject>();
 		playerList = new ArrayList<Player>();
-		health = new Health();
 	}
 	/*
 	 * What to do after every game tick
@@ -31,7 +34,19 @@ public class GameObjectHandlerView {
 	 * - game mechanics update?
 	 */
 	public void tickAll(){
+		this.projectiles.addAll(this.projectileBuffer);
+		this.projectileBuffer.clear();
+		// Removing Projectiles off screen (and dead projectiles for now)
+		for (int i = this.projectiles.size() - 1; i >= 0; i--) {
+			ProjectileObject p = this.projectiles.get(i);
+			if (p.isDead()) {
+				this.projectiles.remove(p);
+			}
+		}
 		for (GameObject go : this.gameObjects){
+			go.tick();
+		}
+		for (ProjectileObject go : this.projectiles){
 			go.tick();
 		}
 		for (Player go : this.playerList) {
@@ -52,6 +67,7 @@ public class GameObjectHandlerView {
 		health.tick();
 	}
 	
+	
 	/*
 	 * Manages the buffer and draws the next available one
 	 */
@@ -62,6 +78,9 @@ public class GameObjectHandlerView {
 		
 		// Tell all game objects here to render themselves
 		for (GameObject go : this.gameObjects){
+			go.render(g);
+		}
+		for (ProjectileObject go : this.projectiles){
 			go.render(g);
 		}
 		for (Player go : this.playerList) {
@@ -85,6 +104,11 @@ public class GameObjectHandlerView {
 	public void addObject(GameObject obj){
 		this.gameObjects.add(obj);
 	}
+	
+	public void addProjectile(ProjectileObject obj){
+		this.projectileBuffer.add(obj);
+	}
+	
 	public void addTrail(Trail trail){
 		this.trails.add(trail);
 	}
