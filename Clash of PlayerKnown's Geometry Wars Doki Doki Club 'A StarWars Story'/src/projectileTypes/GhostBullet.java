@@ -10,7 +10,7 @@ public class GhostBullet extends ProjectileObject {
  * Phases through walls decreasing it's speed speeds up once in air, bounces only on world edges, does after 5 bounces
  * (higher than default bullet)
  */
-	public final static int BUL_GHOST_SPEED = 3;
+	public final static int BUL_GHOST_SPEED = 5;
 	public final static int GHOST_MAX_BOUNCE = 10;
 	public GhostBullet(int x,int y, double angle, Color color, GameObjectHandlerView gohv){
 		super(gohv, x, y, angle);
