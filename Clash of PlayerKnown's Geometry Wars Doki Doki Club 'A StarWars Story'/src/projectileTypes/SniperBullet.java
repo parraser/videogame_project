@@ -21,30 +21,6 @@ public class SniperBullet extends ProjectileObject{
 		this.color = color;
 		this.pLife = SNIPEBULL_PENETRATE_LIFE;
 	}
-	public boolean collisionX(){
-		for(GameObject go : this.gohv.getWalls()) {
-			Rectangle tempRect = this.getRect();
-			
-			tempRect.setLocation(this.getX()+ this.velX, this.getY());
-			
-			if(go.getRect().intersects(tempRect)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	public boolean collisionY(){
-		for(GameObject go : this.gohv.getWalls()) {
-			Rectangle tempRect = this.getRect();
-			
-			tempRect.setLocation(this.getX(), this.getY()+ this.velY);
-			
-			if(go.getRect().intersects(tempRect)) {
-				return true;
-			}
-		}
-		return false;
-	}
 	public void collision(){
 		if(collisionX() || collisionY()){
 			this.pLife -=1;
@@ -54,8 +30,8 @@ public class SniperBullet extends ProjectileObject{
 		if(this.x > Game.WIDTH || this.x + this.width < 0 || this.y > Game.HEIGHT || this.y + this.height < 0 ){
 			this.pLife = -1;
 		}
-		this.x += this.velX*this.dirX;
-		this.y += this.velY*this.dirY;
+		this.x += this.velX*Math.cos(this.angle);
+		this.y += this.velY*Math.sin(this.angle);
 	}
 	public boolean isDead(){
 		if(this.pLife < 0){

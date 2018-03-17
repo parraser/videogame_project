@@ -14,9 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import javax.imageio.ImageIO;
-
-import gameResources.MainMenu;
-
 import java.util.Set;
 
 public class Game extends Canvas implements Runnable{
@@ -33,7 +30,7 @@ public class Game extends Canvas implements Runnable{
 	private MapMaker mapMaker;
 	private MapReader mapReader;
 	private MainMenu mainMenu;
-	public enum State {
+	protected enum State {
 		GAME, MAIN_MENU
 	}
 	private State state;
@@ -54,7 +51,7 @@ public class Game extends Canvas implements Runnable{
 		mapMaker = new MapMaker(gohv);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
-	
+		
 		this.mainMenu = new MainMenu(this);
 		keyHand.addObserver(mainMenu);
 		this.state = State.MAIN_MENU;
@@ -148,10 +145,14 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 	}
 	
+	public State getState() {
+		return this.state;
+	}
+	
 	public void setState(State s) {
 		this.state = s;
 	}
-
+	
 	public static void main(String args[]){
 		new Game();
 	}

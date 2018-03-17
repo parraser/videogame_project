@@ -1,5 +1,4 @@
 package gameResources;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
@@ -11,7 +10,8 @@ import java.util.List;
 public class GameObjectHandlerView {
 	private List<GameObject> gameObjects;
 	private List<Trail> trails;
-	private List<ProjectileObject> projectiles;
+	private List<ProjectileObject> projectileBuffer; // Add new projectiles here (to prevent concurrency issues)
+	private List<ProjectileObject> projectiles; // projectiles tick and render here
 	private KeyHandler keyHand;
 	private List<GameObject> walls;
 	private List<Player> playerList;
@@ -20,6 +20,7 @@ public class GameObjectHandlerView {
 	public GameObjectHandlerView() {
 		gameObjects = new ArrayList<GameObject>();
 		trails = new LinkedList<Trail>();
+		this.projectileBuffer = new LinkedList<ProjectileObject>();
 		this.projectiles = new LinkedList<ProjectileObject>();
 		keyHand = new KeyHandler();
 		walls = new ArrayList<GameObject>();
@@ -32,9 +33,19 @@ public class GameObjectHandlerView {
 	 * - game mechanics update?
 	 */
 	public void tickAll(){
-		gameObjects.addAll(this.projectiles);
-		this.projectiles.clear();
+		this.projectiles.addAll(this.projectileBuffer);
+		this.projectileBuffer.clear();
+		// Removing Projectiles off screen (and dead projectiles for now)
+		for (int i = this.projectiles.size() - 1; i >= 0; i--) {
+			ProjectileObject p = this.projectiles.get(i);
+			if (p.isDead()) {
+				this.projectiles.remove(p);
+			}
+		}
 		for (GameObject go : this.gameObjects){
+			go.tick();
+		}
+		for (ProjectileObject go : this.projectiles){
 			go.tick();
 		}
 		for (Player go : this.playerList) {
@@ -52,18 +63,8 @@ public class GameObjectHandlerView {
 				t.tick();
 			}
 		}
-		// Removing Projectiles off screen (and dead projectiles for now)
-		for (int i = gameObjects.size() - 1; i >= 0; i--) {
-			if (gameObjects.get(i) instanceof ProjectileObject) {
-				ProjectileObject p = (ProjectileObject)gameObjects.get(i);
-				boolean offScreenX = p.getX() < 0 - p.getWidth() || p.getX() > Game.WIDTH + p.getWidth();
-				boolean offScreenY = p.getY() < 0 - p.getHeight() || p.getY() > Game.HEIGHT + p.getHeight();
-				if (offScreenX || offScreenY || p.isDead()) {
-					this.gameObjects.remove(p);
-				}
-			}
-		}
 	}
+	
 	
 	/*
 	 * Manages the buffer and draws the next available one
@@ -75,6 +76,9 @@ public class GameObjectHandlerView {
 		
 		// Tell all game objects here to render themselves
 		for (GameObject go : this.gameObjects){
+			go.render(g);
+		}
+		for (ProjectileObject go : this.projectiles){
 			go.render(g);
 		}
 		for (Player go : this.playerList) {
@@ -99,7 +103,7 @@ public class GameObjectHandlerView {
 	}
 	
 	public void addProjectile(ProjectileObject obj){
-		this.projectiles.add(obj);
+		this.projectileBuffer.add(obj);
 	}
 	
 	public void addTrail(Trail trail){

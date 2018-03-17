@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 public abstract class GameObject {
 	protected int x, y;
 	protected int width, height;
-
 	
 	public int getWidth() {
 		return width;
