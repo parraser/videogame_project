@@ -30,6 +30,9 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 			this.y += this.velY*Math.sin(this.angle);
 			this.velY = -this.velY;
 			this.numBounces --;
+		} else if (playerCollisionX() != null) {
+
+		} else if (playerCollisionY() != null) {
 		}
 	}
 	
@@ -60,6 +63,37 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 		}
 		return false;
 	}
+	
+public GameObject playerCollisionX() {
+		
+		for(GameObject playerIterator : this.gohv.getPlayers()) {
+			Rectangle tempPlayer = this.getRect();
+			
+			tempPlayer.setLocation(this.getX()+ this.velX, this.getY());
+			
+			if(playerIterator.getRect().intersects(tempPlayer)) {
+				((Player)playerIterator).depleteHealth(2);
+				return playerIterator;
+			}
+		}
+		return null;
+	}
+
+public GameObject playerCollisionY() {
+	
+	for(GameObject playerIterator : this.gohv.getPlayers()) {
+		Rectangle tempPlayer = this.getRect();
+		
+		tempPlayer.setLocation(this.getX()+ this.getX(), this.velY);
+		
+		if(playerIterator.getRect().intersects(tempPlayer)) {
+			((Player)playerIterator).depleteHealth(2);
+			return playerIterator;
+		}
+	}
+	return null;
+}
+
 	
 	@Override
 	public void tick() {

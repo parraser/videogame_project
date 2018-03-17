@@ -21,6 +21,7 @@ public class Player extends MovableObject implements Observer{
 	private int up, down, left, right, shoot;
 	private int angle;
 	private String name;
+	private Health health;
 	
 	public Player(int up, int down, int left, int right, int shoot, int width, int height,
 			Color color, String name, GameObjectHandlerView gohv){
@@ -37,6 +38,7 @@ public class Player extends MovableObject implements Observer{
 		this.name = name;
 		this.gohv = gohv;
 		this.angle = 0;
+		this.health = new Health();
 	}
 	
 	public Player(String name, GameObjectHandlerView gohv){
@@ -52,8 +54,10 @@ public class Player extends MovableObject implements Observer{
 		this.right = KeyEvent.VK_D;
 		this.left = KeyEvent.VK_A;
 		this.angle = 0;
+		this.health = new Health();
 	}
 	
+
 	public void collision() {
 		if(!wallCollisionX() && !playerCollisionX()) {
 			this.x += this.getVelX();
@@ -219,6 +223,8 @@ public class Player extends MovableObject implements Observer{
 			this.y = Game.HEIGHT-this.height-25;
 		else if(this.y < 0)
 			this.y = 0;
+		
+		this.health.tick();
 	}
 
 	@Override
@@ -226,11 +232,16 @@ public class Player extends MovableObject implements Observer{
 		// TODO Auto-generated method stub
 		g.setColor(this.color);
 		g.fillRect(this.x, this.y, this.width, this.height);
+		this.health.render(g);
 	}
 
 	@Override
 	public Rectangle getRect() {
 		// TODO Auto-generated method stub
 		return new Rectangle(this.x, this.y, this.width, this.height);
+	}
+	
+	public void depleteHealth(int health) {
+		this.health.depleteHealth(health);
 	}
 }
