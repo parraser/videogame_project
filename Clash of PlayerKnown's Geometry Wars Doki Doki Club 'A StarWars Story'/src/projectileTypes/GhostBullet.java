@@ -10,7 +10,7 @@ public class GhostBullet extends ProjectileObject {
  * Phases through walls decreasing it's speed speeds up once in air, bounces only on world edges, does after 5 bounces
  * (higher than default bullet)
  */
-	public final static int BUL_GHOST_SPEED = 2;
+	public final static int BUL_GHOST_SPEED = 3;
 	public final static int GHOST_MAX_BOUNCE = 10;
 	public GhostBullet(int x,int y, double angle, Color color, GameObjectHandlerView gohv){
 		super(gohv, x, y, angle);
@@ -18,6 +18,10 @@ public class GhostBullet extends ProjectileObject {
 		this.velX = BUL_GHOST_SPEED;
 		this.velY = BUL_GHOST_SPEED;
 		this.numBounces = GHOST_MAX_BOUNCE;
+	}
+	@Override
+	public void tick() {
+		collision();
 	}
 	public void collision(){
 		int newX = this.x;
@@ -29,9 +33,9 @@ public class GhostBullet extends ProjectileObject {
 			newX += this.getVelX()*Math.cos(this.angle);
 		}
 		if(collisionY()) {
-			newX += (this.getVelY()/2)*Math.sin(this.angle);
+			newY += (this.getVelY()/2)*Math.sin(this.angle);
 		}else{
-			newX += this.getVelY()*Math.sin(this.angle);
+			newY += this.getVelY()*Math.sin(this.angle);
 		}
 		
 		if(newX<0||newX+this.width>Game.WIDTH){
@@ -44,7 +48,6 @@ public class GhostBullet extends ProjectileObject {
 			newY=this.y;
 			this.numBounces--;
 		}
-		//System.out.println((this.getVelX()/2)*Math.cos(this.angle));
 		this.x = newX;
 		this.y = newY;
 	}

@@ -22,6 +22,7 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 		this.velX = BUL_DEFAULT_SPEED;
 		this.velY = BUL_DEFAULT_SPEED;
 		this.gohv = gohv;
+		this.color = Color.YELLOW;
 		this.numBounces = BUL_DEFAULT_BOUNCE; // number of collisions for projectile to die (disappears on nth collision)
 	}
 	
