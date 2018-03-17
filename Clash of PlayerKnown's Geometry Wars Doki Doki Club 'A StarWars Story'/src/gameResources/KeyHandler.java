@@ -23,5 +23,8 @@ public class KeyHandler extends KeyAdapter{
 	public void addObserver(Object o){
 		this.obs.addObserver((Observer) o);
 	}
+	public void remObservers() {
+		this.obs.deleteObservers();
+	}
 	
 }
