@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable{
 	private MapMaker mapMaker;
 	private MapReader mapReader;
 	private MainMenu mainMenu;
-	public enum State {
+	protected enum State {
 		GAME, MAIN_MENU
 	}
 	private State state;
@@ -143,6 +143,10 @@ public class Game extends Canvas implements Runnable{
 		
 		g.dispose();
 		bs.show();
+	}
+	
+	public State getState() {
+		return this.state;
 	}
 	
 	public void setState(State s) {
