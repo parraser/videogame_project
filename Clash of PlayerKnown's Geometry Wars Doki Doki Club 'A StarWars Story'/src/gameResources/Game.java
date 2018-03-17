@@ -110,7 +110,11 @@ public class Game extends Canvas implements Runnable{
 				this.gohv.tickAll();
 				for (Player p: this.gohv.getPlayers()) {
 					if (p.getHealth() <= 0) {
+						this.gohv.removekeyObservers();
 						this.setGohv(new GameObjectHandlerView());
+						KeyHandler keyHand = new KeyHandler();
+						this.addKeyListener(keyHand);
+						this.addKeyListener(gohv.getKeyHandler());
 						this.setMapMaker(new MapMaker(this.getGohv()));
 				        this.setMapReader(new MapReader(this.getMapMaker()));
 				        this.getMapReader().readDirectoryRandom("Maps");

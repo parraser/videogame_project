@@ -135,4 +135,8 @@ public class GameObjectHandlerView {
 		playerList.clear();
 	}
 	
+	public void removekeyObservers() {
+		keyHand.remObservers();
+	}
+	
 }
