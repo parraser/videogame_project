@@ -14,6 +14,8 @@ package gameResources;
 
 	import javax.imageio.ImageIO;
 
+import gameResources.Game.State;
+
 public class EndScreen implements Observer {
 		private BufferedImage image;
 		private BufferedImage background;
@@ -71,16 +73,16 @@ public class EndScreen implements Observer {
 
 		@Override
 		public void update(Observable o, Object e) {
-			
+			if(this.game.getState() == State.END) {
 			int key = ((KeyEvent) e).getKeyCode();
 			int keyAction = ((KeyEvent) e).getID();
 			
 			if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAYAGAIN) {
 				//this.game.getGohv().clear();
-				this.game.setGohv(new GameObjectHandlerView());
-				this.game.setMapMaker(new MapMaker(this.game.getGohv()));
-		        this.game.setMapReader(new MapReader(this.game.getMapMaker()));
-		        this.game.getMapReader().readDirectoryRandom("Maps");
+				//this.game.setGohv(new GameObjectHandlerView());
+				//this.game.setMapMaker(new MapMaker(this.game.getGohv()));
+		        //this.game.setMapReader(new MapReader(this.game.getMapMaker()));
+		        //this.game.getMapReader().readDirectoryRandom("Maps");
 				game.setState(Game.State.GAME);
 
 			} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
@@ -103,5 +105,6 @@ public class EndScreen implements Observer {
 				}
 			}
 			
+		}
 		}
 	}

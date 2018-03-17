@@ -110,6 +110,10 @@ public class Game extends Canvas implements Runnable{
 				this.gohv.tickAll();
 				for (Player p: this.gohv.getPlayers()) {
 					if (p.getHealth() <= 0) {
+						this.setGohv(new GameObjectHandlerView());
+						this.setMapMaker(new MapMaker(this.getGohv()));
+				        this.setMapReader(new MapReader(this.getMapMaker()));
+				        this.getMapReader().readDirectoryRandom("Maps");
 						state = State.END;
 					}
 				}
@@ -127,6 +131,10 @@ public class Game extends Canvas implements Runnable{
 			}
 		}
 		stop();
+	}
+
+	public State getState() {
+		return state;
 	}
 
 	/*
