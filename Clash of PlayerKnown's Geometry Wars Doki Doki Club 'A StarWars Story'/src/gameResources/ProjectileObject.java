@@ -10,7 +10,7 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	protected double angle;
 	protected Color color;
 	public static final int BUL_DEFAULT_SIZE = 10;
-	public static final int BUL_DEFAULT_SPEED = 4;
+	public static final int BUL_DEFAULT_SPEED = 5;
 	public static final int BUL_DEFAULT_BOUNCE = 5;
 	
 	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double angle){
@@ -19,8 +19,8 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 		this.angle = angle;
 		this.width = BUL_DEFAULT_SIZE;
 		this.height = BUL_DEFAULT_SIZE;
-		this.velX = BUL_DEFAULT_SPEED;
-		this.velY = BUL_DEFAULT_SPEED;
+		this.velX = (int) (BUL_DEFAULT_SPEED*Math.cos(this.angle));
+		this.velY = (int) (BUL_DEFAULT_SPEED*Math.sin(this.angle));
 		this.gohv = gohv;
 		this.color = Color.YELLOW;
 		this.numBounces = BUL_DEFAULT_BOUNCE; // number of collisions for projectile to die (disappears on nth collision)
@@ -35,20 +35,22 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	
 	public void collision() {
 		if (collisionX()) {
-			this.x += this.velX*Math.cos(this.angle);
 			this.velX = -this.velX;
 			this.numBounces --;
-		} else if (collisionY()) {
-			this.y += this.velY*Math.sin(this.angle);
+		}else {
+			this.x += this.velX;
+		}
+		if (collisionY()) {
 			this.velY = -this.velY;
 			this.numBounces --;
+		}else {
+			this.y += this.velY;
 		}
 	}
 	
 	public boolean collisionX() {
-		
+		Rectangle tempRect = this.getRect();
 		for(GameObject wallIterator : this.gohv.getWalls()) {
-			Rectangle tempRect = this.getRect();
 			
 			tempRect.setLocation(this.getX()+ this.velX, this.getY());
 			
@@ -60,9 +62,8 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	}
 	
 	public boolean collisionY() {
-		
+		Rectangle tempRect = this.getRect();
 		for(GameObject wallIterator : this.gohv.getWalls()) {
-			Rectangle tempRect = this.getRect();
 			
 			tempRect.setLocation(this.getX(), this.getY()+ this.velY);
 			
@@ -75,8 +76,6 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	
 	@Override
 	public void tick() {
-		this.x += this.velX*Math.cos(this.angle);
-		this.y += this.velY*Math.sin(this.angle);
 		collision();
 	}
 
