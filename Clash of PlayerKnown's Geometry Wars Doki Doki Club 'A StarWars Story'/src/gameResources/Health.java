@@ -3,6 +3,8 @@ package gameResources;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import gameResources.Game.State;
+
 public class Health {
 	public Health() {
 		
@@ -11,6 +13,11 @@ public class Health {
 	
 	public void tick() {
 		//life--;
+		/*
+		if (this.life <= 0) {
+			state = State.END;
+		}
+		*/
 	}
 	
 	public void depleteHealth(int health) {

@@ -30,8 +30,10 @@ public class Game extends Canvas implements Runnable{
 	private MapMaker mapMaker;
 	private MapReader mapReader;
 	private MainMenu mainMenu;
+	private EndScreen endscreen;
+	
 	public enum State {
-		GAME, MAIN_MENU
+		GAME, MAIN_MENU, END
 	}
 	private State state;
 	private GameObjectHandlerView gohv;
@@ -56,6 +58,9 @@ public class Game extends Canvas implements Runnable{
 		this.mainMenu = new MainMenu(this);
 		keyHand.addObserver(mainMenu);
 		this.state = State.MAIN_MENU;
+		
+		this.endscreen = new EndScreen(this);
+		keyHand.addObserver(endscreen);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -103,6 +108,11 @@ public class Game extends Canvas implements Runnable{
 			// when we are due for a tick and render
 			while (delta >= tickPerSecond){
 				this.gohv.tickAll();
+				for (Player p: this.gohv.getPlayers()) {
+					if (p.getHealth() <= 0) {
+						state = State.END;
+					}
+				}
 				render();
 				
 				// if a second has elapsed update the FPS
@@ -138,6 +148,10 @@ public class Game extends Canvas implements Runnable{
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			gohv.renderAll(g);
 		}
+		
+		else if (state == State.END) {
+			endscreen.render(g);
+		}
 
 		
 		/*Draw GUI first here */
@@ -146,6 +160,30 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 	}
 	
+	public MapMaker getMapMaker() {
+		return mapMaker;
+	}
+
+	public void setMapMaker(MapMaker mapMaker) {
+		this.mapMaker = mapMaker;
+	}
+
+	public MapReader getMapReader() {
+		return mapReader;
+	}
+
+	public void setMapReader(MapReader mapReader) {
+		this.mapReader = mapReader;
+	}
+
+	public GameObjectHandlerView getGohv() {
+		return gohv;
+	}
+
+	public void setGohv(GameObjectHandlerView gohv) {
+		this.gohv = gohv;
+	}
+
 	public void setState(State s) {
 		this.state = s;
 	}
