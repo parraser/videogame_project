@@ -21,11 +21,13 @@ public class TrapBullet extends ProjectileObject{
 		this.lifeSpan = BUL_TRAP_DURATION;
 		this.trapSet = false;
 	}
+	@Override
 	public void collision() {
 		if (collisionX()||collisionY()) {
 			this.trapSet = true;
 		}
 	}
+	@Override
 	public void tick(){
 		collision();
 		if(!trapSet) {
