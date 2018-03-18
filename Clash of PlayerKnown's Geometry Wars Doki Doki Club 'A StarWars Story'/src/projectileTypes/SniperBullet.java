@@ -16,11 +16,14 @@ public class SniperBullet extends ProjectileObject{
 	int pLife;
 	public final static int SNIPEBULL_PENETRATE_LIFE = 30;
 	public final static int B_SIZE = 10;
+	public final static int BUL_SNIPE_SPEED = 7;
 	public final static Color BUL_SNIPE_COLOR = new Color(255, 255, 128);
 	public SniperBullet(int x,int y, double angle, GameObjectHandlerView gohv){
 		super(gohv, x, y, angle);
 		this.color = BUL_SNIPE_COLOR;
 		this.pLife = SNIPEBULL_PENETRATE_LIFE;
+		this.velX = BUL_SNIPE_SPEED;
+		this.velY = BUL_SNIPE_SPEED;
 	}
 	public void collision(){
 		if(collisionX() || collisionY()){

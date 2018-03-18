@@ -11,7 +11,7 @@ public class GhostBullet extends ProjectileObject {
  * (higher than default bullet)
  */
 	public final static int BUL_GHOST_SPEED = 5;
-	public final static int GHOST_MAX_BOUNCE = 10;
+	public final static int GHOST_MAX_BOUNCE = 3;
 	public final static Color BUL_GHOST_COLOR = new Color(179, 224, 255);
 	public GhostBullet(int x,int y, double angle, GameObjectHandlerView gohv){
 		super(gohv, x, y, angle);
