@@ -29,12 +29,12 @@ public class GhostBullet extends ProjectileObject {
 		int newY = this.y;
 		
 		if(collisionX()) {
-			newX += (this.getVelX()/2)*Math.cos(this.angle);
+			newX += ((float)this.getVelX()*(2f/3f))*Math.cos(this.angle);
 		}else{
 			newX += this.getVelX()*Math.cos(this.angle);
 		}
 		if(collisionY()) {
-			newY += (this.getVelY()/2)*Math.sin(this.angle);
+			newY +=  ((float)this.getVelY()*(2f/3f))*Math.sin(this.angle);
 		}else{
 			newY += this.getVelY()*Math.sin(this.angle);
 		}

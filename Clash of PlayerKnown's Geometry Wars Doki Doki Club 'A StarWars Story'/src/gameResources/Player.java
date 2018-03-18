@@ -231,8 +231,7 @@ public class Player extends MovableObject implements Observer{
 		if (this.moveUp) this.velY-=this.WALK;
 		if (this.moveRight) this.velX+=this.WALK;
 		if (this.moveLeft) this.velX-=this.WALK;
-		//if(this.name.equals("neo"))System.out.println(this.bulType + " " + this.bulTypeTime);
-		if(this.name.equals("neo"))System.out.println((int) (Math.random()*2+1));
+
 		if(this.bulTypeTime < 0){
 			this.bulType = AmmoBox.BUL_DEFAULT;
 		}else {
