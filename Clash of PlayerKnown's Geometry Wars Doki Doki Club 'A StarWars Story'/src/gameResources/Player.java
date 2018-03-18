@@ -22,6 +22,7 @@ public class Player extends MovableObject implements Observer{
 	private int angle;
 	private String name;
 	private int health = 1;
+	private int score = 0;
 	
 	public Player(int up, int down, int left, int right, int shoot, int width, int height,
 			Color color, String name, GameObjectHandlerView gohv){
@@ -241,6 +242,18 @@ public class Player extends MovableObject implements Observer{
 		return health;
 	}
 
+	public int getScore() {
+		return this.score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void increaseScore(){
+		this.score++;
+	}
+	
 	public void depleteHealth(int health) {
 		this.health -= health;
 	}

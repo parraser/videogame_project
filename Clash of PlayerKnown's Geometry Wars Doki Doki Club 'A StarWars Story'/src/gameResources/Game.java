@@ -110,7 +110,12 @@ public class Game extends Canvas implements Runnable{
 				this.gohv.tickAll();
 				for (Player p: this.gohv.getPlayers()) {
 					if (p.getHealth() <= 0) {
-						this.gohv.removekeyObservers();
+						for (Player p2: this.gohv.getPlayers()){
+							if (p2 != p)
+								p2.increaseScore();
+						}
+						//this.gohv.removekeyObservers();
+						List<Player> al = this.gohv.getPlayers();
 						this.setGohv(new GameObjectHandlerView());
 						KeyHandler keyHand = new KeyHandler();
 						this.addKeyListener(keyHand);
@@ -118,6 +123,10 @@ public class Game extends Canvas implements Runnable{
 						this.setMapMaker(new MapMaker(this.getGohv()));
 				        this.setMapReader(new MapReader(this.getMapMaker()));
 				        this.getMapReader().readDirectoryRandom("Maps");
+				        for (int i = 0; i < al.size(); i++){
+							System.out.println(i);
+							this.gohv.getPlayers().get(i).setScore(al.get(i).getScore());
+						}
 						state = State.END;
 					}
 				}

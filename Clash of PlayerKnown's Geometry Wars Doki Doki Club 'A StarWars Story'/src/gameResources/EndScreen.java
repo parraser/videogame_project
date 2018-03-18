@@ -48,6 +48,8 @@ public class EndScreen implements Observer {
 			g.setFont(fnt0);
 			g.setColor(Color.YELLOW);
 			g.drawString("Match END ", Game.WIDTH/8,80);
+			g.drawString("Player1: "+this.game.getGohv().getPlayers().get(0).getScore(), Game.WIDTH/8,160);
+			g.drawString("Player2: "+this.game.getGohv().getPlayers().get(1).getScore(), Game.WIDTH-300,160);
 			
 			g2d.setColor(Color.WHITE);
 			g2d.drawString("Play", playagain.x + 75,playagain.y + 50);
