@@ -8,14 +8,10 @@ import gameResources.GameObject;
 import gameResources.HealthObject;
 
 public class AmmoBox extends GameObject{
-	public final static Color AMMOBOX_COLOR = new Color(213, 56, 57);
+	public final static Color AMMOBOX_COLOR = Color.CYAN;
 	public final static int AMMOBOX_MAX_SIZE = 30;
 	public final static int AMMOBOX_MIN_SIZE = 20;
 	public final static int AMMOBOX_RESPAWN_TIME = 60*10;//in game ticks
-	public static final int BUL_TYPES = 3;
-	public static final int BUL_DEFAULT = 0;
-	public static final int BUL_GHOST = 1;
-	public static final int BUL_SNIPE = 2;
 	private Color color;
 	private int type, respawnTime, centerX, centerY;
 	private boolean growing = false, pickedUp;
@@ -42,7 +38,7 @@ public class AmmoBox extends GameObject{
 	}
 	
 	private void randomizeType() {
-		this.type = (int) (Math.random()*(BUL_TYPES-1)+1);
+		this.type = (int) (Math.random()*(BulletFactory.BUL_TYPES-1)+1);
 	}
 	
 	@Override

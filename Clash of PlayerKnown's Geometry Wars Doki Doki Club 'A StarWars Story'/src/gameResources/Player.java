@@ -42,7 +42,7 @@ public class Player extends MovableObject implements Observer{
 		this.name = name;
 		this.gohv = gohv;
 		this.angle = 0;
-		this.bulType = AmmoBox.BUL_DEFAULT;
+		this.bulType = BulletFactory.BUL_DEFAULT;
 	}
 	
 	public Player(String name, GameObjectHandlerView gohv){
@@ -58,12 +58,12 @@ public class Player extends MovableObject implements Observer{
 		this.right = KeyEvent.VK_D;
 		this.left = KeyEvent.VK_A;
 		this.angle = 0;
-		this.bulType = AmmoBox.BUL_DEFAULT;
+		this.bulType = BulletFactory.BUL_DEFAULT;
 	}
 	
 	public void collision() {
 		int a = ammoBoxCollision();
-		if(a != AmmoBox.BUL_DEFAULT) {
+		if(a != BulletFactory.BUL_DEFAULT) {
 			this.bulTypeTime = AMMO_DURATION;
 			this.bulType = ammoBoxCollision();
 		}
@@ -233,7 +233,7 @@ public class Player extends MovableObject implements Observer{
 		if (this.moveLeft) this.velX-=this.WALK;
 
 		if(this.bulTypeTime < 0){
-			this.bulType = AmmoBox.BUL_DEFAULT;
+			this.bulType = BulletFactory.BUL_DEFAULT;
 		}else {
 			this.bulTypeTime--;
 		}
