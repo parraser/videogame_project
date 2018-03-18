@@ -9,6 +9,8 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import projectileTypes.AmmoBox;
+
 public class MapReader {
 	private MapMaker mapMaker;
 	public final static int WALL_DIM = 40;
@@ -67,6 +69,8 @@ public class MapReader {
 				return mapMaker.createPlayerOne(x, y);
 			case '2':
 				return mapMaker.createPlayerTwo(x, y);
+			case 'B':
+				return new AmmoBox(x, y);
 			default:
 				System.out.println("CANNOT READ: "+c);
 				return null;

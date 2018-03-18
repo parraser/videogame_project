@@ -12,9 +12,10 @@ public class GhostBullet extends ProjectileObject {
  */
 	public final static int BUL_GHOST_SPEED = 5;
 	public final static int GHOST_MAX_BOUNCE = 10;
-	public GhostBullet(int x,int y, double angle, Color color, GameObjectHandlerView gohv){
+	public final static Color BUL_GHOST_COLOR = new Color(179, 224, 255);
+	public GhostBullet(int x,int y, double angle, GameObjectHandlerView gohv){
 		super(gohv, x, y, angle);
-		this.color = color;
+		this.color = BUL_GHOST_COLOR;
 		this.velX = BUL_GHOST_SPEED;
 		this.velY = BUL_GHOST_SPEED;
 		this.numBounces = GHOST_MAX_BOUNCE;

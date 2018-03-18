@@ -3,6 +3,8 @@ package gameResources;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import projectileTypes.AmmoBox;
+
 public class MapMaker {
 	//private Game game;
 	private GameObjectHandlerView gohv;
@@ -20,6 +22,8 @@ public class MapMaker {
 			this.gohv.addPlayer((Player) obj);
 		}else if(obj instanceof Wall) {
 			this.gohv.addWall((Wall) obj);
+		}else if(obj instanceof AmmoBox) {
+			this.gohv.addAmmoBox((AmmoBox)obj);
 		}else{
 			this.gohv.addObject(obj);
 		}
