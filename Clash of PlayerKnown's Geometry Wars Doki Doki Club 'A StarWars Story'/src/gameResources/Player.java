@@ -19,12 +19,14 @@ public class Player extends MovableObject {
 	public final static int WIDTH = 20;
 	public final static int HEIGHT = 20;
 	public final static int AMMO_DURATION = 60*5;// in game ticks
+	public final static int AMMO_LIMIT = 15; // Amount of bullets a player can shoot before reloading
+	public final static int AMMO_RELOAD_TIME = 60*3; // Time it takes to reload in ticks
 	private GameObjectHandlerView gohv;
 	private Color color;
 	private boolean moveRight, moveLeft, moveDown, moveUp;
 	private int up, down, left, right, shoot;
 	private int angle;
-	private int bulType, bulTypeTime;
+	private int bulType, bulTypeTime, bulCount, bulReloadTime;
 	private String name;
 	
 	public Player(int up, int down, int left, int right, int shoot, int width, int height,
@@ -43,8 +45,11 @@ public class Player extends MovableObject {
 		this.gohv = gohv;
 		this.angle = 0;
 		this.bulType = BulletFactory.BUL_DEFAULT;
+		this.bulCount = AMMO_LIMIT;
+		this.bulReloadTime = 0;
 	}
 	
+	//REMOVE?
 	public Player(String name, GameObjectHandlerView gohv){
 		this.name = name;
 		this.x = 0;
@@ -204,89 +209,27 @@ public class Player extends MovableObject {
 			}
 		}
 		
-		if (key == this.shoot) {
-			if (keyAction == KeyEvent.KEY_PRESSED) {
-				int sourcex = this.x + this.width/2;
-				int sourcey = this.y + this.height/2;
-				//this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // angle is temporary placeholder until player rotation implemented
-				this.gohv.addProjectile(BulletFactory.shoot(this)); 
+		if (key == this.shoot && keyAction == KeyEvent.KEY_PRESSED && this.bulCount > 0) {
+			this.bulCount --;
+			if (this.bulCount <= 0) {
+				this.bulReloadTime = AMMO_RELOAD_TIME;
 			}
+			this.gohv.addProjectile(BulletFactory.shoot(this));
 		}
 	}
 
-//	
-//	@Override
-//	public void update(Observable o, Object e) {
-//		// TODO Auto-generated method stub
-//		
-//		int key = ((KeyEvent) e).getKeyCode();
-//		int keyAction = ((KeyEvent) e).getID();
-//
-//		//since actions are recorded once, releasing the key
-//		//shall input an equal negative velocity
-//		// could open a bug where one key is not recorded 
-//		// it will have twice the speed
-//		if(key == this.up) {
-//			if(keyAction == KeyEvent.KEY_PRESSED) {
-//				//this.setVelY(-WALK);
-//				this.moveUp = true;
-//			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-//				//this.setVelY(0);
-//				this.moveUp = false;
-//			}
-//			
-//		}else if(key == this.down) {
-//			if(keyAction == KeyEvent.KEY_PRESSED) {
-//				//this.setVelY(WALK);
-//				this.moveDown = true;
-//			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-//				//this.setVelY(0);
-//				this.moveDown = false;
-//			}
-//		}
-//		
-//		if(key == this.left) {
-//			if(keyAction == KeyEvent.KEY_PRESSED) {
-//				//this.setVelX(-WALK);
-//				this.moveLeft = true;
-//			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-//				//this.setVelX(0);
-//				this.moveLeft = false;
-//			}
-//			
-//		}else if(key == this.right) {
-//			if(keyAction == KeyEvent.KEY_PRESSED) {
-//				//this.setVelX(WALK);
-//				this.moveRight = true;
-//			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-//				//this.setVelX(0);
-//				this.moveRight = false;
-//			}
-//		}else if(key == KeyEvent.VK_Q) {
-//			if(keyAction == KeyEvent.KEY_PRESSED) {
-//				//this.setVelX(WALK);
-//				this.angle = (this.angle-45)%360;
-//			}
-//		}else if(key == KeyEvent.VK_E) {
-//			if(keyAction == KeyEvent.KEY_PRESSED) {
-//				//this.setVelX(WALK);
-//				this.angle = (this.angle+45)%360;
-//			}
-//		}
-//		
-//		if (key == this.shoot) {
-//			if (keyAction == KeyEvent.KEY_PRESSED) {
-//				int sourcex = this.x + this.width/2;
-//				int sourcey = this.y + this.height/2;
-//				//this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // angle is temporary placeholder until player rotation implemented
-//				this.gohv.addProjectile(BulletFactory.shoot(this)); 
-//			}
-//		}
-//	}
 
 	@Override
 	public void tick() {
 		this.gohv.addTrail(new Trail(this.x, this.y, this.color));
+		
+		// Update how much more time before ammo is reloaded
+		if (this.bulCount <= 0) {
+			this.bulReloadTime --;
+			if (this.bulReloadTime == 0) {
+				this.bulCount = AMMO_LIMIT;
+			}
+		}
 		
 		this.velX = 0;
 		this.velY = 0;
