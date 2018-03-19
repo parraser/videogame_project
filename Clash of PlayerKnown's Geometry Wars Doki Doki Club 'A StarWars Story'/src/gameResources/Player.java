@@ -13,7 +13,7 @@ import projectileTypes.AmmoBox;
 import projectileTypes.BulletFactory;
 
 /* The player class object */
-public class Player extends MovableObject implements Observer{
+public class Player extends MovableObject {
 	
 	final static int WALK = 5;
 	public final static int WIDTH = 20;
@@ -151,13 +151,7 @@ public class Player extends MovableObject implements Observer{
 		return false;
 	}
 
-	@Override
-	public void update(Observable o, Object e) {
-		// TODO Auto-generated method stub
-		
-		int key = ((KeyEvent) e).getKeyCode();
-		int keyAction = ((KeyEvent) e).getID();
-
+	public void update(int key, int keyAction) {
 		//since actions are recorded once, releasing the key
 		//shall input an equal negative velocity
 		// could open a bug where one key is not recorded 
@@ -219,6 +213,76 @@ public class Player extends MovableObject implements Observer{
 			}
 		}
 	}
+
+//	
+//	@Override
+//	public void update(Observable o, Object e) {
+//		// TODO Auto-generated method stub
+//		
+//		int key = ((KeyEvent) e).getKeyCode();
+//		int keyAction = ((KeyEvent) e).getID();
+//
+//		//since actions are recorded once, releasing the key
+//		//shall input an equal negative velocity
+//		// could open a bug where one key is not recorded 
+//		// it will have twice the speed
+//		if(key == this.up) {
+//			if(keyAction == KeyEvent.KEY_PRESSED) {
+//				//this.setVelY(-WALK);
+//				this.moveUp = true;
+//			}else if (keyAction == KeyEvent.KEY_RELEASED) {
+//				//this.setVelY(0);
+//				this.moveUp = false;
+//			}
+//			
+//		}else if(key == this.down) {
+//			if(keyAction == KeyEvent.KEY_PRESSED) {
+//				//this.setVelY(WALK);
+//				this.moveDown = true;
+//			}else if (keyAction == KeyEvent.KEY_RELEASED) {
+//				//this.setVelY(0);
+//				this.moveDown = false;
+//			}
+//		}
+//		
+//		if(key == this.left) {
+//			if(keyAction == KeyEvent.KEY_PRESSED) {
+//				//this.setVelX(-WALK);
+//				this.moveLeft = true;
+//			}else if (keyAction == KeyEvent.KEY_RELEASED) {
+//				//this.setVelX(0);
+//				this.moveLeft = false;
+//			}
+//			
+//		}else if(key == this.right) {
+//			if(keyAction == KeyEvent.KEY_PRESSED) {
+//				//this.setVelX(WALK);
+//				this.moveRight = true;
+//			}else if (keyAction == KeyEvent.KEY_RELEASED) {
+//				//this.setVelX(0);
+//				this.moveRight = false;
+//			}
+//		}else if(key == KeyEvent.VK_Q) {
+//			if(keyAction == KeyEvent.KEY_PRESSED) {
+//				//this.setVelX(WALK);
+//				this.angle = (this.angle-45)%360;
+//			}
+//		}else if(key == KeyEvent.VK_E) {
+//			if(keyAction == KeyEvent.KEY_PRESSED) {
+//				//this.setVelX(WALK);
+//				this.angle = (this.angle+45)%360;
+//			}
+//		}
+//		
+//		if (key == this.shoot) {
+//			if (keyAction == KeyEvent.KEY_PRESSED) {
+//				int sourcex = this.x + this.width/2;
+//				int sourcey = this.y + this.height/2;
+//				//this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // angle is temporary placeholder until player rotation implemented
+//				this.gohv.addProjectile(BulletFactory.shoot(this)); 
+//			}
+//		}
+//	}
 
 	@Override
 	public void tick() {

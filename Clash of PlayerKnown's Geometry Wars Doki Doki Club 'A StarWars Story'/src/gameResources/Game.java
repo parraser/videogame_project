@@ -24,9 +24,6 @@ public class Game extends Canvas implements Runnable{
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
-	//private List<GameObject> gameObjects;
-	//private List<Trail> trails;
-	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
 	private MainMenu mainMenu;
@@ -41,24 +38,17 @@ public class Game extends Canvas implements Runnable{
 	 */
 	public Game(){
 		gohv = new GameObjectHandlerView();
-		//gameObjects = new ArrayList<GameObject>();
-		//trails = new LinkedList<Trail>();
-		
-		KeyHandler keyHand = new KeyHandler();
-		this.addKeyListener(keyHand);
-		this.addKeyListener(gohv.getKeyHandler());
-		//mapMaker = new MapMaker(this);
 		mapMaker = new MapMaker(gohv);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
 		
 		this.mainMenu = new MainMenu(this);
-		keyHand.addObserver(mainMenu);
 		this.state = State.MAIN_MENU;
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
-		
+		KeyHandler keyHand = new KeyHandler(this, gohv.getPlayers(), this.mainMenu);
+		this.addKeyListener(keyHand);
 		this.start();
 		
 	}
