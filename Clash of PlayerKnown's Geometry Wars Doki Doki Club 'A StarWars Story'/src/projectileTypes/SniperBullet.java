@@ -14,7 +14,7 @@ public class SniperBullet extends ProjectileObject{
  * Phases through walls decreasing it's speed speeds up once in air, bounces only on world edges, does after 2-3 bounces
  */
 	int pLife;
-	public final static int SNIPEBULL_PENETRATE_LIFE = 30;
+	public final static int SNIPEBULL_PENETRATE_LIFE = 22;
 	public final static int B_SIZE = 10;
 	public final static int BUL_SNIPE_SPEED = 7;
 	public final static Color BUL_SNIPE_COLOR = new Color(255, 255, 128);

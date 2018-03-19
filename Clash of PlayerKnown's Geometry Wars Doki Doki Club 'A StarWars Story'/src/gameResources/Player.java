@@ -65,7 +65,7 @@ public class Player extends MovableObject implements Observer{
 		int a = ammoBoxCollision();
 		if(a != BulletFactory.BUL_DEFAULT) {
 			this.bulTypeTime = AMMO_DURATION;
-			this.bulType = ammoBoxCollision();
+			this.bulType = a;
 		}
 		if(!wallCollisionX() && !playerCollisionX()) {
 			this.x += this.getVelX();
@@ -80,7 +80,7 @@ public class Player extends MovableObject implements Observer{
 		Rectangle temp = this.getRect();
 		temp.setLocation(this.getX()+this.velX,this.getY()+this.velY);
 		for(AmmoBox ammoBox : this.gohv.getAmmoBoxes()) {
-			if(temp.intersects(ammoBox.getRect())) {
+			if(temp.intersects(ammoBox.getRect())&&!ammoBox.isPickedUp()) {
 				ammoBox.pickUp();
 				return ammoBox.getType();
 			}

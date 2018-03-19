@@ -93,5 +93,8 @@ public class AmmoBox extends GameObject{
 		this.pickedUp = true;
 		this.respawnTime = AMMOBOX_RESPAWN_TIME;
 	}
+	public boolean isPickedUp() {
+		return this.pickedUp;
+	}
 	
 }
