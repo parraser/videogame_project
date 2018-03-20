@@ -25,7 +25,7 @@ public class Player extends MovableObject {
 	private boolean moveRight, moveLeft, moveDown, moveUp;
 	private int up, down, left, right, shoot;
 	private int angle;
-	private int bulType, bulTypeTime, bulCount, bulReloadTime;
+	private int bulType, bulCount, bulReloadTime;
 	private String name;
 	
 	public Player(int up, int down, int left, int right, int shoot, int width, int height,
@@ -68,8 +68,6 @@ public class Player extends MovableObject {
 	public void collision() {
 		int a = ammoBoxCollision();
 		if(a != BulletFactory.BUL_DEFAULT) {
-			this.bulCount = AMMO_LIMIT;
-			this.bulReloadTime = 0;
 			this.bulType = a;
 		}
 		if(!wallCollisionX() && !playerCollisionX()) {
@@ -87,6 +85,8 @@ public class Player extends MovableObject {
 		for(AmmoBox ammoBox : this.gohv.getAmmoBoxes()) {
 			if(temp.intersects(ammoBox.getRect())&&!ammoBox.isPickedUp()) {
 				ammoBox.pickUp();
+				this.bulCount = AMMO_LIMIT;
+				this.bulReloadTime = 0;
 				return ammoBox.getType();
 			}
 		}
@@ -226,8 +226,10 @@ public class Player extends MovableObject {
 		// Update how much more time before ammo is reloaded
 		if (this.bulCount <= 0) {
 			this.bulReloadTime --;
-			if (this.bulReloadTime == 0) {
+			if (this.bulType != BulletFactory.BUL_DEFAULT) {
 				this.bulType = BulletFactory.BUL_DEFAULT;
+			}
+			if (this.bulReloadTime == 0) {
 				this.bulCount = AMMO_LIMIT;
 			}
 		}
@@ -239,12 +241,6 @@ public class Player extends MovableObject {
 		if (this.moveUp) this.velY-=this.WALK;
 		if (this.moveRight) this.velX+=this.WALK;
 		if (this.moveLeft) this.velX-=this.WALK;
-
-		if(this.bulTypeTime < 0){
-			this.bulType = BulletFactory.BUL_DEFAULT;
-		}else {
-			this.bulTypeTime--;
-		}
 		
 		collision();
 		
