@@ -18,7 +18,6 @@ public class Player extends MovableObject {
 	final static int WALK = 5;
 	public final static int WIDTH = 20;
 	public final static int HEIGHT = 20;
-	public final static int AMMO_DURATION = 60*5;// in game ticks
 	public final static int AMMO_LIMIT = 15; // Amount of bullets a player can shoot before reloading
 	public final static int AMMO_RELOAD_TIME = 60*3; // Time it takes to reload in ticks
 	private GameObjectHandlerView gohv;
@@ -69,7 +68,8 @@ public class Player extends MovableObject {
 	public void collision() {
 		int a = ammoBoxCollision();
 		if(a != BulletFactory.BUL_DEFAULT) {
-			this.bulTypeTime = AMMO_DURATION;
+			this.bulCount = AMMO_LIMIT;
+			this.bulReloadTime = 0;
 			this.bulType = a;
 		}
 		if(!wallCollisionX() && !playerCollisionX()) {
@@ -227,6 +227,7 @@ public class Player extends MovableObject {
 		if (this.bulCount <= 0) {
 			this.bulReloadTime --;
 			if (this.bulReloadTime == 0) {
+				this.bulType = BulletFactory.BUL_DEFAULT;
 				this.bulCount = AMMO_LIMIT;
 			}
 		}
