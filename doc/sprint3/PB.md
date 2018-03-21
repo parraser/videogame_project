@@ -1,0 +1,524 @@
+project-team-subpar Product Backlog
+====================================
+
+  * This project will utilize the Fibonacci sequence to eliminate user stories.
+  
+---------------------------------------------
+
+#### User Story 0: Learn Java Graphics API
+
+**CHORE**
+
+As a developer, I want to read up on the Java Graphic API so that I know how to build the game.
+
+Priority: 1
+
+Points: N/A
+
+Dependencies: N/A
+
+Tasks: Read and understand Game example
+
+----------------------------------------------------
+
+#### User Story 1: Create player model
+
+As a casual/competitive player, I want to see my character so that I can know where he is and know who to shoot.
+
+Criteria of Satisfaction:
+  * There must be some variety between different user's player avatar per match.
+
+Priority: 1
+
+Points: 5
+
+Dependencies: N/A
+
+Tasks: Implement Player class, Implement Graphics2D and have player drawn on window
+
+-------------------
+
+#### User Story 2: Player movement
+
+As a casual/competitive player, I want to move my character so that I can dodge incoming projectiles.
+
+Criteria of Satisfaction: 
+  * A user must be able to at minimum, move 8 different directions.
+  * A user must be able to move their player avatar smoothly with no input lag or choppiness.
+
+Priority: 1
+
+Points: 3
+
+Dependencies: 1
+
+Tasks: Implement Keyboard listener, Implement new player move methods
+
+------------------------
+
+#### User Story 3: Wall
+
+As a casual/competitive player, I want walls so that I have a more varied experience so that bullets can bounce off.
+
+Criteria of Satisfaction: 
+  * The walls must be solid objects so that the player's shots do not phase through the wall.
+
+Priority: 3
+
+Points: 2
+
+Dependencies: 2
+
+Tasks: Create the wall object, Create collision with player(s)
+
+-----------------------
+
+#### User Story 4: Object Physics
+
+As a competitive player, I want to be able to collide with obstacles so that I can hide from projectiles.
+
+Criteria of Satisfaction: 
+  * The obstacles must be solid objects, so that the player avatar does not phase through the obstacle.
+
+
+Priority: 3
+
+Points: 5
+
+Dependencies: 3
+
+----------------------
+
+#### User Story 5: PVP and scoring
+
+As a casual/competitive player, I want to be able to shoot, so that I can kill my enemy and score points.
+
+Criteria of Satisfaction: 
+  * A user must be able to at minimum, shoot 8 different directions.
+  * A user must have their bullets move smoothly with no input lag or choppiness.
+
+Priority: 1
+
+Points: 5
+
+Dependencies: 1
+
+Tasks: Create a scoring system
+
+------------------------
+
+#### User Story 6: Bullet types
+
+As a competitive player, I want bullets to bounce off walls realistically, so that I can have interesting varied gameplay allowing room for epic strategies.
+
+Criteria of Satisfaction:
+  * The bullets must follow some form of physics so that the bouncing shots are more realistic.
+
+Priority: 4
+
+Points: 8
+
+Dependencies: 5
+
+Tasks: Create different bullet types, create bullet factory
+
+-------------------------
+
+#### User Story 7: Menu Options
+
+As a casual player, I want to be able to choose between different game modes, so that I can have infinite bullet hell or a more passive open-field.
+
+Criteria of Satisfaction:
+  * There could be more game modes, but the two game modes above must work with no bugs or issues.
+
+Priority: 5
+
+Points: 1
+
+Dependencies: 12
+
+Tasks: Create a main menu, Implement different game modes
+
+---------------------------
+
+#### User Story 8: Create and spawn PowerUps
+
+As a casual player, I want random collectible power-ups so that I can have a different power to make it easier to kill my enemy.
+
+Criteria of Satisfaction:
+  * The collectible power-ups must work properly for each power introduced.
+  * (Optional) The collectable power-up is different each stage.
+
+Priority: 3
+
+Points: 8
+
+Dependencies: 5
+
+Tasks: Create power-ups class
+
+-------------------------
+
+#### User Story 9: Create traps
+
+As a casual player, I want miscellaneous hazards so that I can have more varied gameplay giving the players more options to win.
+
+Criteria of Satisfaction:
+  * If the hazard is triggered, the result must show both to the player's avatar and on the player's score.
+  
+Priority: 3
+
+Points: 2
+
+Dependencies: 5
+
+Tasks: Create a traps class
+
+--------------------------
+
+#### User Story 10: Global Ranking
+
+As a competitive player, I want a ranking system, so that I can assert my dominance over the rest of the community
+
+Criteria of Satisfaction:
+  * The ranking system must properly follow how many points each individual player has scored.
+  * The ranking system could show up after each round and/or after each match. 
+  
+Priority: 5
+
+Points: 8
+
+Dependencies: 17
+
+Tasks: Create a ranking system
+
+-------------------------
+
+#### User Story 11: Select Maps
+
+As a casual player, I want multiple maps, so that I can have a variety in multiple battlefields
+
+Criteria of Satisfaction:
+  * Each map must be different and should introduce something new that the other maps do not have.
+
+Priority: 4
+
+Points: 3
+
+Dependencies: 2
+
+Tasks: Create ObjectMaker class, Create MapReader class, Random Map select
+
+------------------------
+
+#### User Story 12: Lobby Browser
+
+As a casual/competitive player,	I want it so that when I start up the game I want to be able to browse the game's simple main menu, with basic options.
+
+Criteria of Satisfaction:
+  * Each customization must properly affect either the players or that of the map.
+  * The set up on the main menu must properly work.
+  * The default settings given must not be necessarily difficult or too simple.
+
+Priority: 2
+
+Points: 3
+
+Dependencies: 17
+
+Tasks: Connect up main menu options with the game
+
+----------------------------
+
+#### User Story 13: Sudden death
+
+As a	casual player, I want it so that after time limit is up the stage transforms into Sudden Death Mode where new randomly chosen map hazards are introduced, so that there are no ties and the round ends with someone getting a point.
+
+Criteria of Satisfaction:
+  * The time limit must be properly set up in all modes and stages.
+  * The sudden death mode must be properly set up in all modes and stages.
+  * The hazard introduced must be properly randomized.
+
+Priority: 4
+
+Points: 8
+
+Dependencies: 11
+
+Tasks: Create a sudden death mode
+
+-----------------------------
+
+#### User Story 14: Random Sudden Death
+
+As a casual player,	I want a variety of different Sudden Death hazards based on chosen map so that each map is interesting and provides a challenge should the time limit ends up finishing.
+
+Criteria of Satisfaction:
+  * The time limit must be properly set up in all modes and stages.
+  * The sudden death mode must be properly set up in all modes and stages.
+  * The hazards must be properly working for each stage.
+
+Priority: 4
+
+Points: 8
+
+Dependencies: 13
+
+Tasks: Create a random sudden death
+
+-----------------------------
+
+#### User Story 15: Create Quick Match Option
+
+As a more casual player, I want a quick start up to a match with default settings so that I can easily pick up the game or drop it when I am taking a break from my work.
+
+Criteria of Satisfaction:
+  * The default setting in this quick set up must not be too difficult or too easy.
+  * The player must be able to have a quick drop out option, without interrupting the other possible player or points.
+  
+Priority: 2
+
+Points: 1
+
+Dependencies: 12
+
+Tasks: Create a quick match mode
+
+---------------------------------
+#### User Story 16: Custom Game
+
+As a casual/competitive player,	I want the main menu and settings to be more elaborate so that I can have custom gameplay.
+
+Criteria of Satisfaction:
+  * Each customization must properly affect either the players or that of the map.
+  * The set up on the main menu must properly work.
+  * The default settings given must not be necessarily difficult or too simple.
+
+Priority: 5
+
+Points: 2
+
+Dependencies: 12
+
+Tasks: Create a custom game mode
+
+----------------------------
+
+#### User Story 17: Match Complete Alert
+
+As a casual/competitive player, I want to see a win screen when I win so that I can see that I won.
+
+Criteria of Satisfactions:
+  * The win screen must appear depending on the win conditions.
+  
+Priority: 3
+
+Points: 1
+
+Dependencies: 5
+
+Tasks: Create a win screen
+
+-------------------------------
+
+#### User Story 18: Game Foundation
+
+As a casual/competitive player, I want to have a foundation for the game so the game window can draw game objects after a set period of time.
+
+Criteria of Satisfaction: Fully implements a timer that updates the game after every game tick.
+
+Priority: 1
+
+Points: 8
+
+Dependencies: N/A
+
+Tasks: GameObj, Main Game class, MovableObject Class, Tell all GameObjects to render and tick accordingly
+
+-------------------------------
+
+#### User Story 19: GUI
+
+As a casual/competitive player, I want to see the screen so that I can know what is happening.
+
+Criteria of Satisfactions:
+The GUI must display the character model and project the players movements.
+
+Priority: 2
+
+Points: 5
+
+Dependencies: User Story 18
+
+Tasks: Implement GUI class, Implement connections to other User Stories, Health indicator
+
+-----------------------------------
+
+#### User Story 20: release 1
+
+**RELEASE 1**
+
+As a casual/competitive player, I want to see a working iteration of the game for testing release.
+
+Criteria of Satisfactions:
+There must be some working features for release
+
+Priority: 3
+
+Points: N/A
+
+Dependencies: N/A/ User Stories 0,1,2,18
+
+-------------------------------------
+
+#### User Story 21: Player Fixes
+
+As a casual/competitive player, I want to move my character so that I can dodge incoming projectiles.
+
+Criteria of Satisfaction:
+A user must be able to at minimum, move 8 different directions.
+A user must be able to move their player avatar smoothly with no input lag or choppiness.
+
+Priority: 1
+
+Points: 3
+
+Dependencies: User Story 1
+
+Tasks: Create a player by giving it's keys it will use to move, Have the player move in a more consistent manner
+
+---------------------------------------
+
+User Story 22: Player Trail
+
+As a casual player, I want player trails, so that I can admire the special effects and add intensity to the game.
+
+Criteria of Satisfaction:
+See a trail come out of the player and watch it decay over time.
+
+Priority: 8
+
+Points: 3
+
+Dependencies: User Story 2
+
+Tasks: Create trail object, Integrate with Player object
+
+-----------------------------------------
+
+#### User Story 23: Collision
+
+As a casual/competitive player, I want my character not to phase through walls and get hit by bullets.
+
+Criteria of Satisfaction:
+Character model should not phase through any of the walls, or other players.
+Bullets should react appropriately.
+
+Priority: 5
+
+Points: 5
+
+Dependencies: User Story 3
+
+Tasks: Map must be implemented, Wall class must exist, Make a collision function
+
+------------------------------------
+
+#### User Story 24: Movement/Rotation
+
+As a casual/competitive player, I want to freely move around the map utilizing 6 buttons.
+
+Criteria of Satisfactions:
+The character model should be able to move freely and rotate.
+
+Priority: 6
+
+Points: 5
+
+Dependencies: User Story 2
+
+Tasks: Make the player rotate
+
+---------------------------------
+
+#### User Story 25: Second Player Implementation
+
+As a casual/competitive player, I want a second player to play against if I choose local versus utilizing different 6 buttons.
+
+Criteria of Satisfactions:
+The character model should be able to move freely and rotate.
+
+Priority: 6
+
+Points: 3
+
+Dependencies: User Story 1 ,2, 26, 27
+
+Tasks: Create a second player using the preexisting player methods, Have the second player have the same rules as the first player
+
+------------------------------------
+
+#### User Story 26: Game Handler view class
+
+As a casual/competitive player, I want to create a handler class to handle all of the game objects so to serve as the "view" of the implementation.
+
+Criteria of Satisfactions:
+The game objects should all still work even when moved as a separate from the Game class.
+
+Priority: 2
+
+Dependencies: User Story 18
+
+Points: 5
+
+Tasks: Add in a handler class to handle all of the game objects
+
+------------------------------------
+
+#### User Story 27: Player Builder
+
+As a casual/competitive player, I want to be able to play with other player.
+
+Criteria of Satisfactions:
+There must produce up to two distinct players
+
+Priority: 1
+
+Points: 1
+
+Dependencies: User Story 2
+
+Tasks: Create a Player Builder class to handle the creation of players
+
+------------------------------------
+#### User Story 28: release 2
+
+**RELEASE 2**
+
+As a casual/competitive player, I want to see a better second working iteration of the game for testing release.
+
+Criteria of Satisfactions:
+There must be some working features for release
+
+Priority: 3
+
+Dependencies: N/A/ User Stories 3, 4, 7, 11, 12, 21, 22, 23, 24, 25, 26
+
+--------------------------------------
+
+#### User Story 29: Death
+
+As a casual/competitive player, I want the enemy or myself to die, so that I can score points.
+
+Criteria of Satisfactions:
+A user must be able to die after being shot.
+
+Priority: 1
+
+Points: 1
+
+Dependencies: User Story 4,6
+
+Tasks: Implement death by shots
+
+------------------------------------
