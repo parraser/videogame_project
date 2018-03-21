@@ -18,7 +18,7 @@ public class KeyHandler extends KeyAdapter{
 	public void updateObjects(KeyEvent e) {
 		int key = ((KeyEvent) e).getKeyCode();
 		int keyAction = ((KeyEvent) e).getID();
-		if (game.getState() == Game.State.MAIN_MENU) {
+		if (game.getState() == Game.State.MAIN_MENU || game.getState() == Game.State.END) {
 			this.mainMenu.update(key, keyAction);
 		} else if (game.getState() == Game.State.GAME) {
 			for (Player p: this.players) {

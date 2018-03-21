@@ -26,6 +26,8 @@ public class TrapBullet extends ProjectileObject{
 		if (collisionX()||collisionY()) {
 			this.trapSet = true;
 		}
+		playerCollisionX();
+		playerCollisionY();
 	}
 	@Override
 	public void tick(){

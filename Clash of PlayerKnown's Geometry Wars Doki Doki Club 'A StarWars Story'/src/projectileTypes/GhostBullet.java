@@ -38,6 +38,8 @@ public class GhostBullet extends ProjectileObject {
 		}else{
 			newY += this.getVelY()*Math.sin(this.angle);
 		}
+		playerCollisionX();
+		playerCollisionY();
 		
 		if(newX<0||newX+this.width>Game.WIDTH){
 			this.velX = -1*this.velX;

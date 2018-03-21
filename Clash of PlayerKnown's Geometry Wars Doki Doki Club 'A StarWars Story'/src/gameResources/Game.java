@@ -110,7 +110,7 @@ public class Game extends Canvas implements Runnable{
 						//this.gohv.removekeyObservers();
 						List<Player> al = this.gohv.getPlayers();
 						this.setGohv(new GameObjectHandlerView());
-						KeyHandler keyHand = new KeyHandler(this, gohv.getPlayers(), this.mainMenu);
+						KeyHandler keyHand = new KeyHandler(this, gohv.getPlayers(), this.endscreen);
 						this.addKeyListener(keyHand);
 						//this.addKeyListener(gohv.getKeyHandler());
 						this.setMapMaker(new MapMaker(this.getGohv()));

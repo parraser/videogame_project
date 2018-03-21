@@ -30,6 +30,8 @@ public class SniperBullet extends ProjectileObject{
 			this.pLife -=1;
 		}
 		
+		playerCollisionX();
+		playerCollisionY();
 		//When the bullet is out of bounds simply kill
 		if(this.x > Game.WIDTH || this.x + this.width < 0 || this.y > Game.HEIGHT || this.y + this.height < 0 ){
 			this.pLife = -1;
