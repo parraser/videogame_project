@@ -30,8 +30,9 @@ public class Game extends Canvas implements Runnable{
 	private MapMaker mapMaker;
 	private MapReader mapReader;
 	private MainMenu mainMenu;
+	private Options options;
 	public enum State {
-		GAME, MAIN_MENU
+		GAME, MAIN_MENU, OPTIONS
 	}
 	private State state;
 	private GameObjectHandlerView gohv;
@@ -55,6 +56,9 @@ public class Game extends Canvas implements Runnable{
 		this.mainMenu = new MainMenu(this);
 		keyHand.addObserver(mainMenu);
 		this.state = State.MAIN_MENU;
+		
+		this.options = new Options(this);
+		keyHand.addObserver(options);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
@@ -136,6 +140,9 @@ public class Game extends Canvas implements Runnable{
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			gohv.renderAll(g);
+		}
+		else if(state == State.OPTIONS){
+			options.render(g);
 		}
 
 		
