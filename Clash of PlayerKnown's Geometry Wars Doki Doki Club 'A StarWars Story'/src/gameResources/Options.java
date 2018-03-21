@@ -117,8 +117,8 @@ public class Options implements Observer{
 			game.setState(Game.State.GAME);
 		}
 		
-		else if(key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == optionState.ROUNDS && !this.change){
-			this.change = true;
+		else if(key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == optionState.ROUNDS && this.change){
+			this.change = false;
 			System.out.println(this.change);
 		}
 		else if ((key == KeyEvent.VK_W || key == KeyEvent.VK_UP)&& keyAction == KeyEvent.KEY_PRESSED && this.mState == optionState.ROUNDS && !this.change) {
@@ -134,11 +134,6 @@ public class Options implements Observer{
 			System.out.println("VALERIE");
 		}
 		
-		//rounds = txtInput.getText(); 
-		//receive input from text field
-		//rounds.charAt(0);
-		//System.out.println(rounds);
-		//System.out.println(sc.nextLine());
 	}
 }
 
