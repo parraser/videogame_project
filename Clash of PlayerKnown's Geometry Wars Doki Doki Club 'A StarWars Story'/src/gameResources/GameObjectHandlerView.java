@@ -127,6 +127,7 @@ public class GameObjectHandlerView {
 	public List<Player> getPlayers(){
 		return playerList;
 	}
+
 	public List<AmmoBox> getAmmoBoxes() {
 		return ammoBoxes;
 	}
@@ -134,4 +135,20 @@ public class GameObjectHandlerView {
 		ammoBoxes.add(obj);
 		
 	}
+
+	
+	public void clear() {
+		gameObjects.clear();
+		trails.clear();
+		this.projectileBuffer.clear();
+		this.projectiles.clear();
+		//keyHand.clear();
+		walls.clear();
+		playerList.clear();
+	}
+	
+	/*public void removekeyObservers() {
+		keyHand.remObservers();
+	}*/
+
 }

@@ -34,5 +34,8 @@ public class KeyHandler extends KeyAdapter{
 	public void keyReleased(KeyEvent e){
 		this.updateObjects(e);
 	}
+	/*public void remObservers() {
+		this.obs.deleteObservers();
+	}*/
 	
 }

@@ -27,6 +27,8 @@ public class Player extends MovableObject {
 	private int angle;
 	private int bulType, bulCount, bulReloadTime;
 	private String name;
+	private int health = 1;
+	private int score = 0;
 	
 	public Player(int up, int down, int left, int right, int shoot, int width, int height,
 			Color color, String name, GameObjectHandlerView gohv){
@@ -65,6 +67,7 @@ public class Player extends MovableObject {
 		this.bulType = BulletFactory.BUL_DEFAULT;
 	}
 	
+
 	public void collision() {
 		int a = ammoBoxCollision();
 		if(a != BulletFactory.BUL_DEFAULT) {
@@ -254,6 +257,7 @@ public class Player extends MovableObject {
 			this.y = Game.HEIGHT-this.height-25;
 		else if(this.y < 0)
 			this.y = 0;
+		
 	}
 
 	@Override
@@ -284,5 +288,25 @@ public class Player extends MovableObject {
 	public int getAmmo() {
 		// TODO Auto-generated method stub
 		return this.bulType;
+	}
+	
+	public int getHealth() {
+		return health;
+	}
+
+	public int getScore() {
+		return this.score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public void increaseScore(){
+		this.score++;
+	}
+	
+	public void depleteHealth(int health) {
+		this.health -= health;
 	}
 }
