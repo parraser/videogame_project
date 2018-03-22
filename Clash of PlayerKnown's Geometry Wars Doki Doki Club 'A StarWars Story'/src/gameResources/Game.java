@@ -24,16 +24,18 @@ public class Game extends Canvas implements Runnable{
 	public static final int NANOPERSEC = 1000000000;
 	private boolean running = false;
 	private Thread thread;
+	//private List<GameObject> gameObjects;
+	//private List<Trail> trails;
+	private Player playerOne;
 	private MapMaker mapMaker;
 	private MapReader mapReader;
 	private MainMenu mainMenu;
-
 	private EndScreen endscreen;
-	
+	private Options options;
 	public enum State {
-		GAME, MAIN_MENU, END
+		GAME, MAIN_MENU, OPTIONS, END
 	}
-	private State state;
+	protected static State state; // TODO temp protected static, change back to private if keeping
 	private GameObjectHandlerView gohv;
 	
 	/*
@@ -41,22 +43,26 @@ public class Game extends Canvas implements Runnable{
 	 */
 	public Game(){
 		gohv = new GameObjectHandlerView();
+		//gameObjects = new ArrayList<GameObject>();
+		//trails = new LinkedList<Trail>();
+		
+		KeyHandler keyHand = new KeyHandler();
+		this.addKeyListener(keyHand);
+		this.addKeyListener(gohv.getKeyHandler());
+		//mapMaker = new MapMaker(this);
 		mapMaker = new MapMaker(gohv);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
 		this.mainMenu = new MainMenu(this);
-		KeyHandler keyHand = new KeyHandler(this, gohv.getPlayers(), this.mainMenu);
-		this.addKeyListener(keyHand);
-		//keyHand.addObserver(mainMenu);
+		keyHand.addObserver(mainMenu);
 		this.state = State.MAIN_MENU;
-		
 		this.endscreen = new EndScreen(this);
-		//keyHand.addObserver(endscreen);
-
+		keyHand.addObserver(endscreen);
+		this.options = new Options(this);
+		keyHand.addObserver(options);
 		
 		//Create a new window to place our game objects
 		new Window(WIDTH, HEIGHT, "Clash of PlayerKnown's Geometery Wars Doki Doki Club 'A StarWars Story'", this);
-
 		
 		this.start();
 		
@@ -110,9 +116,9 @@ public class Game extends Canvas implements Runnable{
 						//this.gohv.removekeyObservers();
 						List<Player> al = this.gohv.getPlayers();
 						this.setGohv(new GameObjectHandlerView());
-						KeyHandler keyHand = new KeyHandler(this, gohv.getPlayers(), this.endscreen);
+						KeyHandler keyHand = new KeyHandler();
 						this.addKeyListener(keyHand);
-						//this.addKeyListener(gohv.getKeyHandler());
+						this.addKeyListener(gohv.getKeyHandler());
 						this.setMapMaker(new MapMaker(this.getGohv()));
 				        this.setMapReader(new MapReader(this.getMapMaker()));
 				        this.getMapReader().readDirectoryRandom("Maps");
@@ -161,10 +167,10 @@ public class Game extends Canvas implements Runnable{
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			gohv.renderAll(g);
-		}
-		
-		else if (state == State.END) {
+		} else if (state == State.END) {
 			endscreen.render(g);
+		} else if(state == State.OPTIONS){
+			options.render(g);
 		}
 
 		

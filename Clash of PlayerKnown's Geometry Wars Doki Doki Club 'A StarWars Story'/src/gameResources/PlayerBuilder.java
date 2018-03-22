@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.function.Supplier;
 
 public class PlayerBuilder implements Supplier<Player> {
-
 	private int up, down, left, right, shoot, width, height;
 	private String name = null;
 	private GameObjectHandlerView gohv = null;

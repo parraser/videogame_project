@@ -38,6 +38,9 @@ public class SniperBullet extends ProjectileObject{
 		}
 		this.x += this.velX*Math.cos(this.angle);
 		this.y += this.velY*Math.sin(this.angle);
+		// TODO temporary
+		playerCollisionX();
+		playerCollisionY();
 	}
 	public boolean isDead(){
 		if(this.pLife < 0){

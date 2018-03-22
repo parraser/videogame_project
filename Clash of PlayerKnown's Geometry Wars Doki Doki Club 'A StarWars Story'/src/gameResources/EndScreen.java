@@ -15,22 +15,19 @@ package gameResources;
 	import javax.imageio.ImageIO;
 
 import gameResources.Game.State;
-//import gameResources.MainMenu.menuState;
 
-public class EndScreen extends MainMenu implements Observer {
+public class EndScreen implements Observer {
 		private BufferedImage image;
 		private BufferedImage background;
 		private Rectangle playagain = new Rectangle(Game.WIDTH/3, 250, 266, 75);
-		private Rectangle option = new Rectangle(Game.WIDTH/3, 350, 266, 75);
 		private Rectangle quit = new Rectangle(Game.WIDTH/3, 450, 266, 75);
 		private Game game;
 		private enum menuState {
-			PLAYAGAIN, OPTIONS, QUIT
+			PLAYAGAIN, QUIT
 		}
 		private menuState mState;
 		
 		public EndScreen(Game game) {
-			super(game);
 			this.game = game;
 			this.image = new BufferedImage(Game.WIDTH,Game.HEIGHT,BufferedImage.TYPE_INT_RGB);
 			this.mState = menuState.PLAYAGAIN;
@@ -55,20 +52,15 @@ public class EndScreen extends MainMenu implements Observer {
 			
 			g2d.setColor(Color.WHITE);
 			g2d.drawString("Play", playagain.x + 75,playagain.y + 50);
-			g2d.drawString("Options", option.x + 50,option.y + 50);
 			g2d.drawString("Quit", quit.x + 75,quit.y + 50);
 			
 			g2d.draw(playagain);
-			g2d.draw(option);
 			g2d.draw(quit);
 			
 			g2d.setColor(Color.YELLOW);
 			if (this.mState == menuState.PLAYAGAIN) {
 				g2d.draw(playagain);
 				g2d.drawString("Play", playagain.x + 75,playagain.y + 50);
-			} else if (this.mState == menuState.OPTIONS) {
-				g2d.draw(option);
-				g2d.drawString("Options", option.x + 50,option.y + 50);
 			} else {
 				g2d.draw(quit);
 				g2d.drawString("Quit", quit.x + 75,quit.y + 50);
@@ -77,12 +69,12 @@ public class EndScreen extends MainMenu implements Observer {
 
 		@Override
 		public void update(Observable o, Object e) {
-			System.out.println("Update");
 			if(this.game.getState() == State.END) {
 			int key = ((KeyEvent) e).getKeyCode();
 			int keyAction = ((KeyEvent) e).getID();
 			
-			if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAYAGAIN) {
+			if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAYAGAIN) {
+				// TODO switch back to VK_ENTER after 2p shooting problem fixed
 				//this.game.getGohv().clear();
 				//this.game.setGohv(new GameObjectHandlerView());
 				//this.game.setMapMaker(new MapMaker(this.game.getGohv()));
@@ -90,50 +82,17 @@ public class EndScreen extends MainMenu implements Observer {
 		        //this.game.getMapReader().readDirectoryRandom("Maps");
 				game.setState(Game.State.GAME);
 
-			} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
+			} else if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
+				// TODO switch back to VK_ENTER after 2p shooting problem fixed
 				System.exit(0);
-			} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
+			} else if ((key == KeyEvent.VK_W || key == KeyEvent.VK_S) && keyAction == KeyEvent.KEY_PRESSED) {
 				if (this.mState == menuState.PLAYAGAIN) {
 					this.mState = menuState.QUIT;
-				} else if (this.mState == menuState.OPTIONS) {
-					this.mState = menuState.PLAYAGAIN;
-				} else if (this.mState == menuState.QUIT) {
-					this.mState = menuState.OPTIONS;
-				}
-			} else if (key == KeyEvent.VK_S && keyAction == KeyEvent.KEY_PRESSED) {
-				if (this.mState == menuState.PLAYAGAIN) {
-					this.mState = menuState.OPTIONS;
-				} else if (this.mState == menuState.OPTIONS) {
-					this.mState = menuState.QUIT;
-				} else if (this.mState == menuState.QUIT) {
+				} else {
 					this.mState = menuState.PLAYAGAIN;
 				}
 			}
 			
 		}
-		}
-		@Override
-		public void update(int key, int keyAction) {
-			if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAYAGAIN) {
-				game.setState(Game.State.GAME);
-			} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
-				System.exit(0);
-			} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
-				if (this.mState == menuState.PLAYAGAIN) {
-					this.mState = menuState.QUIT;
-				} else if (this.mState == menuState.OPTIONS) {
-					this.mState = menuState.PLAYAGAIN;
-				} else if (this.mState == menuState.QUIT) {
-					this.mState = menuState.OPTIONS;
-				}
-			} else if (key == KeyEvent.VK_S && keyAction == KeyEvent.KEY_PRESSED) {
-				if (this.mState == menuState.PLAYAGAIN) {
-					this.mState = menuState.OPTIONS;
-				} else if (this.mState == menuState.OPTIONS) {
-					this.mState = menuState.QUIT;
-				} else if (this.mState == menuState.QUIT) {
-					this.mState = menuState.PLAYAGAIN;
-				}
-			}
-		}
 	}
+}

@@ -53,5 +53,8 @@ public class GhostBullet extends ProjectileObject {
 		}
 		this.x = newX;
 		this.y = newY;
+		// TODO temporary
+		playerCollisionX();
+		playerCollisionY();
 	}
 }
