@@ -53,8 +53,6 @@ public class Game extends Canvas implements Runnable{
 		mapMaker = new MapMaker(gohv);
 		mapReader = new MapReader(mapMaker);
 		mapReader.readDirectoryRandom("Maps");
-
-	
 		this.mainMenu = new MainMenu(this);
 		keyHand.addObserver(mainMenu);
 		this.state = State.MAIN_MENU;

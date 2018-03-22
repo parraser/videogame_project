@@ -13,9 +13,6 @@ import java.util.Observer;
 
 import javax.imageio.ImageIO;
 
-
-
-
 public class MainMenu implements Observer {
 	private BufferedImage image;
 	private BufferedImage background;
@@ -75,32 +72,31 @@ public class MainMenu implements Observer {
 
 	@Override
 	public void update(Observable o, Object e) {
-		
-		int key = ((KeyEvent) e).getKeyCode();
-		int keyAction = ((KeyEvent) e).getID();
-		
-		if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAY) {
-			game.setState(Game.State.GAME);
-
-		} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
-			System.exit(0);
-		} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
-			if (this.mState == menuState.PLAY) {
-				this.mState = menuState.QUIT;
-			} else if (this.mState == menuState.OPTIONS) {
-				this.mState = menuState.PLAY;
-			} else if (this.mState == menuState.QUIT) {
-				this.mState = menuState.OPTIONS;
-			}
-		} else if (key == KeyEvent.VK_S && keyAction == KeyEvent.KEY_PRESSED) {
-			if (this.mState == menuState.PLAY) {
-				this.mState = menuState.OPTIONS;
-			} else if (this.mState == menuState.OPTIONS) {
-				this.mState = menuState.QUIT;
-			} else if (this.mState == menuState.QUIT) {
-				this.mState = menuState.PLAY;
+		if (this.game.getState() == Game.State.MAIN_MENU) {
+			int key = ((KeyEvent) e).getKeyCode();
+			int keyAction = ((KeyEvent) e).getID();
+			
+			if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAY) {
+				game.setState(Game.State.GAME);
+			} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
+				System.exit(0);
+			} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
+				if (this.mState == menuState.PLAY) {
+					this.mState = menuState.QUIT;
+				} else if (this.mState == menuState.OPTIONS) {
+					this.mState = menuState.PLAY;
+				} else if (this.mState == menuState.QUIT) {
+					this.mState = menuState.OPTIONS;
+				}
+			} else if (key == KeyEvent.VK_S && keyAction == KeyEvent.KEY_PRESSED) {
+				if (this.mState == menuState.PLAY) {
+					this.mState = menuState.OPTIONS;
+				} else if (this.mState == menuState.OPTIONS) {
+					this.mState = menuState.QUIT;
+				} else if (this.mState == menuState.QUIT) {
+					this.mState = menuState.PLAY;
+				}
 			}
 		}
-		
 	}
 }

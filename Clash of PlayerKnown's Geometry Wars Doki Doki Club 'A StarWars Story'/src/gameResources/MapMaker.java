@@ -1,6 +1,9 @@
 package gameResources;
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+
+import projectileTypes.AmmoBox;
 
 public class MapMaker {
 	//private Game game;
@@ -19,6 +22,8 @@ public class MapMaker {
 			this.gohv.addPlayer((Player) obj);
 		}else if(obj instanceof Wall) {
 			this.gohv.addWall((Wall) obj);
+		}else if(obj instanceof AmmoBox) {
+			this.gohv.addAmmoBox((AmmoBox)obj);
 		}else{
 			this.gohv.addObject(obj);
 		}
@@ -31,7 +36,6 @@ public class MapMaker {
 		pBuild.setRight(KeyEvent.VK_D);
 		pBuild.setDown(KeyEvent.VK_S);
 		pBuild.setLeft(KeyEvent.VK_A);
-
 		pBuild.setShoot(KeyEvent.VK_SPACE);
 		pBuild.setGohv(this.gohv);
 		pBuild.setHeight(P_SIZE);
@@ -51,7 +55,6 @@ public class MapMaker {
 		pBuild.setDown(KeyEvent.VK_DOWN);
 		pBuild.setLeft(KeyEvent.VK_LEFT);
 		pBuild.setShoot(KeyEvent.VK_ENTER);
-
 		pBuild.setGohv(this.gohv);
 		pBuild.setHeight(P_SIZE);
 		pBuild.setWidth(P_SIZE);

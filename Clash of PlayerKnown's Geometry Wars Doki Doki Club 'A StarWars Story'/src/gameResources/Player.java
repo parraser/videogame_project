@@ -1,4 +1,5 @@
 package gameResources;
+
 import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,18 +9,22 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import projectileTypes.AmmoBox;
+import projectileTypes.BulletFactory;
+
 /* The player class object */
 public class Player extends MovableObject implements Observer{
 	
 	final static int WALK = 5;
 	public final static int WIDTH = 20;
 	public final static int HEIGHT = 20;
+	public final static int AMMO_DURATION = 60*5;// in game ticks
 	private GameObjectHandlerView gohv;
 	private Color color;
 	private boolean moveRight, moveLeft, moveDown, moveUp;
-
 	private int up, down, left, right, shoot;
 	private int angle;
+	private int bulType, bulTypeTime;
 	private String name;
 	private int health = 1;
 	private int score = 0;
@@ -39,6 +44,7 @@ public class Player extends MovableObject implements Observer{
 		this.name = name;
 		this.gohv = gohv;
 		this.angle = 0;
+		this.bulType = BulletFactory.BUL_DEFAULT;
 	}
 	
 	public Player(String name, GameObjectHandlerView gohv){
@@ -54,16 +60,35 @@ public class Player extends MovableObject implements Observer{
 		this.right = KeyEvent.VK_D;
 		this.left = KeyEvent.VK_A;
 		this.angle = 0;
+		this.bulType = BulletFactory.BUL_DEFAULT;
 	}
 	
 
 	public void collision() {
+		int a = ammoBoxCollision();
+		if(a != BulletFactory.BUL_DEFAULT) {
+			this.bulTypeTime = AMMO_DURATION;
+			this.bulType = ammoBoxCollision();
+		}
 		if(!wallCollisionX() && !playerCollisionX()) {
 			this.x += this.getVelX();
 		}
 		if(!wallCollisionY() && !playerCollisionY()) {
 			this.y += this.getVelY();
 		}
+	}
+	
+	//return the AmmoBox type the player collides with
+	public int ammoBoxCollision() {
+		Rectangle temp = this.getRect();
+		temp.setLocation(this.getX()+this.velX,this.getY()+this.velY);
+		for(AmmoBox ammoBox : this.gohv.getAmmoBoxes()) {
+			if(temp.intersects(ammoBox.getRect())) {
+				ammoBox.pickUp();
+				return ammoBox.getType();
+			}
+		}
+		return 0;
 	}
 	
 	public boolean wallCollisionX() {
@@ -192,7 +217,8 @@ public class Player extends MovableObject implements Observer{
 			if (keyAction == KeyEvent.KEY_PRESSED) {
 				int sourcex = this.x + this.width/2;
 				int sourcey = this.y + this.height/2;
-				this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.PI/6)); // angle is temporary placeholder until player rotation implemented
+				//this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // angle is temporary placeholder until player rotation implemented
+				this.gohv.addProjectile(BulletFactory.shoot(this)); 
 			}
 		}
 	}
@@ -208,8 +234,13 @@ public class Player extends MovableObject implements Observer{
 		if (this.moveUp) this.velY-=this.WALK;
 		if (this.moveRight) this.velX+=this.WALK;
 		if (this.moveLeft) this.velX-=this.WALK;
+
+		if(this.bulTypeTime < 0){
+			this.bulType = BulletFactory.BUL_DEFAULT;
+		}else {
+			this.bulTypeTime--;
+		}
 		
-		// TODO Auto-generated method stub
 		collision();
 		
 		
@@ -256,5 +287,22 @@ public class Player extends MovableObject implements Observer{
 	
 	public void depleteHealth(int health) {
 		this.health -= health;
+	}
+
+	public void setAmmo(int bul){
+		this.bulType = bul;
+	}
+
+	public GameObjectHandlerView getGOHV() {
+		// TODO Auto-generated method stub
+		return this.gohv;
+	}
+	public Color getColor(){
+		return this.color;
+	}
+
+	public int getAmmo() {
+		// TODO Auto-generated method stub
+		return this.bulType;
 	}
 }

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import projectileTypes.AmmoBox;
+
 public class GameObjectHandlerView {
 	private List<GameObject> gameObjects;
 	private List<Trail> trails;
@@ -15,7 +17,7 @@ public class GameObjectHandlerView {
 	private KeyHandler keyHand;
 	private List<GameObject> walls;
 	private List<Player> playerList;
-
+	private List<AmmoBox> ammoBoxes;
 	
 	public GameObjectHandlerView() {
 		gameObjects = new ArrayList<GameObject>();
@@ -25,6 +27,7 @@ public class GameObjectHandlerView {
 		keyHand = new KeyHandler();
 		walls = new ArrayList<GameObject>();
 		playerList = new ArrayList<Player>();
+		ammoBoxes = new ArrayList<AmmoBox>();
 	}
 	/*
 	 * What to do after every game tick
@@ -54,6 +57,9 @@ public class GameObjectHandlerView {
 		for (GameObject go : this.walls){
 			go.tick();
 		}
+		for(AmmoBox go : this.ammoBoxes) {
+			go.tick();
+		}
 		Trail t;
 		for(int i = 0; i < this.trails.size(); i++){
 			t = this.trails.get(i);
@@ -79,6 +85,9 @@ public class GameObjectHandlerView {
 			go.render(g);
 		}
 		for (ProjectileObject go : this.projectiles){
+			go.render(g);
+		}
+		for(AmmoBox go : this.ammoBoxes) {
 			go.render(g);
 		}
 		for (Player go : this.playerList) {
@@ -139,4 +148,11 @@ public class GameObjectHandlerView {
 		keyHand.remObservers();
 	}
 	
+	public List<AmmoBox> getAmmoBoxes() {
+		return ammoBoxes;
+	}
+	public void addAmmoBox(AmmoBox obj) {
+		ammoBoxes.add(obj);
+		
+	}
 }
