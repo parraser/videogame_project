@@ -113,10 +113,16 @@ public class Options implements Observer{
 			int key = ((KeyEvent) e).getKeyCode();
 			int keyAction = ((KeyEvent) e).getID();
 			
-			if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == optionState.PLAY) {
+			// TODO temporary, original stuff is commented below
+			if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED) {
 				//TODO change to VK_ENTER after p2 shoot problem fixed
 				game.setState(Game.State.GAME);
 			}
+			
+//			if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == optionState.PLAY) {
+//				//TODO change to VK_ENTER after p2 shoot problem fixed
+//				game.setState(Game.State.GAME);
+//			}
 			
 			else if(key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == optionState.ROUNDS && this.change){
 				//TODO change to VK_ENTER after p2 shoot problem fixed
@@ -137,5 +143,6 @@ public class Options implements Observer{
 			}
 		}
 	}
+	
 }
 
