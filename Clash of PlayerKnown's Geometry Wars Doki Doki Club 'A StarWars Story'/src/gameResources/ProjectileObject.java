@@ -43,11 +43,11 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 		if (collisionY()) {
 			this.velY = -this.velY;
 			this.numBounces --;
-//		} else if (playerCollisionX() != null) {
-//
-//		} else if (playerCollisionY() != null) {
 		}else {
 			this.y += this.velY;
+		} if (playerCollisionX() != null) {
+
+		} else if (playerCollisionY() != null) {
 		}
 	}
 	
