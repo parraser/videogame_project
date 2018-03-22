@@ -20,11 +20,10 @@ public class EndScreen implements Observer {
 		private BufferedImage image;
 		private BufferedImage background;
 		private Rectangle playagain = new Rectangle(Game.WIDTH/3, 250, 266, 75);
-		private Rectangle option = new Rectangle(Game.WIDTH/3, 350, 266, 75);
 		private Rectangle quit = new Rectangle(Game.WIDTH/3, 450, 266, 75);
 		private Game game;
 		private enum menuState {
-			PLAYAGAIN, OPTIONS, QUIT
+			PLAYAGAIN, QUIT
 		}
 		private menuState mState;
 		
@@ -53,20 +52,15 @@ public class EndScreen implements Observer {
 			
 			g2d.setColor(Color.WHITE);
 			g2d.drawString("Play", playagain.x + 75,playagain.y + 50);
-			g2d.drawString("Options", option.x + 50,option.y + 50);
 			g2d.drawString("Quit", quit.x + 75,quit.y + 50);
 			
 			g2d.draw(playagain);
-			g2d.draw(option);
 			g2d.draw(quit);
 			
 			g2d.setColor(Color.YELLOW);
 			if (this.mState == menuState.PLAYAGAIN) {
 				g2d.draw(playagain);
 				g2d.drawString("Play", playagain.x + 75,playagain.y + 50);
-			} else if (this.mState == menuState.OPTIONS) {
-				g2d.draw(option);
-				g2d.drawString("Options", option.x + 50,option.y + 50);
 			} else {
 				g2d.draw(quit);
 				g2d.drawString("Quit", quit.x + 75,quit.y + 50);
@@ -91,24 +85,14 @@ public class EndScreen implements Observer {
 			} else if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
 				// TODO switch back to VK_ENTER after 2p shooting problem fixed
 				System.exit(0);
-			} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
+			} else if ((key == KeyEvent.VK_W || key == KeyEvent.VK_S) && keyAction == KeyEvent.KEY_PRESSED) {
 				if (this.mState == menuState.PLAYAGAIN) {
 					this.mState = menuState.QUIT;
-				} else if (this.mState == menuState.OPTIONS) {
-					this.mState = menuState.PLAYAGAIN;
-				} else if (this.mState == menuState.QUIT) {
-					this.mState = menuState.OPTIONS;
-				}
-			} else if (key == KeyEvent.VK_S && keyAction == KeyEvent.KEY_PRESSED) {
-				if (this.mState == menuState.PLAYAGAIN) {
-					this.mState = menuState.OPTIONS;
-				} else if (this.mState == menuState.OPTIONS) {
-					this.mState = menuState.QUIT;
-				} else if (this.mState == menuState.QUIT) {
+				} else {
 					this.mState = menuState.PLAYAGAIN;
 				}
 			}
 			
 		}
-		}
 	}
+}
