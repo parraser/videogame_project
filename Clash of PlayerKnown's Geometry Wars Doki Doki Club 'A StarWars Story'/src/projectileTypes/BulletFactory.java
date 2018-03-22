@@ -17,15 +17,15 @@ public class BulletFactory {
 		ProjectileObject bullet;
 		bullet=null;
 		if(p.getAmmo() == BUL_DEFAULT){
-			bullet = new ProjectileObject(p.getGOHV(), p.getX()+p.getWidth()/2, p.getY()+p.getHeight()/2, Math.random()*Math.PI*2);
+			bullet = new ProjectileObject(p.getGOHV(), p.getX()+p.getWidth()/2, p.getY()+p.getHeight()/2, p.getAngle());
 		}else if(p.getAmmo() == BUL_GHOST){
-			bullet = new GhostBullet(p.getX()+p.getWidth()/2, p.getY()+p.getHeight()/2, Math.random()*Math.PI*2, p.getGOHV());
+			bullet = new GhostBullet(p.getX()+p.getWidth()/2, p.getY()+p.getHeight()/2, p.getAngle(), p.getGOHV());
 		}else if(p.getAmmo() == BUL_SNIPE){
-			bullet = new SniperBullet(p.getX()+p.getWidth()/2, p.getY()+p.getHeight()/2, Math.random()*Math.PI*2, p.getGOHV());
+			bullet = new SniperBullet(p.getX()+p.getWidth()/2, p.getY()+p.getHeight()/2, p.getAngle(), p.getGOHV());
 		}else if(p.getAmmo() == BUL_TRAP) {
-			bullet = new TrapBullet(p.getX(), p.getY(), Math.random()*Math.PI*2, p.getGOHV());
+			bullet = new TrapBullet(p.getX(), p.getY(), p.getAngle(), p.getGOHV());
 		}else if(p.getAmmo() == BUL_EXPAND) {
-			bullet = new ExpandingBullet(p.getX(), p.getY(), Math.random()*Math.PI*2, p.getGOHV());
+			bullet = new ExpandingBullet(p.getX(), p.getY(), p.getAngle(), p.getGOHV());
 		}
 		return bullet;
 	}
