@@ -79,7 +79,8 @@ public class EndScreen implements Observer {
 			int key = ((KeyEvent) e).getKeyCode();
 			int keyAction = ((KeyEvent) e).getID();
 			
-			if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAYAGAIN) {
+			if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAYAGAIN) {
+				// TODO switch back to VK_ENTER after 2p shooting problem fixed
 				//this.game.getGohv().clear();
 				//this.game.setGohv(new GameObjectHandlerView());
 				//this.game.setMapMaker(new MapMaker(this.game.getGohv()));
@@ -87,7 +88,8 @@ public class EndScreen implements Observer {
 		        //this.game.getMapReader().readDirectoryRandom("Maps");
 				game.setState(Game.State.GAME);
 
-			} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
+			} else if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
+				// TODO switch back to VK_ENTER after 2p shooting problem fixed
 				System.exit(0);
 			} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
 				if (this.mState == menuState.PLAYAGAIN) {

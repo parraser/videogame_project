@@ -164,73 +164,74 @@ public class Player extends MovableObject implements Observer{
 
 	@Override
 	public void update(Observable o, Object e) {
-		// TODO Auto-generated method stub
-		
-		int key = ((KeyEvent) e).getKeyCode();
-		int keyAction = ((KeyEvent) e).getID();
-
-		//since actions are recorded once, releasing the key
-		//shall input an equal negative velocity
-		// could open a bug where one key is not recorded 
-		// it will have twice the speed
-		
-		//horizontal movement
-		if(key == this.up) {
-			if(keyAction == KeyEvent.KEY_PRESSED) {
-				//this.setVelY(-WALK);
-				this.moveUp = true;
-			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-				//this.setVelY(0);
-				this.moveUp = false;
-			}	
-		}else if(key == this.down) {
-			if(keyAction == KeyEvent.KEY_PRESSED) {
-				//this.setVelY(WALK);
-				this.moveDown = true;
-			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-				//this.setVelY(0);
-				this.moveDown = false;
+		// TODO fix. temporary state. Need better state implementation.
+		if (Game.state == Game.State.GAME) {
+			int key = ((KeyEvent) e).getKeyCode();
+			int keyAction = ((KeyEvent) e).getID();
+	
+			//since actions are recorded once, releasing the key
+			//shall input an equal negative velocity
+			// could open a bug where one key is not recorded 
+			// it will have twice the speed
+			
+			//horizontal movement
+			if(key == this.up) {
+				if(keyAction == KeyEvent.KEY_PRESSED) {
+					//this.setVelY(-WALK);
+					this.moveUp = true;
+				}else if (keyAction == KeyEvent.KEY_RELEASED) {
+					//this.setVelY(0);
+					this.moveUp = false;
+				}	
+			}else if(key == this.down) {
+				if(keyAction == KeyEvent.KEY_PRESSED) {
+					//this.setVelY(WALK);
+					this.moveDown = true;
+				}else if (keyAction == KeyEvent.KEY_RELEASED) {
+					//this.setVelY(0);
+					this.moveDown = false;
+				}
 			}
-		}
-		
-		//vertical movement
-		if(key == this.left) {
-			if(keyAction == KeyEvent.KEY_PRESSED) {
-				//this.setVelX(-WALK);
-				this.moveLeft = true;
-			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-				//this.setVelX(0);
-				this.moveLeft = false;
-			}	
-		}else if(key == this.right) {
-			if(keyAction == KeyEvent.KEY_PRESSED) {
-				//this.setVelX(WALK);
-				this.moveRight = true;
-			}else if (keyAction == KeyEvent.KEY_RELEASED) {
-				//this.setVelX(0);
-				this.moveRight = false;
+			
+			//vertical movement
+			if(key == this.left) {
+				if(keyAction == KeyEvent.KEY_PRESSED) {
+					//this.setVelX(-WALK);
+					this.moveLeft = true;
+				}else if (keyAction == KeyEvent.KEY_RELEASED) {
+					//this.setVelX(0);
+					this.moveLeft = false;
+				}	
+			}else if(key == this.right) {
+				if(keyAction == KeyEvent.KEY_PRESSED) {
+					//this.setVelX(WALK);
+					this.moveRight = true;
+				}else if (keyAction == KeyEvent.KEY_RELEASED) {
+					//this.setVelX(0);
+					this.moveRight = false;
+				}
 			}
-		}
-		
-		//Rotation
-		if(key == KeyEvent.VK_Q) {
-			if(keyAction == KeyEvent.KEY_PRESSED) {
-				//this.setVelX(WALK);
-				this.angle = (this.angle-ROTSPEED)%360;
+			
+			//Rotation
+			if(key == KeyEvent.VK_Q) {
+				if(keyAction == KeyEvent.KEY_PRESSED) {
+					//this.setVelX(WALK);
+					this.angle = (this.angle-ROTSPEED)%360;
+				}
+			}else if(key == KeyEvent.VK_E) {
+				if(keyAction == KeyEvent.KEY_PRESSED) {
+					//this.setVelX(WALK);
+					this.angle = (this.angle+ROTSPEED)%360;
+				}
 			}
-		}else if(key == KeyEvent.VK_E) {
-			if(keyAction == KeyEvent.KEY_PRESSED) {
-				//this.setVelX(WALK);
-				this.angle = (this.angle+ROTSPEED)%360;
-			}
-		}
-		
-		if (key == this.shoot) {
-			if (keyAction == KeyEvent.KEY_PRESSED) {
-				int sourcex = this.x + this.width/2;
-				int sourcey = this.y + this.height/2;
-				//this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // angle is temporary placeholder until player rotation implemented
-				this.gohv.addProjectile(BulletFactory.shoot(this)); 
+			
+			if (key == this.shoot) {
+				if (keyAction == KeyEvent.KEY_PRESSED) {
+					//int sourcex = this.x + this.width/2;
+					//int sourcey = this.y + this.height/2;
+					//this.gohv.addProjectile(new ProjectileObject(gohv, sourcex, sourcey, Math.cos(Math.PI/6), Math.sin(Math.PI/6))); // angle is temporary placeholder until player rotation implemented
+					this.gohv.addProjectile(BulletFactory.shoot(this)); 
+				}
 			}
 		}
 	}
@@ -239,16 +240,16 @@ public class Player extends MovableObject implements Observer{
 		int vertical = 0;
 		int horizontal = 0;
 		int tempAngle = 0;
-		if (this.moveDown) vertical--;
-		if (this.moveUp)	 vertical ++;
+		if (this.moveDown) vertical++;
+		if (this.moveUp)	 vertical --;
 		if (this.moveRight) horizontal ++;
 		if (this.moveLeft) horizontal --;
 		
 		if(vertical == 0 || horizontal == 0) {// on key is pressed
-			if (this.moveDown) this.angle =270;
-			else if (this.moveUp) this.angle =90;
-			else if (this.moveRight) this.angle =0;
-			else if (this.moveLeft) this.angle =180;
+			if (this.moveDown) this.angle = 90;
+			else if (this.moveUp) this.angle = 270;
+			else if (this.moveRight) this.angle = 0;
+			else if (this.moveLeft) this.angle = 180;
 		}else {
 			tempAngle = (int)Math.toDegrees(Math.atan(vertical/horizontal));
 			if(tempAngle< 0) tempAngle += 180; //can't do modular
@@ -359,7 +360,7 @@ public class Player extends MovableObject implements Observer{
 	}
 	
 	public double getAngle(){
-		return this.angle;
+		return Math.toRadians(this.angle);
 	}
 	
 	public Color getColor(){

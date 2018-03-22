@@ -7,7 +7,7 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	
 	protected GameObjectHandlerView gohv;
 	protected int numBounces;
-	protected double angle;
+	protected double angle; // in radians
 	protected Color color;
 	public static final int BUL_DEFAULT_SIZE = 10;
 	public static final int BUL_DEFAULT_SPEED = 8;
@@ -16,6 +16,20 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double angle){
 		this.x = posx;
 		this.y = posy;
+		
+//		//Temporary
+////		if (Math.cos(angle) > 0) {
+////			//this.x += 10;
+////		} else if (Math.cos(angle) < 0) {
+////			//this.x -= 10;
+////		}
+////		if (Math.sin(angle) > 0) {
+////			this.y += 10;
+////		} else 
+//		if (Math.sin(angle) < 0) {
+//			this.y -= 20;
+//		}
+		
 		this.angle = angle;
 		this.width = BUL_DEFAULT_SIZE;
 		this.height = BUL_DEFAULT_SIZE;
@@ -45,7 +59,8 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 			this.numBounces --;
 		}else {
 			this.y += this.velY;
-		} if (playerCollisionX() != null) {
+		} 
+		if (playerCollisionX() != null) {
 
 		} else if (playerCollisionY() != null) {
 		}

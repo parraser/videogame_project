@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable{
 	public enum State {
 		GAME, MAIN_MENU, END
 	}
-	private State state;
+	protected static State state; // TODO temp protected static, change back to private if keeping
 	private GameObjectHandlerView gohv;
 	
 	/*

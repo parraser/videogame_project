@@ -76,9 +76,11 @@ public class MainMenu implements Observer {
 			int key = ((KeyEvent) e).getKeyCode();
 			int keyAction = ((KeyEvent) e).getID();
 			
-			if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAY) {
+			if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAY) {
+				// TODO switch back to VK_ENTER after 2p shooting problem fixed
 				game.setState(Game.State.GAME);
-			} else if (key == KeyEvent.VK_ENTER && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
+			} else if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
+				// TODO switch back to VK_ENTER when 2p shooting problem after end screen fixed
 				System.exit(0);
 			} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
 				if (this.mState == menuState.PLAY) {
