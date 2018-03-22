@@ -17,32 +17,35 @@ public class BulletFactory {
 		ProjectileObject bullet;
 		bullet=null;
 		
-		// TODO temporary. prevent self collision while shooting (bullet spawn position needs tweak)
+		// TODO temporary, not flexible so remove for a better idea. 
+		// prevent self collision while shooting (bullet spawn position needs tweak)
 		double angle = p.getAngle();
 		int posx = p.getX();
 		int posy = p.getY();
 		if (Math.cos(angle) > 0) {
-			posx += p.getWidth()/2;
+			posx += p.getWidth();
 		} else if (Math.cos(angle) < 0) {
 			posx -= p.getWidth();
+			posy -= p.getHeight()/2;
 		}
 		if (Math.sin(angle) > 0) {
 			posy += p.getHeight();
+			posx -= p.getWidth(); // ?? to fix buggy positioning
 		} else if (Math.sin(angle) < 0) {
 			posy -= p.getHeight();
-			posx += p.getWidth(); // ?? to fix buggy positioning
+			posx += p.getWidth();
 		}
 		
 		if(p.getAmmo() == BUL_DEFAULT){
 			bullet = new ProjectileObject(p.getGOHV(), posx, posy, p.getAngle());
 		}else if(p.getAmmo() == BUL_GHOST){
-			bullet = new GhostBullet(p.getX()+p.getWidth()/2, p.getY()+p.getHeight()/2, p.getAngle(), p.getGOHV());
+			bullet = new GhostBullet(posx, posy, p.getAngle(), p.getGOHV());
 		}else if(p.getAmmo() == BUL_SNIPE){
-			bullet = new SniperBullet(p.getX()+p.getWidth()/2, p.getY()+p.getHeight()/2, p.getAngle(), p.getGOHV());
+			bullet = new SniperBullet(posx, posy, p.getAngle(), p.getGOHV());
 		}else if(p.getAmmo() == BUL_TRAP) {
-			bullet = new TrapBullet(p.getX(), p.getY(), p.getAngle(), p.getGOHV());
+			bullet = new TrapBullet(posx, posy, p.getAngle(), p.getGOHV());
 		}else if(p.getAmmo() == BUL_EXPAND) {
-			bullet = new ExpandingBullet(p.getX(), p.getY(), p.getAngle(), p.getGOHV());
+			bullet = new ExpandingBullet(posx, posy, p.getAngle(), p.getGOHV());
 		}
 		return bullet;
 		

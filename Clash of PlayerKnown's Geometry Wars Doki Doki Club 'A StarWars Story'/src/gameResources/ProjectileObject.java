@@ -10,7 +10,7 @@ public class ProjectileObject extends MovableObject implements HealthObject{
 	protected double angle; // in radians
 	protected Color color;
 	public static final int BUL_DEFAULT_SIZE = 10;
-	public static final int BUL_DEFAULT_SPEED = 6;
+	public static final int BUL_DEFAULT_SPEED = 8;
 	public static final int BUL_DEFAULT_BOUNCE = 5;
 	
 	public ProjectileObject(GameObjectHandlerView gohv, int posx, int posy, double angle){
