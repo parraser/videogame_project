@@ -13,6 +13,8 @@ import java.util.Observer;
 
 import javax.imageio.ImageIO;
 
+import gameResources.Game.State;
+
 public class MainMenu implements Observer {
 	private BufferedImage image;
 	private BufferedImage background;
@@ -76,13 +78,14 @@ public class MainMenu implements Observer {
 			int key = ((KeyEvent) e).getKeyCode();
 			int keyAction = ((KeyEvent) e).getID();
 			
+			//TODO change VK_BACK_SPACE to VK_ENTER after p2 shoot problem fixed
 			if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.PLAY) {
-				// TODO switch back to VK_ENTER after 2p shooting problem fixed
 				game.setState(Game.State.GAME);
 			} else if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.QUIT) {
-				// TODO switch back to VK_ENTER when 2p shooting problem after end screen fixed
 				System.exit(0);
-			} else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
+			} else if (key == KeyEvent.VK_BACK_SPACE && keyAction == KeyEvent.KEY_PRESSED && this.mState == menuState.OPTIONS) {
+				game.setState(Game.State.OPTIONS);
+			}else if (key == KeyEvent.VK_W && keyAction == KeyEvent.KEY_PRESSED) {
 				if (this.mState == menuState.PLAY) {
 					this.mState = menuState.QUIT;
 				} else if (this.mState == menuState.OPTIONS) {
