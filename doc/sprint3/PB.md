@@ -151,7 +151,7 @@ Criteria of Satisfaction:
 
 Priority: 3
 
-Points: 8
+Points: 3
 
 Dependencies: 5
 
@@ -350,7 +350,7 @@ Points: 5
 
 Dependencies: User Story 18
 
-Tasks: Implement GUI class, Implement connections to other User Stories, Health indicator
+Tasks: Implement connections to other User Stories, Health indicator
 
 -----------------------------------
 
@@ -515,10 +515,23 @@ A user must be able to die after being shot.
 
 Priority: 1
 
-Points: 1
+Points: 2
 
 Dependencies: User Story 4,6
 
 Tasks: Implement death by shots
 
 ------------------------------------
+
+#### User Story 30: release 3
+
+**RELEASE 3**
+
+As a casual/competitive player, I want to see a better third working iteration of the game for testing release.
+
+Criteria of Satisfactions:
+There must be some working features for release
+
+Priority: 3
+
+Dependencies: N/A/ User Stories 4,5,6,8,9,10,15,16,17,19,24,29
