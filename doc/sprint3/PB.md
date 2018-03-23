@@ -176,24 +176,6 @@ Tasks: Create a traps class
 
 --------------------------
 
-#### User Story 10: Global Ranking
-
-As a competitive player, I want a ranking system, so that I can assert my dominance over the rest of the community
-
-Criteria of Satisfaction:
-  * The ranking system must properly follow how many points each individual player has scored.
-  * The ranking system could show up after each round and/or after each match. 
-  
-Priority: 5
-
-Points: 8
-
-Dependencies: 17
-
-Tasks: Create a ranking system
-
--------------------------
-
 #### User Story 11: Select Maps
 
 As a casual player, I want multiple maps, so that I can have a variety in multiple battlefields
@@ -229,44 +211,6 @@ Dependencies: 17
 Tasks: Connect up main menu options with the game
 
 ----------------------------
-
-#### User Story 13: Sudden death
-
-As a	casual player, I want it so that after time limit is up the stage transforms into Sudden Death Mode where new randomly chosen map hazards are introduced, so that there are no ties and the round ends with someone getting a point.
-
-Criteria of Satisfaction:
-  * The time limit must be properly set up in all modes and stages.
-  * The sudden death mode must be properly set up in all modes and stages.
-  * The hazard introduced must be properly randomized.
-
-Priority: 4
-
-Points: 8
-
-Dependencies: 11
-
-Tasks: Create a sudden death mode
-
------------------------------
-
-#### User Story 14: Random Sudden Death
-
-As a casual player,	I want a variety of different Sudden Death hazards based on chosen map so that each map is interesting and provides a challenge should the time limit ends up finishing.
-
-Criteria of Satisfaction:
-  * The time limit must be properly set up in all modes and stages.
-  * The sudden death mode must be properly set up in all modes and stages.
-  * The hazards must be properly working for each stage.
-
-Priority: 4
-
-Points: 8
-
-Dependencies: 13
-
-Tasks: Create a random sudden death
-
------------------------------
 
 #### User Story 15: Create Quick Match Option
 
