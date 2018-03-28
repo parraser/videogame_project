@@ -311,7 +311,7 @@ public class Player extends MovableObject implements Observer{
 		for(int i=-2; i<=2; i++) {
 			radAngle = Math.toRadians(this.angle + (10*i));
 			angleDispX = (int)(9*Math.cos(radAngle));
-			angleDispY = (int)(9*Math.sin(radAngle));
+			angleDispY = -(int)(9*Math.sin(radAngle));
 			g.drawLine(centerX, centerY, centerX+angleDispX, centerY-angleDispY);
 		}
 	}
